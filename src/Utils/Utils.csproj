@@ -52,6 +52,7 @@
     <Compile Include="Extensions\GenericExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Generics\Property.cs" />
     <Compile Include="Logger\Loggers\ConsoleLogger.cs" />
     <Compile Include="Logger\Loggers\FileLogger.cs" />
     <Compile Include="Logger\Contracts\ILogger.cs" />
