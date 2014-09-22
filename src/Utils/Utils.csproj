@@ -51,6 +51,7 @@
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\GenericExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Generics\Property.cs" />
     <Compile Include="Logger\Loggers\ConsoleLogger.cs" />

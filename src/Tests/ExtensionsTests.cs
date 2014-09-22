@@ -98,5 +98,23 @@ namespace Tests
 
             sampleText.Matches(@"\d+", () => Assert.IsTrue(true));
         }
+
+        [TestCase]
+        public void Reflection_Object_SetProperty()
+        {
+            var t = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
+
+            t.Set("Age", 3);
+            t.Set("Title", "Example");
+            t.Set("Internal", "test");
+            t.Set("_test", "b");
+            t.Set("Type", ModelType.Test);
+
+            Assert.AreEqual(3, t.Age);
+            Assert.AreEqual("Example", t.Title);
+            Assert.AreEqual("test", t.Get<string>("Internal"));
+            Assert.AreEqual("b", t.Get<string>("_test"));
+            Assert.AreEqual(t.Type, ModelType.Test);
+        }
     }
 }
