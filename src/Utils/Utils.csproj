@@ -77,8 +77,6 @@
     <Compile Include="ServiceHandler\Contracts\IServiceAdd.cs" />
     <Compile Include="ServiceHandler\ServiceHandler.cs" />
     <Compile Include="ServiceHandler\Services\BaseService.cs" />
-    <Compile Include="Web\Rest\BaseRestService.cs" />
-    <Compile Include="Web\Rest\Contracts\IRestConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
