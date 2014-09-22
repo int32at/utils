@@ -67,6 +67,10 @@
     <Compile Include="Samples\VersionParameter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Utils45\Utils45.csproj">
+      <Project>{090eaf98-40a0-47f5-b837-989aeeffde62}</Project>
+      <Name>Utils45</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{50AD7205-0997-49D8-B78D-92B40F9108B6}</Project>
       <Name>Utils</Name>

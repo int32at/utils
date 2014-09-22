@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace int32.Utils.ServiceHandler.Contracts
 {
@@ -7,11 +6,5 @@ namespace int32.Utils.ServiceHandler.Contracts
     {
         T Add(T item);
         void Add(IEnumerable<T> items);
-    }
-
-    public interface IServiceAddAsync<T>
-    {
-        Task<T> AddAsync(T item);
-        Task AddAsync(IEnumerable<T> items);
     }
 }
