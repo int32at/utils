@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using int32.Utils.Extensions;
 using int32.Utils.ServiceHandler;
+using int32.Utils.ServiceHandler.Contracts;
 using int32.Utils.ServiceHandler.Services;
 using NUnit.Framework;
 using Tests.Samples;

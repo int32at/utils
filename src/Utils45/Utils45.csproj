@@ -41,10 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Utils\ServiceHandler\Contracts\IService.cs">
-      <Link>ServiceHandler\Contracts\IService.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceHandler\Contracts\IInitializeParameter.cs" />
+    <Compile Include="ServiceHandler\Contracts\IService.cs" />
     <Compile Include="ServiceHandler\Contracts\IServiceAdd.cs" />
     <Compile Include="ServiceHandler\Contracts\IServiceDelete.cs" />
     <Compile Include="ServiceHandler\Contracts\IServiceGet.cs" />

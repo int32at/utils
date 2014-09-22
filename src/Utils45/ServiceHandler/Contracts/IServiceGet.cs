@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using int32.Utils.ServiceHandler.Contracts;
 
 namespace int32.Utils45.ServiceHandler.Contracts
 {

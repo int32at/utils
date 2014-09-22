@@ -22,4 +22,21 @@ namespace int32.Utils.ServiceHandler.Services
         public abstract int GetCount();
         public abstract void Dispose();
     }
+
+    public abstract class BaseService<T> : IService, IServiceGet<T>, IServiceGetAll<T>, IServiceAdd<T>, IServiceDelete<T>, IServiceGetCount
+    {
+        public abstract void Initialize();
+        public abstract T Add(T item);
+        public abstract void Add(IEnumerable<T> items);
+        public abstract void Delete(int id);
+        public abstract void Delete(T item);
+        public abstract void Delete(Predicate<T> predicate);
+        public abstract T Get();
+        public abstract T Get(int id);
+        public abstract IEnumerable<T> GetAll();
+        public abstract IEnumerable<T> GetAll(Predicate<T> predicate);
+        public abstract int GetCount();
+        public abstract void Dispose();
+
+    }
 }

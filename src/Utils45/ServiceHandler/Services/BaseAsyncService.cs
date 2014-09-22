@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using int32.Utils.ServiceHandler.Contracts;
 using int32.Utils45.ServiceHandler.Contracts;
 
 namespace int32.Utils45.ServiceHandler.Services
 {
     public abstract class BaseService<T, TParam> : IService, IServiceGetAsync<T>, IServiceGetAllAsync<T>, IServiceGetParamAsync<T, TParam>, IServiceAddAsync<T>, IServiceDeleteAsync<T>, IServiceDeleteParam<TParam>, IServiceGetCountAsync where TParam : IServiceParameter
     {
-        public abstract void Initialize();
+        public abstract void Initialize(IInitializeParameter param);
         public abstract Task<T> Add(T item);
         public abstract Task Add(IEnumerable<T> items);
         public abstract Task Delete(int id);

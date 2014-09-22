@@ -5,7 +5,7 @@ using int32.Utils.ServiceHandler.Contracts;
 
 namespace int32.Utils.ServiceHandler
 {
-    public class ServiceHandler : IDisposable
+    public class ServiceHandler : IServiceHandler
     {
         private readonly List<IService> _services;
 
@@ -29,6 +29,7 @@ namespace int32.Utils.ServiceHandler
         {
             return _services.Find(i => i.GetType() == typeof(T)).As<T>();
         }
+
         public void Initialize()
         {
             _services.ForEach(i => i.Initialize());
