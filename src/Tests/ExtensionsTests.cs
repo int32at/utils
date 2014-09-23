@@ -154,7 +154,7 @@ namespace Tests
                 new SampleModel() {Age = 33}
             };
 
-            models.Update(i => i.Type = ModelType.Sample);
+            models.IfNotNull(() => models.Update(i => i.Type = ModelType.Sample));
 
             models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
         }
