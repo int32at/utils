@@ -1,12 +1,83 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace int32.Utils.Extensions
 {
     public static class GenericExtensions
     {
+        public static bool IsNull<T>(this T o)
+        {
+            return o == null;
+        }
+
+        public static void IfNull<T>(this T o, Action action)
+        {
+            if (o.IsNull())
+                action();
+        }
+
+        public static void IfNull<T>(this T o, Action<T> action)
+        {
+            if (o.IsNull())
+                action(o);
+        }
+
+        public static void IfNull<T>(this T o, Action ifAction, Action<T> elseAction)
+        {
+            if (o.IsNull())
+                ifAction();
+            else elseAction(o);
+        }
+
+        public static void IfNull<T>(this T o, Action<T> ifAction, Action elseAction)
+        {
+            if (o.IsNull())
+                ifAction(o);
+            else elseAction();
+        }
+
+        public static void IfNull<T>(this T o, Action<T> ifAction, Action<T> elseAction)
+        {
+            if (o.IsNull())
+                ifAction(o);
+            else elseAction(o);
+        }
+
+        public static void IfNotNull<T>(this T o, Action action)
+        {
+            if (!o.IsNull())
+                action();
+        }
+
+        public static void IfNotNull<T>(this T o, Action<T> action)
+        {
+            if (!o.IsNull())
+                action(o);
+        }
+
+        public static void IfNotNull<T>(this T o, Action ifAction, Action<T> elseAction)
+        {
+            if (!o.IsNull())
+                ifAction();
+            else elseAction(o);
+        }
+
+        public static void IfNotNull<T>(this T o, Action<T> ifAction, Action elseAction)
+        {
+            if (!o.IsNull())
+                ifAction(o);
+            else elseAction();
+        }
+
+        public static void IfNotNull<T>(this T o, Action<T> ifAction, Action<T> elseAction)
+        {
+            if (!o.IsNull())
+                ifAction(o);
+            else elseAction(o);
+        }
+
         public static bool In<T>(this T source, params T[] list)
         {
             source.ThrowIfNull("source");

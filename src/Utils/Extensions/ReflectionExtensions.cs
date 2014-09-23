@@ -12,17 +12,10 @@ namespace int32.Utils.Extensions
 
             var type = o.GetType();
 
-            var prop = GetProperty(type, name);
-
-            if (prop != null)
-                prop.SetValue(o, value, null);
-            else
-            {
-                var field = GetField(type, name);
-
-                if (field != null)
-                    field.SetValue(o, value);
-            }
+            GetProperty(type, name)
+                .IfNull
+                    (prop => GetField(type, name).IfNotNull(field => field.SetValue(o, value)),
+                prop => prop.SetValue(o, value, null));
         }
 
         public static T Get<T>(this object o, string name)
@@ -30,15 +23,14 @@ namespace int32.Utils.Extensions
             o.ThrowIfNull("o");
 
             var type = o.GetType();
+            T returnValue = default(T);
 
-            var prop = GetProperty(type, name);
+            GetProperty(type, name).IfNotNull(prop =>
+            {
+                returnValue = prop.GetValue(o, null).As<T>();
+            }, prop => GetField(type, name).IfNotNull(field => { returnValue = field.GetValue(o).As<T>(); }));
 
-            if (prop != null)
-                return prop.GetValue(o, null).As<T>();
-
-            var field = GetField(type, name);
-
-            return field != null ? field.GetValue(o).As<T>() : default(T);
+            return returnValue;
         }
 
         private static PropertyInfo GetProperty(Type type, string name)

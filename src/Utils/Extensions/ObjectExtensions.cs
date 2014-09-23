@@ -7,12 +7,6 @@ namespace int32.Utils.Extensions
 {
     public static class ObjectExtensions
     {
-        public static void IfNull(this object o, Action action)
-        {
-            if (o == null)
-                action();
-        }
-
         public static void ThrowIfNull(this object o, string name)
         {
             o.IfNull(() => { throw new ArgumentNullException(name); });
