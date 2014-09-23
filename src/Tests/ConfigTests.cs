@@ -43,7 +43,6 @@ namespace Tests
             config.Remove("MyKey");
 
             Assert.Throws<ArgumentNullException>(() => config.Get<int>("MyKey"));
-            Assert.Throws<ArgumentNullException>(() => config.Remove("MyKey"));
         }
     }
 }
