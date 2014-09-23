@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using int32.Utils.Extensions;
 using NUnit.Framework;
 using Tests.Samples;
@@ -115,6 +117,46 @@ namespace Tests
             Assert.AreEqual("test", t.Get<string>("Internal"));
             Assert.AreEqual("b", t.Get<string>("_test"));
             Assert.AreEqual(t.Type, ModelType.Test);
+        }
+
+        [TestCase]
+        public void Generic_RemoveFromList_Predicate()
+        {
+            var numbers = new List<int> { 1, 3, 5, 7, 9 };
+            numbers.Remove(i => i == 7);
+
+            Assert.IsFalse(numbers.Contains(7));
+        }
+
+        [TestCase]
+        public void Generic_RemoveFromList_Predicate_Class()
+        {
+            var models = new List<SampleModel>
+            {
+                new SampleModel() {Age = 23},
+                new SampleModel() {Age = 12},
+                new SampleModel() {Age = 33}
+            };
+
+            models.Remove(i => i.Age < 20);
+
+            Assert.IsNull(models.FirstOrDefault(i => i.Age < 20));
+        }
+
+
+        [TestCase]
+        public void Generic_UpdateList_Predicate_Class()
+        {
+            var models = new List<SampleModel>
+            {
+                new SampleModel() {Age = 23},
+                new SampleModel() {Age = 12},
+                new SampleModel() {Age = 33}
+            };
+
+            models.Update(i => i.Type = ModelType.Sample);
+
+            models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
         }
     }
 }

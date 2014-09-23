@@ -16,6 +16,7 @@
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
     <IsCodedUITest>False</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,8 +35,15 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.SharePoint.Client.Silverlight">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.Silverlight.14.0.4762.1000\lib\Microsoft.SharePoint.Client.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SharePoint.Client.Silverlight.Runtime">
+      <HintPath>..\packages\Microsoft.SharePoint.Client.Silverlight.14.0.4762.1000\lib\Microsoft.SharePoint.Client.Silverlight.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -67,10 +76,6 @@
     <Compile Include="Samples\VersionParameter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utils45\Utils45.csproj">
-      <Project>{090eaf98-40a0-47f5-b837-989aeeffde62}</Project>
-      <Name>Utils45</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Utils\Utils.csproj">
       <Project>{50AD7205-0997-49D8-B78D-92B40F9108B6}</Project>
       <Name>Utils</Name>
