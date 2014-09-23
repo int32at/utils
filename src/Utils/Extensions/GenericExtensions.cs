@@ -1,15 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace int32.Utils.Extensions
 {
     public static class GenericExtensions
     {
+        public static void ThrowIfNull<T>(this T o, string name)
+        {
+            o.IfNull(() => { throw new ArgumentNullException(name); });
+        }
+
+        public static T Safe<T>(this T o)
+        {
+            o.ThrowIfNull("Safe");
+            return o;
+        }
+
         public static bool IsNull<T>(this T o)
         {
             return o == null;
+        }
+
+        public static T Ensure<T>(this T o)
+        {
+            o.ThrowIfNull("o");
+            return o;
         }
 
         public static void IfNull<T>(this T o, Action action)
