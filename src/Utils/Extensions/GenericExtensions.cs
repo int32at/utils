@@ -6,9 +6,10 @@ namespace int32.Utils.Extensions
 {
     public static class GenericExtensions
     {
-        public static void ThrowIfNull<T>(this T o, string name)
+        public static T ThrowIfNull<T>(this T o, string name)
         {
             o.IfNull(() => { throw new ArgumentNullException(name); });
+            return o;
         }
 
         public static T Safe<T>(this T o)
@@ -24,74 +25,64 @@ namespace int32.Utils.Extensions
 
         public static T Ensure<T>(this T o)
         {
-            o.ThrowIfNull("o");
+            return o.ThrowIfNull("o");
+        }
+
+        public static T And<T>(this T o)
+        {
             return o;
         }
 
-        public static void IfNull<T>(this T o, Action action)
-        {
-            if (o.IsNull())
-                action();
-        }
-
-        public static void IfNull<T>(this T o, Action<T> action)
-        {
-            if (o.IsNull())
-                action(o);
-        }
-
-        public static void IfNull<T>(this T o, Action ifAction, Action<T> elseAction)
-        {
-            if (o.IsNull())
-                ifAction();
-            else elseAction(o);
-        }
-
-        public static void IfNull<T>(this T o, Action<T> ifAction, Action elseAction)
-        {
-            if (o.IsNull())
-                ifAction(o);
-            else elseAction();
-        }
-
-        public static void IfNull<T>(this T o, Action<T> ifAction, Action<T> elseAction)
-        {
-            if (o.IsNull())
-                ifAction(o);
-            else elseAction(o);
-        }
-
-        public static void IfNotNull<T>(this T o, Action action)
+        public static T IfNotNull<T>(this T o, Action action)
         {
             if (!o.IsNull())
                 action();
+
+            return o;
         }
 
-        public static void IfNotNull<T>(this T o, Action<T> action)
+        public static T IfNotNull<T>(this T o, Action<T> action)
         {
             if (!o.IsNull())
                 action(o);
+
+            return o;
         }
 
-        public static void IfNotNull<T>(this T o, Action ifAction, Action<T> elseAction)
+        public static T IfNotNull<T>(this T o, Func<T> action)
         {
-            if (!o.IsNull())
-                ifAction();
-            else elseAction(o);
+            return !o.IsNull() ? action() : o;
         }
 
-        public static void IfNotNull<T>(this T o, Action<T> ifAction, Action elseAction)
+        public static T IfNotNull<T>(this T o, Func<T, T> action)
         {
-            if (!o.IsNull())
-                ifAction(o);
-            else elseAction();
+            return !o.IsNull() ? action(o) : o;
         }
 
-        public static void IfNotNull<T>(this T o, Action<T> ifAction, Action<T> elseAction)
+        public static T IfNull<T>(this T o, Action action)
         {
-            if (!o.IsNull())
-                ifAction(o);
-            else elseAction(o);
+            if (o.IsNull())
+                action();
+
+            return o;
+        }
+
+        public static T IfNull<T>(this T o, Func<T> action)
+        {
+            return o.IsNull() ? action() : o;
+        }
+
+        public static T IfNull<T>(this T o, Func<T, T> action)
+        {
+            return o.IsNull() ? action(o) : o;
+        }
+
+        public static T IfNull<T>(this T o, Action<T> action)
+        {
+            if (o.IsNull())
+                action(o);
+
+            return o;
         }
 
         public static bool In<T>(this T source, params T[] list)

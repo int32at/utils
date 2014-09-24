@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using int32.Utils.Extensions;
 using NUnit.Framework;
 using Tests.Samples;
@@ -159,6 +160,52 @@ namespace Tests
             models.IfNotNull(() => models.Update(i => i.Type = ModelType.Sample));
 
             models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
+
+            var x = GetModel().ThrowIfNull("model").And().IfNotNull(model => model.Age = 23);
+
+            var y = GetModelNull().IfNull(model => new SampleModel() { Age = 17 });
+
+            Assert.AreEqual(x.Age, 23);
+            Assert.AreEqual(y.Age, 17);
+        }
+
+        [TestCase]
+        public void Generic_IfNull_IfNotNull_Chaining()
+        {
+            //just check if not null
+            Assert.AreEqual(22, GetModel().IfNotNull(() => Assert.IsTrue(true)).Age);
+
+            //reset the age
+            Assert.AreEqual(27, GetModel().IfNotNull(() => new SampleModel() { Age = 27 }).Age);
+
+            //check for null
+            Assert.IsNull(GetModelNull().IfNull(() => Assert.IsTrue(true)));
+
+            //create new object when null
+            Assert.AreEqual(27, GetModelNull().IfNull(() => new SampleModel() { Age = 27 }).Age);
+
+            //create ne wobject and check directly
+            GetModelNull().IfNull(() => new SampleModel()).And().IfNotNull(model => Assert.IsNotNull(model));
+
+            //get valid object, set it to null, check for null, and throw if null
+            Assert.Throws<ArgumentNullException>(
+                () =>
+                    GetModel()
+                        .IfNotNull(() => null)
+                        .And()
+                        .IfNull(model => Assert.IsNull(model))
+                        .And()
+                        .ThrowIfNull("model"));
+        }
+
+        private SampleModel GetModel()
+        {
+            return new SampleModel() { Age = 22 };
+        }
+
+        private SampleModel GetModelNull()
+        {
+            return null;
         }
     }
 }

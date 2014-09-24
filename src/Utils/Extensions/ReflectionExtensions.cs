@@ -13,9 +13,8 @@ namespace int32.Utils.Extensions
             var type = o.GetType();
 
             GetProperty(type, name)
-                .IfNull
-                    (prop => GetField(type, name).IfNotNull(field => field.SetValue(o, value)),
-                prop => prop.SetValue(o, value, null));
+                .IfNull(() => GetField(type, name).IfNotNull(field => field.SetValue(o, value)))
+                .IfNotNull(prop => prop.SetValue(o, value, null));
         }
 
         public static T Get<T>(this object o, string name)
@@ -25,10 +24,9 @@ namespace int32.Utils.Extensions
             var type = o.GetType();
             T returnValue = default(T);
 
-            GetProperty(type, name).IfNotNull(prop =>
-            {
-                returnValue = prop.GetValue(o, null).As<T>();
-            }, prop => GetField(type, name).IfNotNull(field => { returnValue = field.GetValue(o).As<T>(); }));
+            GetProperty(type, name)
+                .IfNull(() => GetField(type, name).IfNotNull(field => returnValue = field.GetValue(o).As<T>()))
+                .IfNotNull(prop => returnValue = prop.GetValue(o, null).As<T>());
 
             return returnValue;
         }
