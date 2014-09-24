@@ -14,8 +14,7 @@ namespace int32.Utils.Extensions
 
         public static T Safe<T>(this T o)
         {
-            o.ThrowIfNull("Safe");
-            return o;
+            return o.ThrowIfNull("Safe");
         }
 
         public static bool IsNull<T>(this T o)
@@ -23,14 +22,14 @@ namespace int32.Utils.Extensions
             return o == null;
         }
 
-        public static T Ensure<T>(this T o)
-        {
-            return o.ThrowIfNull("o");
-        }
-
         public static T And<T>(this T o)
         {
             return o;
+        }
+
+        public static T And<T>(this T o, Func<T, T> action)
+        {
+            return action(o);
         }
 
         public static T IfNotNull<T>(this T o, Action action)
