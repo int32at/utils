@@ -21,11 +21,7 @@ namespace int32.Utils.Configuration
 
         public T Get<T>(string key)
         {
-            var entry = _entries.SingleOrDefault(i => i.Key.Equals(key));
-            entry.ThrowIfNull(key);
-
-            // ReSharper disable once PossibleNullReferenceException
-            return entry.Value.As<T>();
+            return _entries.SingleOrDefault(i => i.Key.Equals(key)).ThrowIfNull(key).Value.As<T>();
         }
 
         public void Remove(string key)
@@ -33,7 +29,7 @@ namespace int32.Utils.Configuration
             Remove(i => i.Key.Equals(key));
         }
 
-        public void Remove(Predicate<ConfigEntry> where)
+        public void Remove(Func<ConfigEntry, bool> where)
         {
             for (var i = 0; i < _entries.Count; i++)
                 if (where(_entries[i]))
