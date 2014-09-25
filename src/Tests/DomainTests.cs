@@ -10,14 +10,19 @@ namespace Tests
         [TestCase]
         public void Environment_Create_Object()
         {
-            Domain.SetTo<Integration>();
+            Domain.OnChanged = () => Domain.Current.Switch()
+                .Case<Development>(() => Domain.Current.Config.Set("Url", "https://dev"))
+                .Case<Production>(() => Domain.Current.Config.Set("Url", "https://prod"))
+                .Default(() => Domain.Current.Config.Set("Url", "https://default"));
 
-            Domain.Current.Switch()
-                .Case<Development>(() => Domain.Current.Config.Set("Url", 1))
-                .Case<Production>(() => Domain.Current.Config.Set("Url", 2))
-                .Default(() => Domain.Current.Config.Set("Url", 3));
+            Domain.SetTo<Development>();
+            Assert.AreEqual("https://dev", Domain.Current.Config["Url"]);
 
-            Assert.AreEqual(3, Domain.Current.Config["Url"].As<int>());
+            Domain.SetTo<Production>();
+            Assert.AreEqual("https://prod", Domain.Current.Config["Url"]);
+
+            Domain.SetTo<QualityAssurance>();
+            Assert.AreEqual("https://default", Domain.Current.Config["Url"]);
         }
     }
 }

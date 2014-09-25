@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using int32.Utils.Configuration;
 using int32.Utils.Domains.Contracts;
@@ -19,10 +20,11 @@ namespace int32.Utils.Domains
             new Production()
         };
 
+        public static Action OnChanged;
+
         public static IDomainItem Current
         {
             get { return _current.IfNull(() => Domains.First()); }
-            set { _current = value; }
         }
 
         public static void SetTo<T>() where T : IDomainItem
@@ -30,7 +32,12 @@ namespace int32.Utils.Domains
             var type = typeof(T);
 
             Domains.FirstOrDefault(i => i.GetType() == type)
-                .IfNotNull(i => _current = i);
+                .IfNotNull(i =>
+                {
+                    _current = i;
+                    //execute onChanged when subscribed
+                    OnChanged.IfNotNull(a => a());
+                });
         }
     }
 
