@@ -63,11 +63,12 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AggregatorTests.cs" />
+    <Compile Include="DomainTests.cs" />
+    <Compile Include="ExtensionsTests.cs" />
     <Compile Include="ServiceHandlerTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigTests.cs" />
-    <Compile Include="ExtensionsTests.cs" />
     <Compile Include="Samples\HomeModel.cs" />
     <Compile Include="Samples\MockLogger.cs" />
     <Compile Include="Samples\SampleAddEvent.cs" />

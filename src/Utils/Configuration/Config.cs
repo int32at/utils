@@ -9,6 +9,11 @@ namespace int32.Utils.Configuration
     {
         private readonly List<ConfigEntry> _entries;
 
+        public object this[string key]
+        {
+            get { return GetConfigEntry(key).Value; }
+        }
+
         public Config()
         {
             _entries = new List<ConfigEntry>();
@@ -21,7 +26,7 @@ namespace int32.Utils.Configuration
 
         public T Get<T>(string key)
         {
-            return _entries.SingleOrDefault(i => i.Key.Equals(key)).ThrowIfNull(key).Value.As<T>();
+            return GetConfigEntry(key).Value.As<T>();
         }
 
         public void Remove(string key)
@@ -34,6 +39,11 @@ namespace int32.Utils.Configuration
             for (var i = 0; i < _entries.Count; i++)
                 if (where(_entries[i]))
                     _entries.RemoveAt(i);
+        }
+
+        private ConfigEntry GetConfigEntry(string key)
+        {
+            return _entries.SingleOrDefault(i => i.Key.Equals(key)).ThrowIfNull(key);
         }
     }
 }

@@ -51,12 +51,16 @@
     <Compile Include="Aggregator\Subscription.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigEntry.cs" />
+    <Compile Include="Domains\Contracts\IDomainItem.cs" />
+    <Compile Include="Domains\Domain.cs" />
+    <Compile Include="Domains\DomainType.cs" />
     <Compile Include="Extensions\DateExtensions.cs" />
     <Compile Include="Extensions\GenericExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Generics\Property.cs" />
+    <Compile Include="Generics\TypeSwitch.cs" />
     <Compile Include="Logger\Loggers\ConsoleLogger.cs" />
     <Compile Include="Logger\Loggers\FileLogger.cs" />
     <Compile Include="Logger\Contracts\ILogger.cs" />

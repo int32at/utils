@@ -1,5 +1,6 @@
 ﻿using System;
 using int32.Utils.Configuration;
+using int32.Utils.Extensions;
 using NUnit.Framework;
 
 namespace Tests
@@ -21,6 +22,7 @@ namespace Tests
             var config = new Config();
             config.Set(new ConfigEntry("MyKey", expected));
             Assert.AreEqual(expected, config.Get<int>("MyKey"));
+            Assert.AreEqual(expected, config["MyKey"].As<int>());
         }
 
         [TestCase]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using int32.Utils.Domains.Contracts;
+using int32.Utils.Generics;
 
 namespace int32.Utils.Extensions
 {
@@ -126,6 +128,11 @@ namespace int32.Utils.Extensions
             {
                 updator(item);
             }
+        }
+
+        public static Switch<T> Switch<T>(this T o)
+        {
+            return new Switch<T>(o);
         }
     }
 }
