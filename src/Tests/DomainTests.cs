@@ -13,11 +13,11 @@ namespace Tests
             Domain.SetTo<Integration>();
 
             Domain.Current.Switch()
-                .Case<Development>(() => Domain.Current.Store.Add("Url", 1))
-                .Case<Production>(() => Domain.Current.Store.Add("Url", 2))
-                .Default(() => Domain.Current.Store.Add("Url", 3));
+                .Case<Development>(() => Domain.Current.Config.Set("Url", 1))
+                .Case<Production>(() => Domain.Current.Config.Set("Url", 2))
+                .Default(() => Domain.Current.Config.Set("Url", 3));
 
-            Assert.AreEqual(3, Domain.Current.Store["Url"]);
+            Assert.AreEqual(3, Domain.Current.Config["Url"].As<int>());
         }
     }
 }

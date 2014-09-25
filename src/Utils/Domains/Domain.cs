@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using int32.Utils.Configuration;
 using int32.Utils.Domains.Contracts;
 using int32.Utils.Extensions;
 
@@ -37,13 +38,13 @@ namespace int32.Utils.Domains
     {
         public string Name { get; internal set; }
         public DomainType Type { get; internal set; }
-        public Dictionary<string, object> Store { get; set; }
+        public Config Config { get; set; }
 
         public Development()
         {
             Name = "Development";
             Type = DomainType.Development;
-            Store = new Dictionary<string, object>();
+            Config = new Config();
         }
     }
 

@@ -24,6 +24,11 @@ namespace int32.Utils.Configuration
             _entries.Add(entry);
         }
 
+        public void Set(string key, object value)
+        {
+            _entries.Add(new ConfigEntry(key, value));
+        }
+
         public T Get<T>(string key)
         {
             return GetConfigEntry(key).Value.As<T>();

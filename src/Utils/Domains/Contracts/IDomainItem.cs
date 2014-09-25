@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using int32.Utils.Configuration;
 
 namespace int32.Utils.Domains.Contracts
 {
@@ -6,6 +7,6 @@ namespace int32.Utils.Domains.Contracts
     {
         string Name { get; }
         DomainType Type { get; }
-        Dictionary<string, object> Store { get; set; }
+        Config Config { get; set; }
     }
 }
