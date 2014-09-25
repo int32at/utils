@@ -12,6 +12,7 @@ namespace int32.Utils.Configuration
         public object this[string key]
         {
             get { return GetConfigEntry(key).Value; }
+            set { Set(key, value); }
         }
 
         public Config()
@@ -21,12 +22,17 @@ namespace int32.Utils.Configuration
 
         public void Set(ConfigEntry entry)
         {
+            entry.ThrowIfNull("entry");
+
+            if (_entries.Contains(entry))
+                throw new ArgumentException(string.Format("Entry with key {0} already exists", entry.Key));
+
             _entries.Add(entry);
         }
 
         public void Set(string key, object value)
         {
-            _entries.Add(new ConfigEntry(key, value));
+            Set(new ConfigEntry(key, value));
         }
 
         public T Get<T>(string key)
