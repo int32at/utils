@@ -7,12 +7,13 @@ namespace int32.Utils.ServiceHandler.Contracts
     {
         T Get();
         T Get(int id);
+        T Get(Func<T, bool> predicate);
     }
 
     public interface IServiceGetAll<T>
     {
         IEnumerable<T> GetAll();
-        IEnumerable<T> GetAll(Predicate<T> predicate);
+        IEnumerable<T> GetAll(Func<T, bool> predicate);
     }
 
     public interface IServiceGetParam<T, in TParam> where TParam : IServiceParameter

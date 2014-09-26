@@ -97,6 +97,7 @@ namespace Tests
         public void String_IsMatch_Regex()
         {
             const string sampleText = "sample 33 xxx 322";
+
             Assert.IsTrue(sampleText.Matches(@"\d+"));
 
             sampleText.Matches(@"\d+", () => Assert.IsTrue(true));

@@ -31,9 +31,19 @@ namespace int32.Utils.Logger
             _loggers.ForEach(i => i.Dispose());
         }
 
+        public void Info(string format, params object[] message)
+        {
+            Info(string.Format(format, message));
+        }
+
         public void Info(string message)
         {
             Log(new InfoMessage(message) { Format = Config.Format });
+        }
+
+        public void Warn(string format, params object[] message)
+        {
+            Warn(string.Format(format, message));
         }
 
         public void Warn(string message)

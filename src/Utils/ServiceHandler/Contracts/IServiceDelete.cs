@@ -6,7 +6,7 @@ namespace int32.Utils.ServiceHandler.Contracts
     {
         void Delete(int id);
         void Delete(T item);
-        void Delete(Predicate<T> predicate);
+        void Delete(Func<T, bool> predicate);
     }
 
     public interface IServiceDeleteParam<T> where T : IServiceParameter

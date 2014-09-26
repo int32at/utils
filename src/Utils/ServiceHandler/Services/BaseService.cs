@@ -12,13 +12,14 @@ namespace int32.Utils.ServiceHandler.Services
         public abstract void Delete(int id);
         public abstract void Delete(T item);
         public abstract void Delete(TParam param);
-        public abstract void Delete(Predicate<T> predicate);
+        public abstract void Delete(Func<T, bool> predicate);
         public abstract T Get();
         public abstract T Get(int id);
+        public abstract T Get(Func<T, bool> predicate);
         public abstract T Get(TParam param);
         public abstract IEnumerable<T> GetAll();
+        public abstract IEnumerable<T> GetAll(Func<T, bool> predicate);
         public abstract IEnumerable<T> GetAll(TParam param);
-        public abstract IEnumerable<T> GetAll(Predicate<T> predicate);
         public abstract int GetCount();
         public abstract void Dispose();
     }
@@ -30,13 +31,13 @@ namespace int32.Utils.ServiceHandler.Services
         public abstract void Add(IEnumerable<T> items);
         public abstract void Delete(int id);
         public abstract void Delete(T item);
-        public abstract void Delete(Predicate<T> predicate);
+        public abstract void Delete(Func<T, bool> predicate);
         public abstract T Get();
         public abstract T Get(int id);
+        public abstract T Get(Func<T, bool> predicate);
         public abstract IEnumerable<T> GetAll();
-        public abstract IEnumerable<T> GetAll(Predicate<T> predicate);
+        public abstract IEnumerable<T> GetAll(Func<T, bool> predicate);
         public abstract int GetCount();
         public abstract void Dispose();
-
     }
 }

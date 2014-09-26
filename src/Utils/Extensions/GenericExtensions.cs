@@ -111,12 +111,12 @@ namespace int32.Utils.Extensions
             foreach (var item in list) action(item);
         }
 
-        public static void Remove<T>(this ICollection<T> list, Predicate<T> where)
+        public static void Remove<T>(this ICollection<T> list, Func<T, bool> where)
         {
             list.ThrowIfNull("list");
             where.ThrowIfNull("where");
 
-            var itemsToRemove = list.Where(i => where(i)).ToList();
+            var itemsToRemove = list.Where(where).ToList();
             foreach (var itemToRemove in itemsToRemove)
                 list.Remove(itemToRemove);
 

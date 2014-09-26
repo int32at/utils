@@ -33,10 +33,11 @@ namespace Tests
 
                 Assert.AreEqual(1, svc.Service<VersionService>().Get().Version);
                 Assert.AreEqual(1, svc.Service<VersionService>().Get(1).Version);
+                Assert.AreEqual(2, svc.Service<VersionService>().Get(i => i.Version == 2).Version);
                 Assert.AreEqual(3, svc.Service<VersionService>().GetAll().Count());
                 Assert.AreEqual(1, svc.Service<VersionService>().Get(new VersionParameter { Value = 1 }).Version);
                 Assert.AreEqual(1, svc.Service<VersionService>().GetAll(new VersionParameter { Value = 1 }).Count());
-                Assert.AreEqual(2, svc.Service<VersionService>().GetAll(i => i.Version == 2).FirstOrDefault().Version);
+                Assert.AreEqual(2, svc.Service<VersionService>().GetAll(i => i.Version == 2).First().Version);
                 Assert.AreEqual(3, svc.Service<VersionService>().GetCount());
             }
         }
@@ -65,12 +66,17 @@ namespace Tests
                 return _data.First(i => i.Version == id);
             }
 
+            public override VersionModel Get(Func<VersionModel, bool> predicate)
+            {
+                return _data.FirstOrDefault(predicate);
+            }
+
             public override IEnumerable<VersionModel> GetAll()
             {
                 return _data;
             }
 
-            public override IEnumerable<VersionModel> GetAll(Predicate<VersionModel> predicate)
+            public override IEnumerable<VersionModel> GetAll(Func<VersionModel, bool> predicate)
             {
                 return _data.Where(i => predicate(i));
             }
@@ -106,20 +112,27 @@ namespace Tests
             {
                 _data.Remove(item);
             }
+
             public override void Delete(VersionParameter param)
             {
                 Delete(param.Value);
             }
 
-            public override void Delete(Predicate<VersionModel> predicate)
+            public override void Delete(Func<VersionModel, bool> predicate)
             {
-                _data.Where(i => predicate(i)).ForEach(i => _data.Remove(i));
+                _data.Where(predicate).ForEach(i => _data.Remove(i));
             }
 
             public override int GetCount()
             {
                 return _data.Count;
             }
+        }
+
+        public class VersionParameter : IServiceParameter
+        {
+            public string Key { get; set; }
+            public int Value { get; set; }
         }
     }
 }

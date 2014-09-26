@@ -74,7 +74,6 @@
     <Compile Include="Samples\SampleAddEvent.cs" />
     <Compile Include="Samples\SampleModel.cs" />
     <Compile Include="Samples\VersionModel.cs" />
-    <Compile Include="Samples\VersionParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utils\Utils.csproj">
