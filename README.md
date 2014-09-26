@@ -3,12 +3,12 @@ utils
 
 My .NET Utils Framework
 
-###Logger
+Includes:
+* Logging
+* Configuration
+* Event Aggregator
+* Domains (Environments) Specifics
+* Service Helpers
+* Useful Extension Methods
 
-###Config
-
-###Domain
-
-###Aggregator
-
-###Services
+See the `Test` project on how to use.
