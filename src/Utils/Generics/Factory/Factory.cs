@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Linq;
-using int32.Utils.Extensions;
 
-namespace int32.Utils.Generics
+namespace int32.Utils.Generics.Factory
 {
-    public abstract class Factory<T> where T : class, new()
+    public abstract class Factory<T> where T : class
     {
         public static T Create()
         {

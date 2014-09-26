@@ -1,8 +1,10 @@
-﻿using int32.Utils.Generics;
+﻿using int32.Utils.Extensions;
+using int32.Utils.Generics.Repository.Contracts;
+using int32.Utils.Generics.Singleton;
 
 namespace Tests.Samples
 {
-    public class SampleModel
+    public class SampleModel : IModel
     {
         private string _test = "a";
         private string Internal { get; set; }
@@ -10,6 +12,11 @@ namespace Tests.Samples
         public int Age { get; set; }
 
         public ModelType Type { get; set; }
+
+        public string Return()
+        {
+            return this.ToJSON();
+        }
     }
 
     public class SampleModelSingleton : Singleton<SampleModel> { }

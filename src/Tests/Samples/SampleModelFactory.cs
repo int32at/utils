@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using int32.Utils.Generics;
+﻿using int32.Utils.Generics.Factory;
 
 namespace Tests.Samples
 {

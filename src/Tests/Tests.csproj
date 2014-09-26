@@ -59,7 +59,7 @@
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="GenericToolsTests.cs" />
     <Compile Include="Samples\SampleModelFactory.cs" />
-    <Compile Include="ServiceHandlerTests.cs" />
+    <Compile Include="Samples\SampleModelRepository.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ConfigTests.cs" />
