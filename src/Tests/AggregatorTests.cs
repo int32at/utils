@@ -1,5 +1,6 @@
 ﻿using System;
 using int32.Utils.Aggregator;
+using int32.Utils.Extensions;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -36,6 +37,19 @@ namespace Tests
         {
             var aggregator = new Aggregator();
             Assert.Throws<ArgumentNullException>(() => aggregator.Subscribe<SampleAddEvent>(null));
+        }
+
+        [TestCase]
+        public void Aggregator_Singleton()
+        {
+            var a = Aggregator.Instance;
+            var b = Aggregator.Instance;
+
+            Assert.AreEqual(a, b);
+
+            //since its the same singleton, this should work
+            a.Subscribe<SampleAddEvent>(x => Assert.AreEqual(3, x.Data.As<int>()));
+            b.Publish(new SampleAddEvent() { Data = 3 });
         }
     }
 }

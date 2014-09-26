@@ -57,6 +57,7 @@
     <Compile Include="AggregatorTests.cs" />
     <Compile Include="DomainTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
+    <Compile Include="GenericToolsTests.cs" />
     <Compile Include="ServiceHandlerTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
