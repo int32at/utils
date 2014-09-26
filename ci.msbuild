@@ -4,6 +4,6 @@
   <Target Name="CI" DependsOnTargets="Build" />
   
   <Target Name="Build">
-    <MSBuild Projects="../src/Utils.sln" Properties="Configuration=Debug;Platform=x86" />
+    <MSBuild Projects="src/Utils.sln" Properties="Configuration=Debug;Platform=Any CPU" />
   </Target> 
 </Project>
