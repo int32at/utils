@@ -4,4 +4,4 @@ install:
   - sudo apt-get install mono-devel mono-gmcs nunit-console
  
 script:
-  - xbuild /scripts/CI.proj
+  - xbuild /scripts/ci.msbuild
