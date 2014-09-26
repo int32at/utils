@@ -65,6 +65,7 @@
     <Compile Include="Generics\Repository\Repository.cs" />
     <Compile Include="Generics\Repository\RepositoryHandler.cs" />
     <Compile Include="Generics\Singleton\Singleton.cs" />
+    <Compile Include="Generics\Timer.cs" />
     <Compile Include="Generics\TypeSwitch.cs" />
     <Compile Include="Logger\Loggers\ConsoleLogger.cs" />
     <Compile Include="Logger\Loggers\FileLogger.cs" />

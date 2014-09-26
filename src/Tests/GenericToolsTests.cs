@@ -1,4 +1,6 @@
 ﻿using System.Linq;
+using System.Threading;
+using int32.Utils.Generics;
 using int32.Utils.Generics.Factory;
 using int32.Utils.Generics.Repository;
 using int32.Utils.Generics.Singleton;
@@ -104,6 +106,12 @@ namespace Tests
                 ));
 
             Assert.IsNotNull(RepositoryHandler.Repository<SampleModelRepository>());
+        }
+
+        [TestCase]
+        public void GenericTools_Timer_Measure()
+        {
+            Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 200);
         }
     }
 }
