@@ -1,4 +1,6 @@
-﻿namespace Tests.Samples
+﻿using int32.Utils.Generics;
+
+namespace Tests.Samples
 {
     public class SampleModel
     {
@@ -9,6 +11,8 @@
 
         public ModelType Type { get; set; }
     }
+
+    public class SampleModelSingleton : Singleton<SampleModel> { }
 
     public enum ModelType
     {

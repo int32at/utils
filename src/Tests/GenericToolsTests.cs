@@ -1,6 +1,4 @@
-﻿using System;
-using int32.Utils.Generics;
-using int32.Utils.Logger;
+﻿using int32.Utils.Generics;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -16,6 +14,22 @@ namespace Tests
             var b = Singleton<SampleModel>.Instance;
 
             Assert.AreEqual(a, b);
+        }
+
+        [TestCase]
+        public void GenericTools_Singleton_Class()
+        {
+            var a = SampleModelSingleton.Instance;
+            var b = SampleModelSingleton.Instance;
+
+            Assert.AreEqual(a, b);
+        }
+
+        [TestCase]
+        public void GenericTools_Factory()
+        {
+            Assert.IsNotNull(SampleModelFactory.Create());
+            Assert.AreEqual(17, SampleModelFactory.Create(model => model.Age = 17).Age);
         }
     }
 }

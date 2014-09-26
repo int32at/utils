@@ -58,6 +58,7 @@
     <Compile Include="DomainTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="GenericToolsTests.cs" />
+    <Compile Include="Samples\SampleModelFactory.cs" />
     <Compile Include="ServiceHandlerTests.cs" />
     <Compile Include="LoggerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
