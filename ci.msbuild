@@ -1,9 +1,18 @@
 <?xml version="1.0"?>
-<Project ToolsVersion="4.0" DefaultTargets="CI" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
- 
-  <Target Name="CI" DependsOnTargets="Build" />
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <ItemGroup>
+        <NuGetPackageConfigs Include="$(MSBuildStartupDirectory)\**\packages.config" />
+    </ItemGroup>
+    <Target Name="LoadNuGetPackages">
+        <Message Importance="high" Text="-----------------------------------------------"/>
+        <Message Importance="high" Text="Retrieving packages for %(NuGetPackageConfigs.Identity)" />
+        <Message Importance="high" Text="-----------------------------------------------"/>
+        <Exec Command="&quot;$(SrcPath)\.nuget\nuget&quot; install &quot;%(NuGetPackageConfigs.Identity)&quot; -o &quot;$(SrcPath)\packages&quot;" />
+    </Target> 
   
-  <Target Name="Build">
-    <MSBuild Projects="src/Utils.sln" Properties="Configuration=Debug;Platform=Any CPU" />
-  </Target> 
+    <Target Name="Compile" DependsOnTargets="LoadNuGetPackages">
+        <MSBuild Projects="src/Utils.sln" Properties="Configuration=Debug;Platform=Any CPU" />
+    </Target> 
+  
+    <Target Name="Build" DependsOnTargets="LoadNuGetPackages;Compile" />
 </Project>
