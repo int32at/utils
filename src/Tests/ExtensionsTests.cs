@@ -208,5 +208,15 @@ namespace Tests
         {
             return null;
         }
+
+        [TestCase]
+        public void Generic_And_ListAdd()
+        {
+            var models = new List<SampleModel>()
+                .And(l => l.Add(new SampleModel()))
+                .And(l => l.Add(new SampleModel()));
+
+            Assert.AreEqual(2, models.Count);
+        }
     }
 }

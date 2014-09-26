@@ -1,19 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
+using System.Xml.Serialization;
 using int32.Utils.Extensions;
 
 namespace int32.Utils.Configuration
 {
     public class Config
     {
-        private readonly List<ConfigEntry> _entries;
+        private List<ConfigEntry> _entries;
 
         public object this[string key]
         {
             get { return GetConfigEntry(key).Value; }
             set { Set(key, value); }
         }
+
+        public int Count { get { return _entries.Count; } }
 
         public Config()
         {
@@ -50,6 +55,35 @@ namespace int32.Utils.Configuration
             for (var i = 0; i < _entries.Count; i++)
                 if (where(_entries[i]))
                     _entries.RemoveAt(i);
+        }
+
+        /// <summary>
+        /// Loads the app.config file automatically and parses the appSettings 
+        /// </summary>
+        /// <returns></returns>
+        public static Config Create()
+        {
+            return Load(ConfigurationManager.AppSettings);
+        }
+
+        public Config Load()
+        {
+            var cfg = Create();
+            _entries = cfg._entries;
+            return this;
+        }
+
+        private static Config Load(NameValueCollection values)
+        {
+            var temp = new Config();
+
+            values.IfNotNull(config =>
+            {
+                foreach (var key in config.AllKeys)
+                    temp.Set(key, config[key]);
+            });
+
+            return temp;
         }
 
         private ConfigEntry GetConfigEntry(string key)

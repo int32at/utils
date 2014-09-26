@@ -52,5 +52,14 @@ namespace Tests
 
             Assert.Throws<ArgumentNullException>(() => config.Get<int>("MyKey"));
         }
+
+        [TestCase]
+        public void Config_LoadFrom_ConfigManager()
+        {
+            //load the app config file
+            var cfg = Config.Create();
+            Assert.AreEqual(2, cfg.Count);
+            Assert.AreEqual(3, cfg["MyKey"].As<int>());
+        }
     }
 }

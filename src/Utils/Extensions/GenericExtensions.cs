@@ -34,6 +34,12 @@ namespace int32.Utils.Extensions
             return action(o);
         }
 
+        public static T And<T>(this T o, Action<T> action)
+        {
+            action(o);
+            return o;
+        }
+
         public static T IfNotNull<T>(this T o, Action action)
         {
             if (!o.IsNull())
