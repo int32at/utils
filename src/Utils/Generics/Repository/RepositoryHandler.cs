@@ -1,33 +1,27 @@
 ﻿using System.Collections.Generic;
 using int32.Utils.Extensions;
 using int32.Utils.Generics.Repository.Contracts;
-using int32.Utils.Generics.Singleton;
 
 namespace int32.Utils.Generics.Repository
 {
-    public class RepositoryHandler : Singleton<RepositoryHandler>
+    public class RepositoryHandler
     {
-        private readonly List<IRepository> _repositories;
+        private static readonly List<IRepository> Repositories = new List<IRepository>();
 
-        public RepositoryHandler()
+        public static void Register(IRepository repository)
         {
-            _repositories = new List<IRepository>();
+            if (!Repositories.Contains(repository))
+                Repositories.Add(repository);
         }
 
-        public void Register(IRepository repository)
+        public static void Register(params IRepository[] repositories)
         {
-            if (!_repositories.Contains(repository))
-                _repositories.Add(repository);
+            Repositories.ForEach(Register);
         }
 
-        public void Register(params IRepository[] repositories)
+        public static T Repository<T>()
         {
-            _repositories.ForEach(Register);
-        }
-
-        public T Repository<T>()
-        {
-            return _repositories.Find(i => i.GetType() == typeof(T)).As<T>();
+            return Repositories.Find(i => i.GetType() == typeof(T)).As<T>();
         }
     }
 }
