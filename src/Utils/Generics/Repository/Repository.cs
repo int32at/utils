@@ -16,6 +16,7 @@ namespace int32.Utils.Generics.Repository
         public abstract IEnumerable<TEntity> GetAll();
         public abstract IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
         public abstract TEntity Update(TEntity oldItem, TEntity newItem);
+        public abstract void SaveChanges();
     }
 
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IModel
@@ -29,5 +30,6 @@ namespace int32.Utils.Generics.Repository
         public abstract IEnumerable<TEntity> GetAll();
         public abstract IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
         public abstract TEntity Update(TEntity oldItem, TEntity newItem);
+        public abstract void SaveChanges();
     }
 }

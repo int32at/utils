@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using int32.Utils.Extensions;
 using int32.Utils.Generics.Repository;
 
@@ -66,6 +67,11 @@ namespace Tests.Samples
             var x = _data.Find(model => model == oldItem);
             x.Age = newItem.Age;
             return x;
+        }
+
+        public override void SaveChanges()
+        {
+
         }
     }
 }

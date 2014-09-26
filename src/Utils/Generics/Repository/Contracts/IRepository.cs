@@ -21,5 +21,6 @@ namespace int32.Utils.Generics.Repository.Contracts
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> GetAll(Func<TEntity, bool> predicate);
         TEntity Update(TEntity oldItem, TEntity newItem);
+        void SaveChanges();
     }
 }
