@@ -8,5 +8,4 @@ before_install:
   - export EnableNuGetPackageRestore=true
  
 script:
-  - cd src/
-  - xbuild Utils.sln
+  - xbuild src/Utils.sln
