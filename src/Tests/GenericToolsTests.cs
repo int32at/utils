@@ -96,6 +96,8 @@ namespace Tests
 
             RepositoryHandler.Instance.Repository<SampleModelRepository>().Delete(i => i.Age > 40);
             Assert.AreEqual(3, RepositoryHandler.Instance.Repository<SampleModelRepository>().Count);
+
+            Assert.DoesNotThrow(() => RepositoryHandler.Instance.Repository<SampleModelRepository>().SaveChanges());
         }
     }
 }
