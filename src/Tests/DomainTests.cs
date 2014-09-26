@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using int32.Utils.Domains;
+﻿using int32.Utils.Domains;
 using int32.Utils.Extensions;
 using NUnit.Framework;
 
