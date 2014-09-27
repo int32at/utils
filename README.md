@@ -52,7 +52,6 @@ using (var logger = new Logger(new ConsoleLogger(), new FileLogger(@"C:\log.txt"
 {
     //call to logger.Info("message") now logs on all 3
 }
-
 ```
 ####Configuraiton
 The logger obviously also can be configured, here is a brief explanation:
