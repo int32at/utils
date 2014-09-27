@@ -80,14 +80,14 @@ namespace Tests
         }
 
         [TestCase]
-        public void Generics_Between_List()
+        public void Generic_Between_List()
         {
             Assert.IsTrue(3.Between(1, 4));
             Assert.IsFalse(3.Between(1, 2));
         }
 
         [TestCase]
-        public void Generics_ForEach()
+        public void Generic_ForEach()
         {
             var numbers = new[] { 1, 3, 5, 7, 9 };
             numbers.ForEach(i => Assert.IsTrue(i.Between(1, 10)));

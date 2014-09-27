@@ -46,7 +46,7 @@ namespace Tests
         }
 
         [TestCase]
-        public void GenericTools_Repository_Handler()
+        public void GenericTools_RepositoryHandler()
         {
             var vm = RepositoryHandler.Add(new SampleModelRepository());
             Assert.AreEqual(vm, RepositoryHandler.Get<SampleModelRepository>());
@@ -107,11 +107,17 @@ namespace Tests
         [TestCase]
         public void GenericTools_RepositoryHandler_RegisterMultiple()
         {
-            Assert.DoesNotThrow(() => RepositoryHandler.Add(
-                new SampleModelRepository(),
-                new SampleModelRepository(),
-                new SampleModelRepository()
-                ));
+            Assert.DoesNotThrow(() =>
+            {
+                var items = RepositoryHandler.Add(
+                    new SampleModelRepository(),
+                    new SampleModelRepository(),
+                    new SampleModelRepository()
+                    );
+
+                Assert.AreEqual(3, items.Count());
+            });
+
 
             Assert.IsNotNull(RepositoryHandler.Get<SampleModelRepository>());
         }
