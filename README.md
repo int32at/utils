@@ -5,6 +5,8 @@ utils
 * Domain
 * Aggregator
 * Logging
+* Extension Methods
+* Design Patterns
 
 ##Configuration
 The `Config` class was designed to be simple and easy to use. Here are a few quick examples:
