@@ -1,9 +1,11 @@
 ﻿using System.Linq;
 using System.Threading;
+using int32.Utils.Extensions;
 using int32.Utils.Generics;
 using int32.Utils.Generics.Factory;
 using int32.Utils.Generics.Repository;
 using int32.Utils.Generics.Singleton;
+using int32.Utils.Generics.ViewModel;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -48,29 +50,29 @@ namespace Tests
         public void GenericTools_RepositoryHandler_Get()
         {
             //register sample service
-            RepositoryHandler.Register(new SampleModelRepository());
+            RepositoryHandler.Add(new SampleModelRepository());
 
-            var sampleModel = RepositoryHandler.Repository<SampleModelRepository>().Get();
+            var sampleModel = RepositoryHandler.Get<SampleModelRepository>().Get();
 
             Assert.IsNotNull(sampleModel);
             Assert.AreEqual(1, sampleModel.Age);
 
-            var sampleModel2 = RepositoryHandler.Repository<SampleModelRepository>().Get(i => i.Age > 17);
+            var sampleModel2 = RepositoryHandler.Get<SampleModelRepository>().Get(i => i.Age > 17);
             Assert.AreEqual(22, sampleModel2.Age);
 
-            Assert.AreEqual(3, RepositoryHandler.Repository<SampleModelRepository>().Count);
+            Assert.AreEqual(3, RepositoryHandler.Get<SampleModelRepository>().Count);
         }
 
         [TestCase]
         public void GenericTools_RepositoryHandler_GetAll()
         {
             //register sample service
-            RepositoryHandler.Register(new SampleModelRepository());
+            RepositoryHandler.Add(new SampleModelRepository());
 
-            var count = RepositoryHandler.Repository<SampleModelRepository>().GetAll().Count();
+            var count = RepositoryHandler.Get<SampleModelRepository>().GetAll().Count();
             Assert.AreEqual(3, count);
 
-            var count2 = RepositoryHandler.Repository<SampleModelRepository>().GetAll(i => i.Age > 17).Count();
+            var count2 = RepositoryHandler.Get<SampleModelRepository>().GetAll(i => i.Age > 17).Count();
             Assert.AreEqual(2, count2);
         }
 
@@ -78,34 +80,34 @@ namespace Tests
         public void GenericTools_RepositoryHandler_AddUpdateDelete()
         {
             //register sample service
-            RepositoryHandler.Register(new SampleModelRepository());
+            RepositoryHandler.Add(new SampleModelRepository());
 
-            var item = RepositoryHandler.Repository<SampleModelRepository>().Add(new SampleModel() { Age = 50 });
+            var item = RepositoryHandler.Get<SampleModelRepository>().Add(new SampleModel() { Age = 50 });
 
             Assert.AreEqual(50, item.Age);
-            Assert.AreEqual(item, RepositoryHandler.Repository<SampleModelRepository>().Get(i => i == item));
-            Assert.AreEqual(4, RepositoryHandler.Repository<SampleModelRepository>().Count);
+            Assert.AreEqual(item, RepositoryHandler.Get<SampleModelRepository>().Get(i => i == item));
+            Assert.AreEqual(4, RepositoryHandler.Get<SampleModelRepository>().Count);
 
-            var newItem = RepositoryHandler.Repository<SampleModelRepository>().Update(item, new SampleModel() { Age = 53 });
-            Assert.AreEqual(newItem, RepositoryHandler.Repository<SampleModelRepository>().Get(i => i == newItem));
-            Assert.AreEqual(4, RepositoryHandler.Repository<SampleModelRepository>().Count);
+            var newItem = RepositoryHandler.Get<SampleModelRepository>().Update(item, new SampleModel() { Age = 53 });
+            Assert.AreEqual(newItem, RepositoryHandler.Get<SampleModelRepository>().Get(i => i == newItem));
+            Assert.AreEqual(4, RepositoryHandler.Get<SampleModelRepository>().Count);
 
-            RepositoryHandler.Repository<SampleModelRepository>().Delete(i => i.Age > 40);
-            Assert.AreEqual(3, RepositoryHandler.Repository<SampleModelRepository>().Count);
+            RepositoryHandler.Get<SampleModelRepository>().Delete(i => i.Age > 40);
+            Assert.AreEqual(3, RepositoryHandler.Get<SampleModelRepository>().Count);
 
-            Assert.DoesNotThrow(() => RepositoryHandler.Repository<SampleModelRepository>().SaveChanges());
+            Assert.DoesNotThrow(() => RepositoryHandler.Get<SampleModelRepository>().SaveChanges());
         }
 
         [TestCase]
         public void GenericTools_RepositoryHandler_RegisterMultiple()
         {
-            Assert.DoesNotThrow(() => RepositoryHandler.Register(
+            Assert.DoesNotThrow(() => RepositoryHandler.Add(
                 new SampleModelRepository(),
                 new SampleModelRepository(),
                 new SampleModelRepository()
                 ));
 
-            Assert.IsNotNull(RepositoryHandler.Repository<SampleModelRepository>());
+            Assert.IsNotNull(RepositoryHandler.Get<SampleModelRepository>());
         }
 
         [TestCase]
@@ -124,6 +126,21 @@ namespace Tests
 
             vm.PropertyChanged += vm_TestChanged;
             vm.Test = 37;
+        }
+
+        [TestCase]
+        public void GenericTools_ViewModel_Handler()
+        {
+            ViewModelHandler.Add(new SampleModelViewModel());
+            var vm = ViewModelHandler.Get<SampleModelViewModel>();
+
+            Assert.IsNotNull(vm);
+            Assert.AreEqual(vm, ViewModelHandler.Get<SampleModelViewModel>());
+
+            vm.PropertyChanged += vm_LoadChanged;
+            vm.Load();
+
+            Assert.IsTrue(vm.IsLoaded);
         }
 
         //////HELPERS
