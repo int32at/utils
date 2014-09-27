@@ -248,3 +248,18 @@ Domain.Current.Switch()
     .Case<Production>(() => Domain.Current.Config.Set("Url", "http://prod"))
     .Default(() => Domain.Current.Config.Load());
 ```
+
+##Design Patterns
+
+#####Singleton
+The `Singleton<T>` class implements the Singleton pattern. You can just reuse it with your own objects like this:
+```cs
+//simple usage without creating a seperate class
+var a = Singleton<SampleModel>.Instance;
+
+//inheriting the Singleton pattern on your own class
+public class SampleModelSingleton : Singleton<SampleModel> { }
+
+var b = SampleModelSingleton.Instance;
+
+```
