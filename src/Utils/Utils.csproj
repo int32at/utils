@@ -58,7 +58,7 @@
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\ReflectionExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
-    <Compile Include="Generics\BaseHandler.cs" />
+    <Compile Include="Generics\Base\BaseHandler.cs" />
     <Compile Include="Generics\Factory\Factory.cs" />
     <Compile Include="Generics\Repository\Contracts\IModel.cs" />
     <Compile Include="Generics\Repository\Contracts\IRepository.cs" />

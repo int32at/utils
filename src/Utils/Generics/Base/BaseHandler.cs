@@ -2,7 +2,7 @@
 using System.Linq;
 using int32.Utils.Extensions;
 
-namespace int32.Utils.Generics
+namespace int32.Utils.Generics.Base
 {
     public abstract class BaseHandler<T>
     {
