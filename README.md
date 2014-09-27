@@ -4,7 +4,7 @@ utils
 * Configuration
 * Logging
 
-###Configuration
+##Configuration
 The `Config` class was designed to be simple and easy to use. Here are a few quick examples:
 
 ```cs
@@ -26,7 +26,7 @@ var c = config["MyKey"];
 var cfg = Config.Create();
 ```
 
-###Logging
+##Logging
 Logging is relativly easy and straight forward. It is not a fullblown logging framework like NLog or log4net or similar - it is supposed to be fast and easy to use.
 
 ####Usage
