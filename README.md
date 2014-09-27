@@ -133,3 +133,41 @@ logger.Config.EnableInfos = true; //default; same as EnableErrors but Warn() ins
 logger.Config.Format = "{0}\t{1}\t{2}"; //default Format = DateTime.Now\tLOGLEVEL\tmessage
 ```
 
+##Extension Methods
+In this framework, Extension Methods are used very heavily. There are a lot of inbuilt functionallities (especially generic ones) that are powering different parts and features as well. Here is a list of all available methods based by type:
+
+DateTime:
+* DateTime Tomorrow();
+* DateTime Yesterday(); 
+
+string:
+* T FromJSON<T>();
+* bool Matches("Some Regex Exp");
+* void Matches("Some Regex Exp", Action);
+
+object:
+* string ToJSON();
+* T As<T>();
+* bool Is<T>();
+* 
+Generics:
+* T ThrowIfNull<T>(name);
+* T Safe<T>();
+* bool IsNull<T>();
+* T And<T>();
+* T And<T>(Action<T>);
+* T And<T>(Func<T, T>);
+* T IfNull<T>(Action);
+* T IfNull<T>(Action<T>);
+* T IfNull<T>(Func<T>);
+* T IfNull<T>(Func<T, T>);
+* T IfNotNull<T>(Action);
+* T IfNotNull<T>(Action<T>);
+* T IfNotNull<T>(Func<T>);
+* T IfNotNull<T>(Func<T, T>);
+* bool In<T>(list);
+* bool Between<T>(lower, upper)
+* void ForEach<T>(Action)
+* void Remove<T>(Func<T, bool>);
+* void Update<T>(Action<T>);
+* Switch<T> Switch<T>();
