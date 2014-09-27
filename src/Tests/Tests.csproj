@@ -58,6 +58,7 @@
     <Compile Include="DomainTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="GenericToolsTests.cs" />
+    <Compile Include="Samples\SampleModel - Copy.cs" />
     <Compile Include="Samples\SampleModelFactory.cs" />
     <Compile Include="Samples\SampleModelRepository.cs" />
     <Compile Include="LoggerTests.cs" />
@@ -66,7 +67,7 @@
     <Compile Include="Samples\HomeModel.cs" />
     <Compile Include="Samples\MockLogger.cs" />
     <Compile Include="Samples\SampleAddEvent.cs" />
-    <Compile Include="Samples\SampleModel.cs" />
+    <Compile Include="Samples\SampleModelViewModel.cs" />
     <Compile Include="Samples\VersionModel.cs" />
   </ItemGroup>
   <ItemGroup>

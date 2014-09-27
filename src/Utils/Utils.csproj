@@ -67,6 +67,8 @@
     <Compile Include="Generics\Singleton\Singleton.cs" />
     <Compile Include="Generics\Timer.cs" />
     <Compile Include="Generics\TypeSwitch.cs" />
+    <Compile Include="Generics\ViewModel\Contracts\IViewModel.cs" />
+    <Compile Include="Generics\ViewModel\ViewModel.cs" />
     <Compile Include="Logger\Loggers\ConsoleLogger.cs" />
     <Compile Include="Logger\Loggers\FileLogger.cs" />
     <Compile Include="Logger\Contracts\ILogger.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Logger\Messages\ErrorMessage.cs" />
     <Compile Include="Logger\Messages\WarnMessage.cs" />
     <Compile Include="Logger\Messages\InfoMessage.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

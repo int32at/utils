@@ -113,5 +113,29 @@ namespace Tests
         {
             Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 200);
         }
+
+        [TestCase]
+        public void GenericTools_ViewModel()
+        {
+            var vm = Factory<SampleModelViewModel>.Create();
+            vm.PropertyChanged += vm_LoadChanged;
+            vm.Load();
+            vm.PropertyChanged -= vm_LoadChanged;
+
+            vm.PropertyChanged += vm_TestChanged;
+            vm.Test = 37;
+        }
+
+        //////HELPERS
+
+        void vm_LoadChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Assert.AreEqual("IsLoaded", e.PropertyName);
+        }
+
+        void vm_TestChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            Assert.AreEqual("Test", e.PropertyName);
+        }
     }
 }
