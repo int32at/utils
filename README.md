@@ -35,6 +35,8 @@ The `Domain` class has nothing to do with internet - it's more like an environme
 * Staging
 * Production
 
+**Note**: By default, `Domain.Current.Config` will be loaded with the `appSettings` section of the current config file (app.config or web.config).
+
 ````cs
 /* this assumes there is an key 'MyKey' present in the app.config/web.config file
  * all keys from the appSettings section will be loaded into the Config object automatically
