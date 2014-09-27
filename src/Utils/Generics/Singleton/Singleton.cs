@@ -1,5 +1,5 @@
-﻿using System;
-using int32.Utils.Extensions;
+﻿using int32.Utils.Extensions;
+using int32.Utils.Generics.Factory;
 
 namespace int32.Utils.Generics.Singleton
 {
@@ -9,7 +9,7 @@ namespace int32.Utils.Generics.Singleton
 
         public static T Instance
         {
-            get { return _instance.IfNull(() => _instance = Activator.CreateInstance<T>()); }
+            get { return _instance.IfNull(() => _instance = Factory<T>.Create()); }
         }
     }
 }
