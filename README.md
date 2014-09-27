@@ -146,8 +146,8 @@ var yesterday = DateTime.Now.Yesterday();
 
 ####string:
 * T FromJSON<T>();
-* bool Matches("Some Regex Exp");
-* void Matches("Some Regex Exp", Action);
+* bool Matches("Some Regex Exp"); //whether the text matches the given Regex 
+* void Matches("Some Regex Exp", Action); //whether the text matches the given Regex, then execute action
 ```cs
 var sampleText = "sample 33 xxx 322";
 
@@ -161,11 +161,23 @@ if(sampleText.Matches(@"\d+"))
 sampleText.Matches(@"\d+", () => Console.WriteLine("matches"));
 ```
 
-object:
-* string ToJSON();
-* T As<T>();
-* bool Is<T>();
-* 
+####object:
+* string ToJSON(); //converts an object to an JSON string
+* T As<T>(); //converts an object into T
+* bool Is<T>(); //whether the object's type is T
+```cs
+var model = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
+//convert the object to an json string
+var s = model.ToJSON();
+
+//convert string to int
+var a = "3".As<int>();
+
+//easy type check
+var b = model.Is<SampleModel>();
+```
+
+
 Generics:
 * T ThrowIfNull<T>(name);
 * T Safe<T>();
