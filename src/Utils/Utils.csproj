@@ -81,6 +81,9 @@
     <Compile Include="Logger\Messages\WarnMessage.cs" />
     <Compile Include="Logger\Messages\InfoMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Web\WebService\Contracts\IResponse.cs" />
+    <Compile Include="Web\WebService\WebServiceHandler.cs" />
+    <Compile Include="Web\WebService\Response.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
