@@ -62,7 +62,6 @@
     <Compile Include="Generics\Factory\Factory.cs" />
     <Compile Include="Generics\Repository\Contracts\IModel.cs" />
     <Compile Include="Generics\Repository\Contracts\IRepository.cs" />
-    <Compile Include="Generics\Types\Property.cs" />
     <Compile Include="Generics\Repository\Repository.cs" />
     <Compile Include="Generics\Repository\RepositoryHandler.cs" />
     <Compile Include="Generics\Singleton\Singleton.cs" />
@@ -81,7 +80,6 @@
     <Compile Include="Logger\Messages\ErrorMessage.cs" />
     <Compile Include="Logger\Messages\WarnMessage.cs" />
     <Compile Include="Logger\Messages\InfoMessage.cs" />
-    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
