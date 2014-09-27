@@ -137,17 +137,21 @@ logger.Config.Format = "{0}\t{1}\t{2}"; //default Format = DateTime.Now\tLOGLEVE
 In this framework, Extension Methods are used very heavily. There are a lot of inbuilt functionallities (especially generic ones) that are powering different parts and features as well. Here is a list of all available methods based by type:
 
 ####DateTime:
-* DateTime Tomorrow(); //gets yesterdays date
-* DateTime Yesterday();  //gets tomorrows date
+Name | Description
+--- | --- 
+DateTime Tomorrow(); | gets yesterdays date
+DateTime Yesterday(); |gets tomorrows date
 ```cs
 var tomorrow = DateTime.Now.Tomorrow();
 var yesterday = DateTime.Now.Yesterday();
 ```
 
 ####string:
-* T FromJSON<T>();
-* bool Matches("Some Regex Exp"); //whether the text matches the given Regex 
-* void Matches("Some Regex Exp", Action); //whether the text matches the given Regex, then execute action
+Name | Description
+--- | --- 
+T FromJSON<T>(); | converts an JSON string into T
+bool Matches("Some Regex Exp"); | whether the text matches the given Regex 
+void Matches("Some Regex Exp", Action); | whether the text matches the given Regex, then execute action
 ```cs
 var sampleText = "sample 33 xxx 322";
 
@@ -162,9 +166,11 @@ sampleText.Matches(@"\d+", () => Console.WriteLine("matches"));
 ```
 
 ####object:
-* string ToJSON(); //converts an object to an JSON string
-* T As<T>(); //converts an object into T
-* bool Is<T>(); //whether the object's type is T
+Name | Description
+--- | --- 
+* string ToJSON(); | converts an object to an JSON string
+* T As<T>(); | converts an object into T
+* bool Is<T>(); | whether the object's type is T
 ```cs
 var model = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
 //convert the object to an json string
