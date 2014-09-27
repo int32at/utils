@@ -47,6 +47,13 @@ namespace Tests
         }
 
         [TestCase]
+        public void GenericTools_Repository_Handler()
+        {
+            var vm = RepositoryHandler.Add(new SampleModelRepository());
+            Assert.AreEqual(vm, RepositoryHandler.Get<SampleModelRepository>());
+        }
+
+        [TestCase]
         public void GenericTools_RepositoryHandler_Get()
         {
             //register sample service
