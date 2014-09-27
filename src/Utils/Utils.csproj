@@ -66,7 +66,7 @@
     <Compile Include="Generics\Repository\Repository.cs" />
     <Compile Include="Generics\Repository\RepositoryHandler.cs" />
     <Compile Include="Generics\Singleton\Singleton.cs" />
-    <Compile Include="Generics\Timer.cs" />
+    <Compile Include="Generics\Tasks\Timer.cs" />
     <Compile Include="Generics\Types\TypeSwitch.cs" />
     <Compile Include="Generics\ViewModel\Contracts\IViewModel.cs" />
     <Compile Include="Generics\ViewModel\ViewModel.cs" />

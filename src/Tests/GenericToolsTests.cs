@@ -1,10 +1,9 @@
 ﻿using System.Linq;
 using System.Threading;
-using int32.Utils.Extensions;
-using int32.Utils.Generics;
 using int32.Utils.Generics.Factory;
 using int32.Utils.Generics.Repository;
 using int32.Utils.Generics.Singleton;
+using int32.Utils.Generics.Tasks;
 using int32.Utils.Generics.ViewModel;
 using NUnit.Framework;
 using Tests.Samples;

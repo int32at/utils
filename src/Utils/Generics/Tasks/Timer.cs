@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using int32.Utils.Extensions;
 
-namespace int32.Utils.Generics
+namespace int32.Utils.Generics.Tasks
 {
     public static class Timing
     {
