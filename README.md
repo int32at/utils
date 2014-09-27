@@ -54,6 +54,23 @@ Domain.OnChanged = () => Domain.Current.Switch()
     .Case<Production>(() => Domain.Current.Config["MyUrl"] = "http://prod");
 ```
 
+##Aggregator
+The `Aggregator` singleton follows the Event Aggregator pattern and allows you to send "messages" between different parts of your application. There is no specifc way how/where to use it - but it's written very generic and can be used basically anywhere. You can publish and subscribe to events, it is even possible to subscribe to one type of event multiple times which means you can update parts of your application (like ViewModels) by just publishing 1 single event.
+
+```cs
+//push a new message to all subscribers
+Aggregator.Instance.Publish(new SampleEvent { Data = 3});
+
+/* some other part of your application;
+ * it is even possible to subscribe to the same event multiple times
+ */
+Aggregator.Instance.Subbscribe<SampleEvent>(message => {
+    //receive the message and print it
+    Console.WriteLine(message.Data);
+});
+
+```
+
 
 ##Logging
 Logging is relativly easy and straight forward. It is not a fullblown logging framework like NLog or log4net or similar - it is supposed to be fast and easy to use.
