@@ -1,12 +1,12 @@
 utils
 =====
 
-* Configuration
-* Domain
-* Aggregator
-* Logging
-* Extension Methods
-* Design Patterns
+* **Configuration**: simple and configuration object
+* **Domain**: environment based configuration loading
+* **Aggregator**: static event system
+* **Loggin**g: fast, easy and extensible logging
+* **Extension Methods**: big collection of reusable extension methods
+* **Design Patterns**: Singleton, Factory, Repository, MVVM
 
 ##Configuration
 The `Config` class was designed to be simple and easy to use. Here are a few quick examples:
