@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{50AD7205-0997-49D8-B78D-92B40F9108B6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2812F613-2AF3-4507-8F7E-30087C8CA38F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B} = {3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9758C3B5-7712-4A32-A877-2E48BAB3E5EC}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9758C3
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService", "WebService\WebService.csproj", "{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +33,10 @@ Global
 		{2812F613-2AF3-4507-8F7E-30087C8CA38F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2812F613-2AF3-4507-8F7E-30087C8CA38F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2812F613-2AF3-4507-8F7E-30087C8CA38F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AED3CB4-380B-4F15-BB89-ACA6D4D2BA5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
