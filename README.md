@@ -62,8 +62,7 @@ The `Aggregator` singleton follows the Event Aggregator pattern and allows you t
 Aggregator.Instance.Publish(new SampleEvent { Data = 3});
 
 /* some other part of your application;
- * it is even possible to subscribe to the same event multiple times
- */
+ * it is even possible to subscribe to the same event multiple times */
 Aggregator.Instance.Subbscribe<SampleEvent>(message => {
     //receive the message and print it
     Console.WriteLine(message.Data);
