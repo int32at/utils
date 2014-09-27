@@ -59,7 +59,7 @@ namespace Tests
             //load the app config file
             var cfg = Config.Create();
             Assert.AreEqual(2, cfg.Count);
-            Assert.AreEqual(3, cfg["MyKey"].As<int>());
+            Assert.AreEqual(2, cfg["MyKey"].As<int>());
         }
     }
 }
