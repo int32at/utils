@@ -6,7 +6,8 @@ namespace Tests.Samples
 {
     public class SampleModel : IModel
     {
-        private string _test = "a";
+        // ReSharper disable once InconsistentNaming
+        private const string _test = "a";
         private string Internal { get; set; }
         public string Title { get; set; }
         public int Age { get; set; }
@@ -16,6 +17,11 @@ namespace Tests.Samples
         public string Return()
         {
             return this.ToJSON();
+        }
+
+        public string Test()
+        {
+            return _test;
         }
     }
 
