@@ -184,24 +184,25 @@ var b = model.Is<SampleModel>();
 ```
 
 
-Generics:
-* T ThrowIfNull<T>(name);
-* T Safe<T>();
-* bool IsNull<T>();
-* T And<T>();
-* T And<T>(Action<T>);
-* T And<T>(Func<T, T>);
-* T IfNull<T>(Action);
-* T IfNull<T>(Action<T>);
-* T IfNull<T>(Func<T>);
-* T IfNull<T>(Func<T, T>);
-* T IfNotNull<T>(Action);
-* T IfNotNull<T>(Action<T>);
-* T IfNotNull<T>(Func<T>);
-* T IfNotNull<T>(Func<T, T>);
-* bool In<T>(list);
-* bool Between<T>(lower, upper)
-* void ForEach<T>(Action)
-* void Remove<T>(Func<T, bool>);
-* void Update<T>(Action<T>);
-* Switch<T> Switch<T>();
+####Generics:
+Name | Description
+--- | --- 
+* T ThrowIfNull<T>(name); | Throws an ArgumentNullException for the given name, when the object is null
+* bool IsNull<T>(); | whether the object is null
+* T And<T>(); | doesn't actually do anything, expect making the syntax more readable
+* T And<T>(Action<T>); | simple executing an action; makes it more readable
+* T And<T>(Func<T, T>); | simple executing an action; makes it more readable
+* T IfNull<T>(Action); | if the object is null, then execute function
+* T IfNull<T>(Action<T>); | if the object is null, then execute function + paramter
+* T IfNull<T>(Func<T>); | if the object is null, then execute function + return
+* T IfNull<T>(Func<T, T>); | if the object is null, then execute function + parameter + return
+* T IfNotNull<T>(Action); | if the object is not null, then execute function
+* T IfNotNull<T>(Action<T>); | if the object is not null, then execute function + parameter
+* T IfNotNull<T>(Func<T>); | if the object is not null, then execute function + return 
+* T IfNotNull<T>(Func<T, T>); | if the object is not null, then execute function + parameter + return
+* bool In<T>(list); | whether the object exists in the given list
+* bool Between<T>(lower, upper) | whether the object exists in the certain range
+* void ForEach<T>(Action) | executes function for every item in a list
+* void Remove<T>(Func<T, bool>); | removes items from an list based on a query
+* void Update<T>(Action<T>); | updates all items in a list with the Action
+* Switch<T> Switch<T>(); | begins the typeswitch
