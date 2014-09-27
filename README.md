@@ -2,6 +2,8 @@ utils
 =====
 
 * Configuration
+* Domain
+* Aggregator
 * Logging
 
 ##Configuration
