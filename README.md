@@ -1,7 +1,30 @@
 utils
 =====
 
+* Configuration
 * Logging
+
+###Configuration
+The `Config` class was designed to be simple and easy to use. Here are a few quick examples:
+
+```cs
+var config = new Config();
+
+//add an entry
+config.Set(new ConfigEntry("MyKey", 3));
+
+//get the entry
+var a = config.Get<int>("MyKey"); //use the default get method
+var b = config["MyKey"].As<int>(); //use the As extension method
+
+config.Remove("MyKey"); //removes the netry
+
+//throws exception
+var c = config["MyKey"];
+
+//load the config from app.config or web.config
+var cfg = Config.Create();
+```
 
 ###Logging
 Logging is relativly easy and straight forward. It is not a fullblown logging framework like NLog or log4net or similar - it is supposed to be fast and easy to use.
