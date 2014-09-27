@@ -35,7 +35,7 @@ namespace Tests
         [TestCase]
         public void Logger_Create_FileLogger()
         {
-            const string path = @"C:\log.txt";
+            const string path = @"log.txt";
             TestLogger(new FileLogger(path));
 
             Assert.IsTrue(File.Exists(path));
