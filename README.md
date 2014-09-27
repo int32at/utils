@@ -4,7 +4,7 @@ utils
 * **Configuration**: simple and configuration object
 * **Domain**: environment based configuration loading
 * **Aggregator**: static event system
-* **Loggin**g: fast, easy and extensible logging
+* **Logging**: fast, easy and extensible logging
 * **Extension Methods**: big collection of reusable extension methods
 * **Design Patterns**: Singleton, Factory, Repository, MVVM
 
