@@ -136,7 +136,7 @@ logger.Config.Format = "{0}\t{1}\t{2}"; //default Format = DateTime.Now\tLOGLEVE
 ##Extension Methods
 In this framework, Extension Methods are used very heavily. There are a lot of inbuilt functionallities (especially generic ones) that are powering different parts and features as well. Here is a list of all available methods based by type:
 
-DateTime:
+####DateTime:
 * DateTime Tomorrow(); //gets yesterdays date
 * DateTime Yesterday();  //gets tomorrows date
 ```cs
@@ -144,7 +144,7 @@ var tomorrow = DateTime.Now.Tomorrow();
 var yesterday = DateTime.Now.Yesterday();
 ```
 
-string:
+####string:
 * T FromJSON<T>();
 * bool Matches("Some Regex Exp");
 * void Matches("Some Regex Exp", Action);
