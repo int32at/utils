@@ -125,7 +125,7 @@ namespace Tests
         [TestCase]
         public void GenericTools_Timer_Measure()
         {
-            Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 200);
+            Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 100);
         }
 
         [TestCase]
