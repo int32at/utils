@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using int32.Utils.Domains.Contracts;
-using int32.Utils.Generics;
+using int32.Utils.Generics.Types;
 
 namespace int32.Utils.Extensions
 {
@@ -32,6 +31,12 @@ namespace int32.Utils.Extensions
         public static T And<T>(this T o, Func<T, T> action)
         {
             return action(o);
+        }
+
+        public static T And<T>(this T o, Action<T> action)
+        {
+            action(o);
+            return o;
         }
 
         public static T IfNotNull<T>(this T o, Action action)

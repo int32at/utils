@@ -24,7 +24,16 @@ namespace int32.Utils.Domains
 
         public static IDomainItem Current
         {
-            get { return _current.IfNull(() => Domains.First()); }
+            get
+            {
+                if (_current == null)
+                {
+                    _current = Domains.First();
+                    _current.Config.Load();
+                }
+
+                return _current;
+            }
         }
 
         public static void SetTo<T>() where T : IDomainItem

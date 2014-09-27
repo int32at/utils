@@ -8,21 +8,25 @@ namespace Tests
     public class EnvironmentTests
     {
         [TestCase]
-        public void Environment_Create_Object()
+        public void Domain_LoadFrom_Config()
+        {
+            Domain.Current.Config.Load(); //load from app config
+            Assert.AreEqual("http://dev", Domain.Current.Config["Url"]);
+        }
+
+        [TestCase]
+        public void Domain_LoadFromConfig_Switch()
         {
             Domain.OnChanged = () => Domain.Current.Switch()
-                .Case<Development>(() => Domain.Current.Config.Set("Url", "https://dev"))
-                .Case<Production>(() => Domain.Current.Config.Set("Url", "https://prod"))
-                .Default(() => Domain.Current.Config.Set("Url", "https://default"));
+                .Case<Production>(() => Domain.Current.Config.Set("Url", "http://prod"))
+                .Default(() => Domain.Current.Config.Load());
 
             Domain.SetTo<Development>();
-            Assert.AreEqual("https://dev", Domain.Current.Config["Url"]);
+
+            Assert.AreEqual("http://dev", Domain.Current.Config["Url"]);
 
             Domain.SetTo<Production>();
-            Assert.AreEqual("https://prod", Domain.Current.Config["Url"]);
-
-            Domain.SetTo<QualityAssurance>();
-            Assert.AreEqual("https://default", Domain.Current.Config["Url"]);
+            Assert.AreEqual("http://prod", Domain.Current.Config["Url"]);
         }
     }
 }

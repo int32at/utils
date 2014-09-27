@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using int32.Utils.Aggregator.Contracts;
 using int32.Utils.Extensions;
+using int32.Utils.Generics.Singleton;
 
 namespace int32.Utils.Aggregator
 {
-    public class Aggregator
+    public class Aggregator : Singleton<Aggregator>
     {
         private readonly Dictionary<Type, IList> _subscriptions;
 

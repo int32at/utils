@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
 using int32.Utils.Logger;
+using int32.Utils.Logger.Contracts;
+using int32.Utils.Logger.Loggers;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -20,14 +23,41 @@ namespace Tests
         [TestCase]
         public void Logger_Create_MockLogger()
         {
-            using (var logger = new Logger(new MockLogger()))
+            TestLogger(new MockLogger());
+        }
+
+        [TestCase]
+        public void Logger_Create_ConsoleLogger()
+        {
+            TestLogger(new ConsoleLogger());
+        }
+
+        [TestCase]
+        public void Logger_Create_FileLogger()
+        {
+            const string path = @"C:\log.txt";
+            TestLogger(new FileLogger(path));
+
+            Assert.IsTrue(File.Exists(path));
+            File.Delete(path);
+        }
+
+        private void TestLogger(ILogger log)
+        {
+            using (var logger = new Logger(log))
             {
                 Assert.IsNotNull(logger);
                 Assert.IsNotNull(logger.Config);
 
-                logger.Warn("WarnMessage");
-                logger.Info("InfoMessage");
-                logger.Error(new ArgumentOutOfRangeException());
+                //found no better way to do this
+                Assert.DoesNotThrow(() =>
+                {
+                    logger.Warn("WarnMessage");
+                    logger.Warn("{0}{1}", "Warn", "Message");
+                    logger.Info("InfoMessage");
+                    logger.Info("{0}{1}", "Info", "Message");
+                    logger.Error(new ArgumentOutOfRangeException());
+                });
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using Newtonsoft.Json;
 
@@ -20,8 +19,7 @@ namespace int32.Utils.Extensions
 
         public static T As<T>(this object o)
         {
-            o.ThrowIfNull("o");
-            return o.ConvertTo(default(T));
+            return (T)(o.IsNull() ? o : o.ConvertTo(default(T)));
         }
 
         public static bool Is<T>(this object o)
