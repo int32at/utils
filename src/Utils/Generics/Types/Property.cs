@@ -1,4 +1,4 @@
-﻿namespace int32.Utils.Generics
+﻿namespace int32.Utils.Generics.Types
 {
     public class Property<T>
     {

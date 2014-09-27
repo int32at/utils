@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using int32.Utils.Generics;
+using int32.Utils.Generics.Types;
 
 namespace int32.Utils.Extensions
 {
