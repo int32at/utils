@@ -26,6 +26,33 @@ var c = config["MyKey"];
 var cfg = Config.Create();
 ```
 
+##Domain
+The `Domain` class has nothing to do with internet - it's more like an environmental object that allows you to distinquish between systems and load config files accordingly (for example). Following domains are available:
+
+* Development (default)
+* Integration
+* QualityAssurance
+* Staging
+* Production
+
+````cs
+/* this assumes there is an key 'MyKey' present in the app.config/web.config file
+ * all keys from the appSettings section will be loaded into the Config object automatically
+ * on requesting the Current object */
+var setting = Domain.Current.Config["MyKey"].As<int>();
+
+//sets the current domain to production
+Domain.SetTo<Production>();
+
+/* react to switching of domains
+ * this uses the custom .Switch() extension method (also in this framework)
+ * but obviously it would also be possible to use a normal method instead */
+Domain.OnChanged = () => Domain.Current.Switch()
+    .Case<Development>(() => Domain.Current.Config["MyUrl"] = "http://dev")
+    .Case<Production>(() => Domain.Current.Config["MyUrl"] = "http://prod");
+```
+
+
 ##Logging
 Logging is relativly easy and straight forward. It is not a fullblown logging framework like NLog or log4net or similar - it is supposed to be fast and easy to use.
 
