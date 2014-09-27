@@ -8,6 +8,8 @@ utils
 * **Extension Methods**: big collection of reusable extension methods
 * **Design Patterns**: Singleton, Factory, Repository, MVVM
 
+See the [Test Project](/src/Tests) for more specific examples.
+
 ##Configuration
 The `Config` class was designed to be simple and easy to use. Here are a few quick examples:
 
