@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>int32.utils</id>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <title>Utility Framework</title>
     <authors>Andreas Scharf</authors>
     <owners>int32at</owners>
