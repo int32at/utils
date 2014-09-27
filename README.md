@@ -206,3 +206,43 @@ void ForEach<T>(Action) | executes function for every item in a list
 void Remove<T>(Func<T, bool>); | removes items from an list based on a query
 void Update<T>(Action<T>); | updates all items in a list with the Action
 Switch<T> Switch<T>(); | begins the typeswitch
+```cs
+var o1 = null;
+
+var isNull = o1.IsNull();
+o1.ThrowIfNull("o1"); //throws exception when o1 is null
+
+//samples for the IfNull/IfNotNull functionallity
+o1.IfNull(() => Console.WriteLine("o1 is null"));
+o1.IfNotNull(i => Console.WriteLine("o1 is not null but is: " + i));
+
+var numbers = new List<int> { 1, 2, 3, 4, 5 };
+3.In(numbers); //true
+new [] { 3, 5 }.In(numbers); //true
+new [] { 7, 1 }.In(numbers); //false, both numbers must be in range
+
+3.Between(1, 5); //true
+3.Between(1, 2); //false
+
+//check whether every number is between 1 and 10
+numbers.ForEach(i => i.Between(1, 10));
+
+//removes all numbers from the array that are greather than 3
+numbers.Remove(i => i > 3);
+
+var models = new List<SampleModel>
+{
+    new SampleModel() {Age = 23},
+    new SampleModel() {Age = 12},
+    new SampleModel() {Age = 33}
+};
+
+//update all items at once
+models.Update(model => model.Type = ModelType.Sample);
+
+//switch statement based on type
+Domain.Current.Switch()
+    .Case<Development>(() => Domain.Current.Config.Set("Url", "http://dev"))
+    .Case<Production>(() => Domain.Current.Config.Set("Url", "http://prod"))
+    .Default(() => Domain.Current.Config.Load());
+```
