@@ -5,89 +5,72 @@ using int32.Utils.Extensions;
 
 namespace int32.Utils.Generics.Collections
 {
-    public class FluentList<T> : IEnumerable<T>
+    public class FluentList<T> : List<T>
     {
-        private readonly List<T> _data;
-
-        public int Count { get { return _data.Count; } }
-
-        public T this[int index]
+        public new FluentList<T> Add(T obj)
         {
-            get { return _data[index]; }
-            set { _data[index] = value; }
-        }
-
-        public FluentList()
-        {
-            _data = new List<T>();
-        }
-
-        public FluentList<T> Add(T item)
-        {
-            _data.Add(item);
+            base.Add(obj);
             return this;
         }
 
-        public FluentList<T> Clear()
+        public new FluentList<T> AddRange(IEnumerable<T> collection)
         {
-            _data.Clear();
+            base.AddRange(collection);
             return this;
         }
 
-        public bool Contains(T item)
+        public new FluentList<T> Clear()
         {
-            return _data.Contains(item);
-        }
-
-        public FluentList<T> CopyTo(T[] array, int arrayIndex)
-        {
-            _data.CopyTo(array, arrayIndex);
+            base.Clear();
             return this;
         }
 
-        public int IndexOf(T item)
+        public new FluentList<T> ForEach(Action<T> action)
         {
-            return _data.IndexOf(item);
-        }
-
-        public FluentList<T> Insert(int index, T item)
-        {
-            _data.Insert(index, item);
+            base.ForEach(action);
             return this;
         }
 
-        public FluentList<T> Remove(T item)
+        public new FluentList<T> Insert(int index, T item)
         {
-            _data.Remove(item);
+            base.Insert(index, item);
             return this;
         }
 
-        public FluentList<T> Remove(Func<T, bool> predicate)
+        public new FluentList<T> InsertRange(int index, IEnumerable<T> collection)
         {
-            _data.Remove(predicate);
+            base.InsertRange(index, collection);
             return this;
         }
 
-        public FluentList<T> RemoveAt(int index)
+        public new FluentList<T> Remove(T item)
         {
-            _data.RemoveAt(index);
+            base.Remove(item);
             return this;
         }
 
-        public FluentList<T> Update(Action<T> action)
+        public new FluentList<T> RemoveAt(int index)
         {
-            _data.Update(action);
+            base.RemoveAt(index);
             return this;
         }
 
-        public IEnumerator<T> GetEnumerator()
+        public new FluentList<T> RemoveRange(int index, int count)
         {
-            return _data.GetEnumerator();
+            base.RemoveRange(index, count);
+            return this;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public new FluentList<T> Reverse()
         {
-            return GetEnumerator();
+            base.Reverse();
+            return this;
+        }
+
+        public new FluentList<T> Sort()
+        {
+            base.Sort();
+            return this;
         }
     }
 }

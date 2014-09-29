@@ -127,12 +127,14 @@ namespace int32.Utils.Extensions
 
         }
 
-        public static void Update<T>(this IEnumerable<T> outer, Action<T> updator)
+        public static ICollection<T> Update<T>(this ICollection<T> outer, Action<T> action)
         {
             foreach (var item in outer)
             {
-                updator(item);
+                action(item);
             }
+
+            return outer;
         }
 
         public static Switch<T> Switch<T>(this T o)

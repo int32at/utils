@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
+using int32.Utils.Extensions;
 using int32.Utils.Generics.Collections;
 using int32.Utils.Generics.Factory;
 using int32.Utils.Generics.Repository;
@@ -164,11 +165,10 @@ namespace Tests
                 .Add(new SampleModel { Title = "Test" })
                 .Add(new SampleModel { Title = "Test2" })
                 .Add(new SampleModel { Title = "Test3" })
-                .Remove(i => i.Title.EndsWith("3"))
-                .Update(i => i.Type = ModelType.Test);
+                .RemoveAt(0).Reverse().Sort().Update(i => i.Type = ModelType.Test);
 
             Assert.AreEqual(2, list.Count);
-            Assert.AreEqual(ModelType.Test, list[0].Type);
+            Assert.AreEqual(ModelType.Test, list.First().Type);
         }
 
         [TestCase]

@@ -158,8 +158,6 @@ namespace Tests
 
             Assert.Throws<ArgumentNullException>(() => models.FirstOrDefault(i => i.Age == 34).Safe());
 
-            models.IfNotNull(() => models.Update(i => i.Type = ModelType.Sample));
-
             models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
 
             var x = GetModel().ThrowIfNull("model").And().IfNotNull(model => model.Age = 23);
