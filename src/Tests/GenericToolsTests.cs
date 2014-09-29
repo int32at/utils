@@ -1,5 +1,7 @@
 ﻿using System.Linq;
+using System.Security.Cryptography;
 using System.Threading;
+using int32.Utils.Generics.Collections;
 using int32.Utils.Generics.Factory;
 using int32.Utils.Generics.Repository;
 using int32.Utils.Generics.Singleton;
@@ -153,6 +155,20 @@ namespace Tests
             vm.Load();
 
             Assert.IsTrue(vm.IsLoaded);
+        }
+
+        [TestCase]
+        public void GenericTools_Collections_FluentList()
+        {
+            var list = new FluentList<SampleModel>()
+                .Add(new SampleModel { Title = "Test" })
+                .Add(new SampleModel { Title = "Test2" })
+                .Add(new SampleModel { Title = "Test3" })
+                .Remove(i => i.Title.EndsWith("3"))
+                .Update(i => i.Type = ModelType.Test);
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(ModelType.Test, list[0].Type);
         }
 
         //////HELPERS
