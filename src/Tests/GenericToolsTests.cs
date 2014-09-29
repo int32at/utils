@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Threading;
 using int32.Utils.Extensions;
@@ -165,7 +167,7 @@ namespace Tests
                 .Add(new SampleModel { Title = "Test" })
                 .Add(new SampleModel { Title = "Test2" })
                 .Add(new SampleModel { Title = "Test3" })
-                .RemoveAt(0).Reverse().Sort().Update(i => i.Type = ModelType.Test);
+                .RemoveAt(0).Reverse().Update(i => i.Type = ModelType.Test);
 
             Assert.AreEqual(2, list.Count);
             Assert.AreEqual(ModelType.Test, list.First().Type);

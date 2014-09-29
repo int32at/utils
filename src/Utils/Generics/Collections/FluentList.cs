@@ -5,7 +5,7 @@ using int32.Utils.Extensions;
 
 namespace int32.Utils.Generics.Collections
 {
-    public class FluentList<T> : List<T>
+    public class FluentList<T> : List<T>, IList<T>
     {
         public new FluentList<T> Add(T obj)
         {
