@@ -171,6 +171,26 @@ namespace Tests
             Assert.AreEqual(ModelType.Test, list[0].Type);
         }
 
+        [TestCase]
+        public void GenericTools_Collections_FluentDictionary()
+        {
+            var dict = new FluentDictionary<string, int>()
+                .Add("Key1", 1)
+                .Add("Key2", 2)
+                .Add("Key3", 3)
+                .Remove("Key3");
+
+            Assert.AreEqual(2, dict.Count);
+            Assert.IsTrue(dict.ContainsKey("Key2"));
+            Assert.AreEqual(1, dict["Key1"]);
+            Assert.AreEqual(2, dict.Keys.Count);
+            Assert.AreEqual(2, dict.Values.Count);
+
+            dict.Clear();
+
+            Assert.AreEqual(0, dict.Count);
+        }
+
         //////HELPERS
 
         void vm_LoadChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
