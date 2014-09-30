@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using int32.Utils.Core.Extensions;
 using int32.Utils.Logger;
 using int32.Utils.Logger.Contracts;
 using int32.Utils.Logger.Loggers;
@@ -18,7 +19,7 @@ namespace Tests
             var response = WebServiceHandler.Handle(GetData);
 
             Assert.AreEqual(StatusCode.Ok, response.Status);
-            Assert.IsNullOrEmpty(response.Error);
+            Assert.IsNull(response.Error);
             Assert.AreEqual(23, response.Result.Age);
         }
 
@@ -28,7 +29,7 @@ namespace Tests
             var response = WebServiceHandler.Handle<SampleModel>(GetDataException);
 
             Assert.AreEqual(StatusCode.Error, response.Status);
-            Assert.AreEqual("Test", response.Error);
+            Assert.AreEqual("Test", response.Error.Message);
         }
 
         [TestCase]
@@ -37,7 +38,7 @@ namespace Tests
             var response = WebServiceHandler.Handle(GetDataExceptionDirect);
 
             Assert.AreEqual(StatusCode.Error, response.Status);
-            Assert.AreEqual("TestDirect", response.Error);
+            Assert.AreEqual("TestDirect", response.Error.Message);
             Assert.IsNull(response.Result);
         }
 
@@ -54,7 +55,7 @@ namespace Tests
             }
             catch (Exception ex)
             {
-                response.Error = ex.Message;
+                response.Error = ex.ToSerializable();
             }
 
             return null;
