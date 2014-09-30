@@ -1,35 +1,37 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace int32.Utils.Core.Exceptions
 {
     [Serializable]
     public class SerializableException
     {
-        public DateTime At { get; set; }
-        public string Message { get; set; }
-        public string StackTrace { get; set; }
+        public KeyValuePair<object, object>[] Data { get; private set; }
+        public SerializableException InnerException { get; private set; }
+        public string Message { get; private set; }
+        public string Source { get; private set; }
+        public string StackTrace { get; private set; }
 
-        public SerializableException()
-        {
-            At = DateTime.Now;
-        }
+
+        public DateTime At { get; set; }
 
         public SerializableException(Exception ex)
-            : this()
         {
+            if (ex == null) return;
+            SetDataField(Data);
             Message = ex.Message;
+            Source = ex.Source;
             StackTrace = ex.StackTrace;
+            InnerException = new SerializableException(ex.InnerException);
         }
 
-        public SerializableException(string message)
-            : this()
+        private void SetDataField(ICollection collection)
         {
-            Message = message;
-        }
+            Data = new KeyValuePair<object, object>[0];
 
-        public override string ToString()
-        {
-            return Message + StackTrace;
+            if (null != collection)
+                collection.CopyTo(Data, 0);
         }
     }
 }
