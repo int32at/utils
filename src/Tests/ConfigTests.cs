@@ -1,6 +1,6 @@
 ﻿using System;
 using int32.Utils.Configuration;
-using int32.Utils.Extensions;
+using int32.Utils.Core.Extensions;
 using NUnit.Framework;
 
 namespace Tests

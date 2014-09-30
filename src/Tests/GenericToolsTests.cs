@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
+﻿using System.Linq;
 using System.Threading;
-using int32.Utils.Extensions;
-using int32.Utils.Generics.Collections;
-using int32.Utils.Generics.Factory;
-using int32.Utils.Generics.Repository;
-using int32.Utils.Generics.Singleton;
-using int32.Utils.Generics.Tasks;
-using int32.Utils.Generics.ViewModel;
+using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Collections;
+using int32.Utils.Core.Generic.Factory;
+using int32.Utils.Core.Generic.Repository;
+using int32.Utils.Core.Generic.Singleton;
+using int32.Utils.Core.Generic.Tasks;
+using int32.Utils.Core.Generic.ViewModel;
 using NUnit.Framework;
 using Tests.Samples;
 

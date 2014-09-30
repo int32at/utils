@@ -1,4 +1,4 @@
-﻿using int32.Utils.Generics.Factory;
+﻿using int32.Utils.Core.Generic.Factory;
 
 namespace Tests.Samples
 {

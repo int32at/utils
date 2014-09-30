@@ -1,4 +1,4 @@
-﻿using int32.Utils.Extensions;
+﻿using int32.Utils.Core.Extensions;
 
 namespace Tests.Samples
 {

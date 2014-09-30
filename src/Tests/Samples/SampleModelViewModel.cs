@@ -1,4 +1,4 @@
-﻿using int32.Utils.Generics.ViewModel;
+﻿using int32.Utils.Core.Generic.ViewModel;
 
 namespace Tests.Samples
 {

@@ -1,6 +1,6 @@
-﻿using int32.Utils.Extensions;
-using int32.Utils.Generics.Repository.Contracts;
-using int32.Utils.Generics.Singleton;
+﻿using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Repository.Contracts;
+using int32.Utils.Core.Generic.Singleton;
 
 namespace Tests.Samples
 {

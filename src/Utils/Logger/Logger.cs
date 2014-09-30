@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using int32.Utils.Extensions;
+using int32.Utils.Core.Extensions;
 using int32.Utils.Logger.Contracts;
 using int32.Utils.Logger.Messages;
 
