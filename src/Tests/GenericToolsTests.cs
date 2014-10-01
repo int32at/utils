@@ -219,7 +219,7 @@ namespace Tests
         [TestCase]
         public void GenericTools_Require_Throw()
         {
-            var sampleModel = new SampleModel() { Age = 18, Type = ModelType.Test };
+            var sampleModel = new SampleModel() { Age = 17, Type = ModelType.Test };
 
             try
             {
@@ -228,7 +228,7 @@ namespace Tests
                     model => model.Age > 18
                     );
             }
-            catch (RequirementNotCompliedException rex)
+            catch (Exception rex)
             {
                 Assert.IsNotNull(rex);
             }
