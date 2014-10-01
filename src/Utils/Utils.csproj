@@ -56,8 +56,6 @@
     <Compile Include="Aggregator\Subscription.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigEntry.cs" />
-    <Compile Include="Core\Exceptions\SerializableException.cs" />
-    <Compile Include="Core\Extensions\ExceptionExtensions.cs" />
     <Compile Include="Core\Generic\Base\Require.cs" />
     <Compile Include="Core\Generic\Collections\DataStore.cs" />
     <Compile Include="Domain\Contracts\IDomainItem.cs" />

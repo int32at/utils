@@ -29,7 +29,7 @@ namespace Tests
             var response = WebServiceHandler.Handle<SampleModel>(GetDataException);
 
             Assert.AreEqual(StatusCode.Error, response.Status);
-            Assert.AreEqual("Test", response.Error.Message);
+            Assert.AreEqual("Test", response.Error);
         }
 
         [TestCase]
@@ -38,7 +38,7 @@ namespace Tests
             var response = WebServiceHandler.Handle(GetDataExceptionDirect);
 
             Assert.AreEqual(StatusCode.Error, response.Status);
-            Assert.AreEqual("TestDirect", response.Error.Message);
+            Assert.AreEqual("TestDirect", response.Error);
             Assert.IsNull(response.Result);
         }
 
@@ -55,7 +55,7 @@ namespace Tests
             }
             catch (Exception ex)
             {
-                response.Error = ex.ToSerializable();
+                response.Error = ex.Message;
             }
 
             return null;

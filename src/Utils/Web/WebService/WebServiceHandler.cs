@@ -1,5 +1,4 @@
 ﻿using System;
-using int32.Utils.Core.Exceptions;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebService.Contracts;
 
@@ -20,7 +19,7 @@ namespace int32.Utils.Web.WebService
             }
             catch (Exception ex)
             {
-                SetFailure(response, ex.ToSerializable());
+                SetFailure(response, ex.Message);
             }
 
             return response;
@@ -39,13 +38,13 @@ namespace int32.Utils.Web.WebService
             }
             catch (Exception ex)
             {
-                SetFailure(response, ex.ToSerializable());
+                SetFailure(response, ex.Message);
             }
 
             return response;
         }
 
-        private static void SetFailure<T>(IResponse<T> response, SerializableException ex)
+        private static void SetFailure<T>(IResponse<T> response, string ex)
         {
             response.Status = StatusCode.Error;
             response.Error = ex;
