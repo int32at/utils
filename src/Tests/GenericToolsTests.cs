@@ -1,6 +1,8 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Collections;
 using int32.Utils.Core.Generic.Factory;
 using int32.Utils.Core.Generic.Repository;
@@ -201,6 +203,35 @@ namespace Tests
             Assert.AreEqual(3, store.Get<int>("test"));
             Assert.AreEqual(typeof(SampleModel), store.Get<SampleModel>("test2").GetType());
             Assert.AreEqual("bla", store.Get<string>("test3"));
+        }
+
+        [TestCase]
+        public void GenericTools_Require_List()
+        {
+            var sampleModel = new SampleModel() { Age = 23, Type = ModelType.Test };
+
+            Assert.DoesNotThrow(() => Require.That(sampleModel,
+                model => model != null,
+                model => model.Age > 18
+                ));
+        }
+
+        [TestCase]
+        public void GenericTools_Require_Throw()
+        {
+            var sampleModel = new SampleModel() { Age = 18, Type = ModelType.Test };
+
+            try
+            {
+                Require.That(sampleModel,
+                    model => model != null,
+                    model => model.Age > 18
+                    );
+            }
+            catch (RequirementNotCompliedException rex)
+            {
+                Assert.IsNotNull(rex);
+            }
         }
 
         //////HELPERS
