@@ -190,6 +190,19 @@ namespace Tests
             Assert.AreEqual(0, dict.Count);
         }
 
+        [TestCase]
+        public void GenericTools_Collection_DataStore()
+        {
+            var store = new DataStore()
+                .Set("test", 3)
+                .Set("test2", new SampleModel())
+                .Set("test3", "bla");
+
+            Assert.AreEqual(3, store.Get<int>("test"));
+            Assert.AreEqual(typeof(SampleModel), store.Get<SampleModel>("test2").GetType());
+            Assert.AreEqual("bla", store.Get<string>("test3"));
+        }
+
         //////HELPERS
 
         void vm_LoadChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
