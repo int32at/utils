@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Types;
 
 namespace int32.Utils.Core.Extensions
@@ -21,6 +22,11 @@ namespace int32.Utils.Core.Extensions
         public static bool IsNull<T>(this T o)
         {
             return o == null;
+        }
+
+        public static bool IsNotNull<T>(this T o)
+        {
+            return !o.IsNull();
         }
 
         public static T And<T>(this T o)
