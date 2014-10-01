@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using int32.Utils.Core.Extensions;
 using int32.Utils.Logger;
 using int32.Utils.Logger.Contracts;
 using int32.Utils.Logger.Loggers;
@@ -18,7 +19,7 @@ namespace Tests
             var response = WebServiceHandler.Handle(GetData);
 
             Assert.AreEqual(StatusCode.Ok, response.Status);
-            Assert.IsNullOrEmpty(response.Error);
+            Assert.IsNull(response.Error);
             Assert.AreEqual(23, response.Result.Age);
         }
 

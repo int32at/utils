@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
-using int32.Utils.Generics.Factory;
-using int32.Utils.Generics.Repository;
-using int32.Utils.Generics.Singleton;
-using int32.Utils.Generics.Tasks;
-using int32.Utils.Generics.ViewModel;
+using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Base;
+using int32.Utils.Core.Generic.Collections;
+using int32.Utils.Core.Generic.Factory;
+using int32.Utils.Core.Generic.Repository;
+using int32.Utils.Core.Generic.Singleton;
+using int32.Utils.Core.Generic.Tasks;
+using int32.Utils.Core.Generic.ViewModel;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -125,7 +129,7 @@ namespace Tests
         [TestCase]
         public void GenericTools_Timer_Measure()
         {
-            Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 200);
+            Assert.GreaterOrEqual(Timing.Measure(() => Thread.Sleep(200)).Milliseconds, 100);
         }
 
         [TestCase]
@@ -153,6 +157,81 @@ namespace Tests
             vm.Load();
 
             Assert.IsTrue(vm.IsLoaded);
+        }
+
+        [TestCase]
+        public void GenericTools_Collections_FluentList()
+        {
+            var list = new FluentList<SampleModel>()
+                .Add(new SampleModel { Title = "Test" })
+                .Add(new SampleModel { Title = "Test2" })
+                .Add(new SampleModel { Title = "Test3" })
+                .RemoveAt(0).Reverse().Update(i => i.Type = ModelType.Test);
+
+            Assert.AreEqual(2, list.Count);
+            Assert.AreEqual(ModelType.Test, list.First().Type);
+        }
+
+        [TestCase]
+        public void GenericTools_Collections_FluentDictionary()
+        {
+            var dict = new FluentDictionary<string, int>()
+                .Add("Key1", 1)
+                .Add("Key2", 2)
+                .Add("Key3", 3)
+                .Remove("Key3");
+
+            Assert.AreEqual(2, dict.Count);
+            Assert.IsTrue(dict.ContainsKey("Key2"));
+            Assert.AreEqual(1, dict["Key1"]);
+            Assert.AreEqual(2, dict.Keys.Count);
+            Assert.AreEqual(2, dict.Values.Count);
+
+            dict.Clear();
+
+            Assert.AreEqual(0, dict.Count);
+        }
+
+        [TestCase]
+        public void GenericTools_Collection_DataStore()
+        {
+            var store = new DataStore()
+                .Set("test", 3)
+                .Set("test2", new SampleModel())
+                .Set("test3", "bla");
+
+            Assert.AreEqual(3, store.Get<int>("test"));
+            Assert.AreEqual(typeof(SampleModel), store.Get<SampleModel>("test2").GetType());
+            Assert.AreEqual("bla", store.Get<string>("test3"));
+        }
+
+        [TestCase]
+        public void GenericTools_Require_List()
+        {
+            var sampleModel = new SampleModel() { Age = 23, Type = ModelType.Test };
+
+            Assert.DoesNotThrow(() => Require.That(sampleModel,
+                model => model != null,
+                model => model.Age > 18
+                ));
+        }
+
+        [TestCase]
+        public void GenericTools_Require_Throw()
+        {
+            var sampleModel = new SampleModel() { Age = 17, Type = ModelType.Test };
+
+            try
+            {
+                Require.That(sampleModel,
+                    model => model != null,
+                    model => model.Age > 18
+                    );
+            }
+            catch (Exception rex)
+            {
+                Assert.IsNotNull(rex);
+            }
         }
 
         //////HELPERS

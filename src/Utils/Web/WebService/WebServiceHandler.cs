@@ -1,4 +1,5 @@
 ﻿using System;
+using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebService.Contracts;
 
 namespace int32.Utils.Web.WebService
@@ -13,7 +14,7 @@ namespace int32.Utils.Web.WebService
             {
                 response.Result = action();
 
-                if (!string.IsNullOrEmpty(response.Error))
+                if (!response.Error.IsNull())
                     SetFailure(response, response.Error);
             }
             catch (Exception ex)
@@ -32,7 +33,7 @@ namespace int32.Utils.Web.WebService
             {
                 response.Result = action(response);
 
-                if (!string.IsNullOrEmpty(response.Error))
+                if (!response.Error.IsNull())
                     SetFailure(response, response.Error);
             }
             catch (Exception ex)
@@ -43,10 +44,10 @@ namespace int32.Utils.Web.WebService
             return response;
         }
 
-        private static void SetFailure<T>(IResponse<T> response, string message)
+        private static void SetFailure<T>(IResponse<T> response, string ex)
         {
             response.Status = StatusCode.Error;
-            response.Error = message;
+            response.Error = ex;
             response.Result = default(T);
         }
     }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using int32.Utils.Extensions;
+using int32.Utils.Core.Extensions;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -157,8 +156,6 @@ namespace Tests
             };
 
             Assert.Throws<ArgumentNullException>(() => models.FirstOrDefault(i => i.Age == 34).Safe());
-
-            models.IfNotNull(() => models.Update(i => i.Type = ModelType.Sample));
 
             models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
 
