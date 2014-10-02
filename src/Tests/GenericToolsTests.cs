@@ -299,7 +299,7 @@ namespace Tests
             workflow.OnStepError += (o, e) => Debug.WriteLine("step {0} failed.", e.Step);
 
             var sequence = new Step("Starting Workflow...",
-                new Step("Wait a couple of seconds", () => Thread.Sleep(5000)),
+                new Step("Wait a couple of seconds", () => Thread.Sleep(200)),
                 new Step("Write Object to console", () => Debug.WriteLine("OBJECT"),
                     new Step("Throw example exception", () => { throw new Exception("TEST"); },
                         new Step("Should not execute...", () => Debug.WriteLine("should not execute.."))
