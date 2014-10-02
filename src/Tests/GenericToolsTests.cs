@@ -5,12 +5,12 @@ using System.Threading;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Collections;
+using int32.Utils.Core.Generic.Engine;
 using int32.Utils.Core.Generic.Factory;
 using int32.Utils.Core.Generic.Repository;
 using int32.Utils.Core.Generic.Singleton;
 using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.ViewModel;
-using int32.Utils.Core.Generic.Workflow;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -243,7 +243,7 @@ namespace Tests
 
             var steps = new Step("1st", () => model.Age = 18);
 
-            new Workflow().Start(steps);
+            new Engine().Start(steps);
 
             Assert.AreEqual(18, model.Age);
         }
@@ -260,12 +260,12 @@ namespace Tests
                             new Step("4th", () => model.Title = "Title")))
                     ));
 
-            var workflow = new Workflow();
+            var engine = new Engine();
 
             //register error event
-            workflow.OnStepError += (o, a) => Assert.AreEqual("3rd", a.Step.Title);
+            engine.OnStepError += (o, a) => Assert.AreEqual("3rd", a.Step.Title);
 
-            workflow.Start(steps);
+            engine.Start(steps);
 
             Assert.AreEqual(18, model.Age);
         }
@@ -281,9 +281,9 @@ namespace Tests
                     new Step("2ndSub", () => { throw new Exception("TEST"); })),
                 new Step("3rd", () => model.Age = 23));
 
-            var workflow = new Workflow();
-            workflow.OnStepError += (o, e) => Assert.AreEqual("2ndSub", e.Step.Title);
-            workflow.Start(steps);
+            var engine = new Engine();
+            engine.OnStepError += (o, e) => Assert.AreEqual("2ndSub", e.Step.Title);
+            engine.Start(steps);
 
             Assert.AreEqual(18, model.Age);
             Assert.AreEqual(ModelType.Test, model.Type);
@@ -292,11 +292,11 @@ namespace Tests
         [TestCase]
         public void GenericTools_Workflow_ShowCase()
         {
-            var workflow = new Workflow();
+            var engine = new Engine();
 
-            workflow.OnStepCompleted += (o, e) => Debug.WriteLine("completed step: {0}", e.Step);
-            workflow.OnCompleted += (o, e) => Debug.WriteLine("completed workflow in {0} ms", e.ExecutionTime.TotalMilliseconds);
-            workflow.OnStepError += (o, e) => Debug.WriteLine("step {0} failed.", e.Step);
+            engine.OnStepCompleted += (o, e) => Debug.WriteLine("completed step: {0}", e.Step);
+            engine.OnCompleted += (o, e) => Debug.WriteLine("completed workflow in {0} ms", e.ExecutionTime.TotalMilliseconds);
+            engine.OnStepError += (o, e) => Debug.WriteLine("step {0} failed.", e.Step);
 
             var sequence = new Step("Starting Workflow...",
                 new Step("Wait a couple of seconds", () => Thread.Sleep(200)),
@@ -306,8 +306,7 @@ namespace Tests
                         )
                     )
                 );
-
-            workflow.Start(sequence);
+            engine.Start(sequence);
             Debug.WriteLine("after completion...");
         }
 

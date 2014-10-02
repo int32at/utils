@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using int32.Utils.Core.Extensions;
 
-namespace int32.Utils.Core.Generic.Workflow
+namespace int32.Utils.Core.Generic.Engine
 {
     public class Step
     {
@@ -41,29 +40,6 @@ namespace int32.Utils.Core.Generic.Workflow
         public override string ToString()
         {
             return Title;
-        }
-    }
-
-    public class StepFailedException : Exception
-    {
-        public Step Step { get; set; }
-    }
-
-    public class StepCompletedEventArgs : EventArgs
-    {
-        public Step Step { get; private set; }
-
-        public StepCompletedEventArgs(Step step)
-        {
-            Step = step;
-        }
-    }
-
-    public class StepErrorEventArgs : StepCompletedEventArgs
-    {
-        public StepErrorEventArgs(Step step)
-            : base(step)
-        {
         }
     }
 }

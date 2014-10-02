@@ -1,11 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Engine.Events;
 using int32.Utils.Core.Generic.Tasks;
 
-namespace int32.Utils.Core.Generic.Workflow
+namespace int32.Utils.Core.Generic.Engine
 {
-    public class Workflow
+    public class Engine
     {
         public bool HasError { get; protected set; }
 
@@ -79,10 +80,5 @@ namespace int32.Utils.Core.Generic.Workflow
 
             return t;
         }
-    }
-
-    public class WorkflowCompletedEventArgs : EventArgs
-    {
-        public TimeSpan ExecutionTime { get; set; }
     }
 }
