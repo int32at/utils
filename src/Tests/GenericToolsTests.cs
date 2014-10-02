@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using int32.Utils.Core.Extensions;
@@ -9,6 +10,7 @@ using int32.Utils.Core.Generic.Repository;
 using int32.Utils.Core.Generic.Singleton;
 using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.ViewModel;
+using int32.Utils.Core.Generic.Workflow;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -232,6 +234,81 @@ namespace Tests
             {
                 Assert.IsNotNull(rex);
             }
+        }
+
+        [TestCase]
+        public void GenericTools_Workflow_SimpleSteps()
+        {
+            var model = new SampleModel { Age = 17 };
+
+            var steps = new Step("1st", () => model.Age = 18);
+
+            new Workflow().Start(steps);
+
+            Assert.AreEqual(18, model.Age);
+        }
+
+        [TestCase]
+        public void GenericTools_Workflow_DependingSteps()
+        {
+            var model = new SampleModel { Age = 17 };
+
+            var steps = new Step("Root",
+                new Step("1st", () => model.Age = 18,
+                    new Step("2nd", () => model.Type = ModelType.Test,
+                        new Step("3rd", () => { throw new Exception("TEST"); },
+                            new Step("4th", () => model.Title = "Title")))
+                    ));
+
+            var workflow = new Workflow();
+
+            //register error event
+            workflow.OnStepError += (o, a) => Assert.AreEqual("3rd", a.Step.Title);
+
+            workflow.Start(steps);
+
+            Assert.AreEqual(18, model.Age);
+        }
+
+        [TestCase]
+        public void GenericTools_Workflow_MultiSteps()
+        {
+            var model = new SampleModel { Age = 17 };
+
+            var steps = new Step("Root",
+                new Step("1st", () => model.Age = 18),
+                new Step("2nd", () => model.Type = ModelType.Test,
+                    new Step("2ndSub", () => { throw new Exception("TEST"); })),
+                new Step("3rd", () => model.Age = 23));
+
+            var workflow = new Workflow();
+            workflow.OnStepError += (o, e) => Assert.AreEqual("2ndSub", e.Step.Title);
+            workflow.Start(steps);
+
+            Assert.AreEqual(18, model.Age);
+            Assert.AreEqual(ModelType.Test, model.Type);
+        }
+
+        [TestCase]
+        public void GenericTools_Workflow_ShowCase()
+        {
+            var workflow = new Workflow();
+
+            workflow.OnStepCompleted += (o, e) => Debug.WriteLine("completed step: {0}", e.Step);
+            workflow.OnCompleted += (o, e) => Debug.WriteLine("completed workflow in {0} ms", e.ExecutionTime.TotalMilliseconds);
+            workflow.OnStepError += (o, e) => Debug.WriteLine("step {0} failed.", e.Step);
+
+            var sequence = new Step("Starting Workflow...",
+                new Step("Wait a couple of seconds", () => Thread.Sleep(5000)),
+                new Step("Write Object to console", () => Debug.WriteLine("OBJECT"),
+                    new Step("Throw example exception", () => { throw new Exception("TEST"); },
+                        new Step("Should not execute...", () => Debug.WriteLine("should not execute.."))
+                        )
+                    )
+                );
+
+            workflow.Start(sequence);
+            Debug.WriteLine("after completion...");
         }
 
         //////HELPERS
