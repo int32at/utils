@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 using int32.Utils.Core.Generic.Workflow.Steps;
 
 namespace int32.Utils.Core.Generic.Workflow

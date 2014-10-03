@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
-using int32.Utils.Core.Extensions;
 
 namespace int32.Utils.Core.Generic.Base
 {
