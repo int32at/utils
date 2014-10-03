@@ -17,15 +17,4 @@ namespace int32.Utils.Core.Generic.Base
             return item;
         }
     }
-
-    public class RequirementNotCompliedException : Exception
-    {
-        public RequirementNotCompliedException(string message) : base(message) { }
-
-        public RequirementNotCompliedException(string message, Exception innerException) : base(message, innerException) { }
-
-        public RequirementNotCompliedException(LambdaExpression lex)
-        {
-        }
-    }
 }
