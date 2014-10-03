@@ -31,6 +31,20 @@ namespace int32.Utils.Core.Extensions
             return returnValue;
         }
 
+        public static object Get(this object o, string name)
+        {
+            o.ThrowIfNull("o");
+
+            var type = o.GetType();
+            object returnValue = null;
+
+            GetProperty(type, name)
+                .IfNull(() => GetField(type, name).IfNotNull(field => returnValue = field.GetValue(o)))
+                .IfNotNull(prop => returnValue = prop.GetValue(o, null));
+
+            return returnValue;
+        }
+
         private static PropertyInfo GetProperty(Type type, string name)
         {
             return type.GetProperty(name) ??
