@@ -59,11 +59,10 @@
     <Compile Include="Core\Extensions\EventExtensions.cs" />
     <Compile Include="Core\Generic\Base\Require.cs" />
     <Compile Include="Core\Generic\Collections\DataStore.cs" />
-    <Compile Include="Core\Generic\Engine\Events\StepEvents.cs" />
-    <Compile Include="Core\Generic\Engine\Events\WorkflowEvents.cs" />
-    <Compile Include="Core\Generic\Engine\Exceptions\StepExceptions.cs" />
-    <Compile Include="Core\Generic\Engine\Step.cs" />
-    <Compile Include="Core\Generic\Engine\Engine.cs" />
+    <Compile Include="Core\Generic\Engine\Workflow\Steps\WorkflowStep.cs" />
+    <Compile Include="Core\Generic\Engine\Workflow\Workflow.cs" />
+    <Compile Include="Core\Generic\Engine\Workflow\WorkflowEngine.cs" />
+    <Compile Include="Core\Generic\Engine\Workflow\WorkflowResult.cs" />
     <Compile Include="Domain\Contracts\IDomainItem.cs" />
     <Compile Include="Domain\Domain.cs" />
     <Compile Include="Domain\DomainType.cs" />
