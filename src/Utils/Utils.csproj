@@ -56,7 +56,6 @@
     <Compile Include="Aggregator\Subscription.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigEntry.cs" />
-    <Compile Include="Core\Extensions\EventExtensions.cs" />
     <Compile Include="Core\Generic\Base\Require.cs" />
     <Compile Include="Core\Generic\Collections\DataStore.cs" />
     <Compile Include="Core\Generic\Workflow\Engine.cs" />
