@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using int32.Utils.Core.Generic.Workflow.Steps;
 
 namespace int32.Utils.Core.Generic.Workflow
@@ -17,10 +18,25 @@ namespace int32.Utils.Core.Generic.Workflow
 
         public WorkflowResult<T> Start()
         {
-            foreach (var step in Steps)
-                step.Start(Target);
+            var result = new WorkflowResult<T>(Target);
 
-            return new WorkflowResult<T>(Target);
+            foreach (var step in Steps)
+            {
+                try
+                {
+                    step.Start(Target);
+                    result.CompletedSteps.Add(step);
+                }
+                catch (Exception ex)
+                {
+                    result.FailedSteps.Add(step);
+                    result.HasErrors = true;
+                    result.Exception = ex.InnerException ?? ex;
+                    break;
+                }
+            }
+
+            return result;
         }
     }
 
