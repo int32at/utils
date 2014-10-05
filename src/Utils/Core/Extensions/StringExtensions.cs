@@ -24,5 +24,10 @@ namespace int32.Utils.Core.Extensions
             if (s.Matches(regex))
                 action();
         }
+
+        public static T ParseEnum<T>(this string s)
+        {
+            return (T)Enum.Parse(typeof(T), s, true);
+        }
     }
 }

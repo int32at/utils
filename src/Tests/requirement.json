@@ -1,0 +1,6 @@
+﻿{
+    "type": "Test.Samples.SampleRequirementObject",
+    "requirements": [
+        { "property": "Type", "check": "Equal", "constant": "Test" }
+    ]
+}

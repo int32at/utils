@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.Base;
@@ -214,6 +215,23 @@ namespace Tests
                 model => model != null,
                 model => model.Age > 18
                 ));
+        }
+
+        [TestCase]
+        public void Test()
+        {
+            var model = new SampleModel { Age = 14, Type = ModelType.Test };
+
+            var requirements = RequirementBuilder.Load<SampleModel>("requirement.json");
+
+            try
+            {
+                Require.That(model, requirements);
+            }
+            catch (RequirementNotMetException rex)
+            {
+                Assert.AreEqual("", rex.Message);
+            }
         }
 
         [TestCase]

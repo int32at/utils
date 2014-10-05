@@ -34,7 +34,7 @@ namespace Tests
                 Type = ModelType.Sample
             };
 
-            const string expected = "{\"Title\":\"Cool Object\",\"Age\":23,\"Type\":0}";
+            const string expected = "{\"Title\":\"Cool Object\",\"Age\":23,\"Type\":\"Sample\"}";
             Assert.AreEqual(expected, x.ToJSON());
 
             var json = expected.FromJSON<SampleModel>();

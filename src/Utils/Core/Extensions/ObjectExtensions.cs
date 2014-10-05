@@ -9,12 +9,12 @@ namespace int32.Utils.Core.Extensions
         public static string ToJSON(this object o)
         {
             o.ThrowIfNull("o");
-            return JsonConvert.SerializeObject(o);
+            return JsonConvert.SerializeObject(o, Constants.JsonSerializerDefaultSettings);
         }
 
         public static string ToJSON(this IEnumerable<object> objects)
         {
-            return JsonConvert.SerializeObject(objects);
+            return JsonConvert.SerializeObject(objects, Constants.JsonSerializerDefaultSettings);
         }
 
         public static T As<T>(this object o)
