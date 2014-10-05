@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DB867B23-3959-4476-9485-3FB8FF717FA6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>int32.Utils</RootNamespace>
+    <AssemblyName>int32.Utils40</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\build\key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Utils\Aggregator\Aggregator.cs">
+      <Link>Aggregator\Aggregator.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Aggregator\Contracts\IEvent.cs">
+      <Link>Aggregator\Contracts\IEvent.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Aggregator\Subscription.cs">
+      <Link>Aggregator\Subscription.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Configuration\Config.cs">
+      <Link>Configuration\Config.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Configuration\ConfigEntry.cs">
+      <Link>Configuration\ConfigEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Constants.cs">
+      <Link>Core\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Extensions\DateExtensions.cs">
+      <Link>Core\Extensions\DateExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Extensions\GenericExtensions.cs">
+      <Link>Core\Extensions\GenericExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Extensions\ObjectExtensions.cs">
+      <Link>Core\Extensions\ObjectExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Extensions\ReflectionExtensions.cs">
+      <Link>Core\Extensions\ReflectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Extensions\StringExtensions.cs">
+      <Link>Core\Extensions\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Base\BaseHandler.cs">
+      <Link>Core\Generic\Base\BaseHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Base\Require.cs">
+      <Link>Core\Generic\Base\Require.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Base\RequirementBuilder.cs">
+      <Link>Core\Generic\Base\RequirementBuilder.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Collections\DataStore.cs">
+      <Link>Core\Generic\Collections\DataStore.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Collections\FluentDictionary.cs">
+      <Link>Core\Generic\Collections\FluentDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Collections\FluentList.cs">
+      <Link>Core\Generic\Collections\FluentList.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Factory\Factory.cs">
+      <Link>Core\Generic\Factory\Factory.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IModel.cs">
+      <Link>Core\Generic\Repository\Contracts\IModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IRepository.cs">
+      <Link>Core\Generic\Repository\Contracts\IRepository.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Repository\Repository.cs">
+      <Link>Core\Generic\Repository\Repository.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Repository\RepositoryHandler.cs">
+      <Link>Core\Generic\Repository\RepositoryHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Resources\Utils1.Designer.cs">
+      <Link>Core\Generic\Resources\Utils1.Designer.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Singleton\Singleton.cs">
+      <Link>Core\Generic\Singleton\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Tasks\Timer.cs">
+      <Link>Core\Generic\Tasks\Timer.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Types\TypeSwitch.cs">
+      <Link>Core\Generic\Types\TypeSwitch.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\ViewModel\Contracts\IViewModel.cs">
+      <Link>Core\Generic\ViewModel\Contracts\IViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\ViewModel\ViewModel.cs">
+      <Link>Core\Generic\ViewModel\ViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\ViewModel\ViewModelHandler.cs">
+      <Link>Core\Generic\ViewModel\ViewModelHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Engine.cs">
+      <Link>Core\Generic\Workflow\Engine.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Steps\IfSteps.cs">
+      <Link>Core\Generic\Workflow\Steps\IfSteps.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Steps\Step.cs">
+      <Link>Core\Generic\Workflow\Steps\Step.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Steps\StepEngine.cs">
+      <Link>Core\Generic\Workflow\Steps\StepEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Steps\StepResult.cs">
+      <Link>Core\Generic\Workflow\Steps\StepResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\Workflow.cs">
+      <Link>Core\Generic\Workflow\Workflow.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Workflow\WorkflowResult.cs">
+      <Link>Core\Generic\Workflow\WorkflowResult.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Domain\Contracts\IDomainItem.cs">
+      <Link>Domain\Contracts\IDomainItem.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Domain\Domain.cs">
+      <Link>Domain\Domain.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Domain\DomainType.cs">
+      <Link>Domain\DomainType.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Contracts\ILogger.cs">
+      <Link>Logger\Contracts\ILogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\LogConfig.cs">
+      <Link>Logger\LogConfig.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Logger.cs">
+      <Link>Logger\Logger.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Loggers\ConsoleLogger.cs">
+      <Link>Logger\Loggers\ConsoleLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Loggers\FileLogger.cs">
+      <Link>Logger\Loggers\FileLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\LogLevel.cs">
+      <Link>Logger\LogLevel.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Messages\BaseMessage.cs">
+      <Link>Logger\Messages\BaseMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Messages\ErrorMessage.cs">
+      <Link>Logger\Messages\ErrorMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Messages\InfoMessage.cs">
+      <Link>Logger\Messages\InfoMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Logger\Messages\WarnMessage.cs">
+      <Link>Logger\Messages\WarnMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Web\WebService\Contracts\IResponse.cs">
+      <Link>Web\WebService\Contracts\IResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Web\WebService\Response.cs">
+      <Link>Web\WebService\Response.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Web\WebService\WebServiceHandler.cs">
+      <Link>Web\WebService\WebServiceHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\build\AssemblyInfo.cs">
+      <Link>Properties\AssemblyInfo.cs</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="..\Utils\Core\Generic\Resources\Utils.resx">
+      <Link>Core\Generic\Resources\Utils.resx</Link>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
