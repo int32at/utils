@@ -5,6 +5,8 @@ utils
 * **Domain**: environment based configuration loading
 * **Aggregator**: static event system
 * **Logging**: fast, easy and extensible logging
+* **Collections**: updates to existing collections
+* **Collections**: set requirements for objects and check them
 * **Extension Methods**: big collection of reusable extension methods
 * **Design Patterns**: Singleton, Factory, Repository, MVVM
 
@@ -135,6 +137,50 @@ logger.Config.EnableErrors = true; //default; allows logging of Error messages, 
 logger.Config.EnableWarnings = true; //default; same as EnableErrors but Warn() instead
 logger.Config.EnableInfos = true; //default; same as EnableErrors but Warn() instead
 logger.Config.Format = "{0}\t{1}\t{2}"; //default Format = DateTime.Now\tLOGLEVEL\tmessage
+```
+
+##Collections
+Following generic collections are available
+* FluentList<T>: a Fluent API interpretation of List<T>
+* FluentDictionary<TKey, TValue>: a Fluent API interpretation of Dictionary<TKey, TValue>
+* DataStore: a simple storage to store all kinds of data and types.
+* 
+```cs
+var list = new FluentList<SampleModel>()
+    .Add(new SampleModel { Title = "Test" })
+    .Add(new SampleModel { Title = "Test2" })
+    .Add(new SampleModel { Title = "Test3" })
+    .RemoveAt(0)
+    .Reverse()
+    .Update(i => i.Type = ModelType.Test);
+    
+var dict = new FluentDictionary<string, int>()
+    .Add("Key1", 1)
+    .Add("Key2", 2)
+    .Add("Key3", 3)
+    .Remove("Key3");
+    
+//DataStore also obviously has an fluent api
+var store = new DataStore()
+    .Set("test", 3)
+    .Set("test2", new SampleModel())
+    .Set("test3", "bla");
+```
+
+##Requirements
+The idea behind requirements and especially the `Require` class is to set different rules (requirements) for objects and then make sure a given object fullfill's those rules. Here is an easy example:
+
+```cs
+var sampleModel = new SampleModel { Age = 17 };
+
+/*check that the sampleModel is not null, and the age is greater than 18
+ * in this case, Require.That will throw an exception, because the Age (17) does not 
+ * fullfill the requirement (Age > 18) */
+Require.That(sampleModel,
+    model => model.IsNotNull(),
+    model => model.Age > 18
+    );
+
 ```
 
 ##Extension Methods
