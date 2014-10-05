@@ -218,7 +218,7 @@ namespace Tests
         }
 
         [TestCase]
-        public void Test()
+        public void GenericTools_RequirementBuilder()
         {
             var model = new SampleModel { Age = 14, Type = ModelType.Test };
 
