@@ -62,6 +62,8 @@
     <Compile Include="Core\Generic\Base\RequirementBuilder.cs" />
     <Compile Include="Core\Generic\Collections\DataStore.cs" />
     <Compile Include="Core\Generic\Collections\EventList.cs" />
+    <Compile Include="Core\Generic\Data\FlatDatabase.cs" />
+    <Compile Include="Core\Generic\Data\FlatSession.cs" />
     <Compile Include="Core\Generic\Data\MemoryDatabase.cs" />
     <Compile Include="Core\Generic\Data\MemorySession.cs" />
     <Compile Include="Core\Generic\Resources\Utils1.Designer.cs">

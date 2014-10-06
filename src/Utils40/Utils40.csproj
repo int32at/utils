@@ -78,6 +78,9 @@
     <Compile Include="..\Utils\Core\Extensions\GenericExtensions.cs">
       <Link>Core\Extensions\GenericExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Extensions\IOExtensions.cs">
+      <Link>Core\Extensions\IOExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Extensions\ObjectExtensions.cs">
       <Link>Core\Extensions\ObjectExtensions.cs</Link>
     </Compile>
@@ -107,6 +110,12 @@
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Collections\FluentList.cs">
       <Link>Core\Generic\Collections\FluentList.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Data\FlatDatabase.cs">
+      <Link>Core\Generic\Data\FlatDatabase.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Core\Generic\Data\FlatSession.cs">
+      <Link>Core\Generic\Data\FlatSession.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Data\MemoryDatabase.cs">
       <Link>Core\Generic\Data\MemoryDatabase.cs</Link>
