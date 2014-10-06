@@ -111,6 +111,9 @@
     <Compile Include="..\Utils\Core\Generic\Data\MemoryDatabase.cs">
       <Link>Core\Generic\Data\MemoryDatabase.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Generic\Data\MemorySession.cs">
+      <Link>Core\Generic\Data\MemorySession.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Generic\Factory\Factory.cs">
       <Link>Core\Generic\Factory\Factory.cs</Link>
     </Compile>
