@@ -230,5 +230,11 @@ namespace Tests
             Assert.IsTrue(string.Empty.IsNullOrEmpty());
             Assert.IsFalse("test".IsNullOrEmpty());
         }
+
+        [TestCase]
+        public void Generic_string_Format()
+        {
+            Assert.AreEqual("Hello World", "Hello {0}".With("World"));
+        }
     }
 }

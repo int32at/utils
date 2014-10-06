@@ -30,6 +30,11 @@ namespace int32.Utils.Core.Extensions
             return string.IsNullOrEmpty(s);
         }
 
+        public static string With(this string s, params object[] args)
+        {
+            return string.Format(s, args);
+        }
+
         public static T ParseEnum<T>(this string s)
         {
             return (T)Enum.Parse(typeof(T), s, true);
