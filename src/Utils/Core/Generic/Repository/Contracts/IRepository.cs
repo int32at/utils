@@ -10,7 +10,7 @@ namespace int32.Utils.Core.Generic.Repository.Contracts
         TEntity Get(TKey id);
     }
 
-    public interface IRepository<TEntity> : IRepository where TEntity : class
+    public interface IRepository<TEntity> : IRepository
     {
         int Count { get; }
         TEntity Add(TEntity item);

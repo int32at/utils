@@ -11,5 +11,10 @@ namespace int32.Utils.Core.Extensions
 
             return info;
         }
+
+        public static string ReadAlltext(this FileInfo file)
+        {
+            return File.ReadAllText(file.ThrowIfNull("file").FullName);
+        }
     }
 }

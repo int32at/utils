@@ -108,6 +108,9 @@
     <Compile Include="..\Utils\Core\Generic\Collections\FluentList.cs">
       <Link>Core\Generic\Collections\FluentList.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Generic\Data\MemoryDatabase.cs">
+      <Link>Core\Generic\Data\MemoryDatabase.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Generic\Factory\Factory.cs">
       <Link>Core\Generic\Factory\Factory.cs</Link>
     </Compile>

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Collections;
+using int32.Utils.Core.Generic.Data;
 using int32.Utils.Core.Generic.Factory;
 using int32.Utils.Core.Generic.Repository;
 using int32.Utils.Core.Generic.Singleton;
@@ -271,6 +271,46 @@ namespace Tests
             catch (Exception rex)
             {
                 Assert.IsNotNull(rex);
+            }
+        }
+
+        [TestCase]
+        public void GenericTools_Data_MemoryDatabase()
+        {
+            var db = new MemoryDatabase<SampleModel>();
+
+            db.Add(new SampleModel());
+            db.Add(new SampleModel { Age = 17 });
+            db.Add(new SampleModel { Type = ModelType.Test });
+
+            Assert.AreEqual(3, db.Count);
+            Assert.AreEqual(17, db.Get(i => i.Age == 17).Age);
+            Assert.AreEqual(2, db.GetAll(i => i.Type == ModelType.Sample).Count());
+        }
+
+        [TestCase]
+        public void GenericTools_Data_MemoryDatabase_int()
+        {
+            var db = new MemoryDatabase<int>();
+
+            db.Add(3);
+            db.Add(7);
+            db.Add(5);
+
+            Assert.AreEqual(15, db.GetAll().Sum(i => i));
+        }
+
+
+        [TestCase]
+        public void GenericTools_Data_MemorySession()
+        {
+            using (var session = new MemorySession())
+            {
+                var db = session.Database<SampleModel>();
+                db.Add(new SampleModel());
+
+                var db2 = session.Database<SampleModel>();
+                Assert.AreEqual(1, db2.Count);
             }
         }
 
