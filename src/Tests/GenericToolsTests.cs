@@ -207,6 +207,28 @@ namespace Tests
         }
 
         [TestCase]
+        public void GenericTools_Collection_EventList()
+        {
+            var addedCounter = 0;
+            var removeCounter = 0;
+
+            var list = new EventList<int>
+            {
+                ItemAdded = i => addedCounter += i,
+                ItemRemoved = i => removeCounter += i
+            };
+
+            list.Add(1);
+            list.AddRange(new[] { 2, 3 });
+
+            list.Remove(1);
+            list.RemoveAt(0);
+
+            Assert.AreEqual(6, addedCounter);
+            Assert.AreEqual(4, removeCounter);
+        }
+
+        [TestCase]
         public void GenericTools_Require_List()
         {
             var sampleModel = new SampleModel() { Age = 23, Type = ModelType.Test };

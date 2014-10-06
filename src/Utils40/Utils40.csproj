@@ -99,6 +99,9 @@
     <Compile Include="..\Utils\Core\Generic\Collections\DataStore.cs">
       <Link>Core\Generic\Collections\DataStore.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Generic\Collections\EventList.cs">
+      <Link>Core\Generic\Collections\EventList.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Generic\Collections\FluentDictionary.cs">
       <Link>Core\Generic\Collections\FluentDictionary.cs</Link>
     </Compile>

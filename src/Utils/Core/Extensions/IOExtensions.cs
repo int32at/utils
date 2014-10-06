@@ -1,0 +1,15 @@
+﻿using System.IO;
+
+namespace int32.Utils.Core.Extensions
+{
+    public static class IOExtensions
+    {
+        public static DirectoryInfo Ensure(this DirectoryInfo info)
+        {
+            if (!info.Exists)
+                info.Create();
+
+            return info;
+        }
+    }
+}
