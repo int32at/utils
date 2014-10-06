@@ -215,5 +215,20 @@ namespace Tests
 
             Assert.AreEqual(2, models.Count);
         }
+
+        [TestCase]
+        public void Generic_Object_MemberName()
+        {
+            var model = new SampleModel();
+            Assert.AreEqual("Age", model.MemberName(i => i.Age));
+        }
+
+        [TestCase]
+        public void Generic_String_IsNullOrEmpty()
+        {
+            Assert.IsTrue("".IsNullOrEmpty());
+            Assert.IsTrue(string.Empty.IsNullOrEmpty());
+            Assert.IsFalse("test".IsNullOrEmpty());
+        }
     }
 }

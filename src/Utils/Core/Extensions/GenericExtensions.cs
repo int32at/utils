@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Types;
 
@@ -146,6 +147,16 @@ namespace int32.Utils.Core.Extensions
         public static Switch<T> Switch<T>(this T o)
         {
             return new Switch<T>(o);
+        }
+
+        public static string MemberName<T, TResult>(this T o, Expression<Func<T, TResult>> expression) where T : class
+        {
+            return MemberName(expression);
+        }
+
+        public static string MemberName<T, TReturn>(Expression<Func<T, TReturn>> expression) where T : class
+        {
+            return ((MemberExpression)expression.Body).Member.Name;
         }
     }
 }

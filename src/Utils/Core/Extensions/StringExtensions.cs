@@ -25,6 +25,11 @@ namespace int32.Utils.Core.Extensions
                 action();
         }
 
+        public static bool IsNullOrEmpty(this string s)
+        {
+            return string.IsNullOrEmpty(s);
+        }
+
         public static T ParseEnum<T>(this string s)
         {
             return (T)Enum.Parse(typeof(T), s, true);
