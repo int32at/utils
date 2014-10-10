@@ -254,6 +254,15 @@
     <Compile Include="..\build\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Windows\Files\Finder.cs">
+      <Link>Windows\Files\Finder.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Windows\Files\Links\Link.cs">
+      <Link>Windows\Files\Links\Link.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Windows\Files\Links\LinkResolver.cs">
+      <Link>Windows\Files\Links\LinkResolver.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\build\key.snk">

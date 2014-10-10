@@ -1,5 +1,7 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using int32.Utils.Windows.Files.Links;
 
 namespace int32.Utils.Core.Extensions
 {
@@ -38,6 +40,16 @@ namespace int32.Utils.Core.Extensions
         public static void WriteAllText(this FileInfo file, string contents)
         {
             File.WriteAllText(file.ThrowIfNull("file").FullName, contents);
+        }
+
+        public static IEnumerable<string> ResolveAll(this IEnumerable<Link> links)
+        {
+            var resolver = new LinkResolver();
+            var list = new List<string>();
+
+            links.ForEach(i => list.Add(resolver.Resolve(i.Path)));
+
+            return list;
         }
     }
 }

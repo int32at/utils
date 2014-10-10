@@ -116,6 +116,9 @@
     <Compile Include="Web\WebService\Contracts\IResponse.cs" />
     <Compile Include="Web\WebService\WebServiceHandler.cs" />
     <Compile Include="Web\WebService\Response.cs" />
+    <Compile Include="Windows\Files\Finder.cs" />
+    <Compile Include="Windows\Files\Links\Link.cs" />
+    <Compile Include="Windows\Files\Links\LinkResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

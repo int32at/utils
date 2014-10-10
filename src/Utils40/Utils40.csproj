@@ -232,6 +232,15 @@
     <Compile Include="..\build\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Windows\Files\Finder.cs">
+      <Link>Windows\Files\Finder.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Windows\Files\Links\Link.cs">
+      <Link>Windows\Files\Links\Link.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils\Windows\Files\Links\LinkResolver.cs">
+      <Link>Windows\Files\Links\LinkResolver.cs</Link>
+    </Compile>
     <Compile Include="Core\Extensions\DrawingExtensions.cs" />
     <Compile Include="Windows\Wpf\Base\BindableBase.cs" />
     <Compile Include="Windows\Wpf\Commands\RelayCommand.cs" />

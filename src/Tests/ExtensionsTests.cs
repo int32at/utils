@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using int32.Utils.Core.Extensions;
-
+using int32.Utils.Windows.Files;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -47,7 +49,7 @@ namespace Tests
         {
             Assert.AreEqual(3, "3".As<int>());
 
-            var e = new SampleAddEvent() { Data = new SampleAddEvent { Data = 3 } };
+            var e = new SampleAddEvent() {Data = new SampleAddEvent {Data = 3}};
             Assert.AreEqual("Tests.Samples.SampleAddEvent", e.As<string>());
             Assert.AreEqual(3, e.Data.As<SampleAddEvent>().Data.As<int>());
         }
@@ -73,10 +75,10 @@ namespace Tests
         [TestCase]
         public void Generics_In_List()
         {
-            var numbers = new[] { 1, 2, 3, 4, 5 };
+            var numbers = new[] {1, 2, 3, 4, 5};
             Assert.IsTrue(3.In(numbers));
-            Assert.IsTrue(new[] { 3, 5 }.In(numbers));
-            Assert.IsFalse(new[] { 7, 1 }.In(numbers));
+            Assert.IsTrue(new[] {3, 5}.In(numbers));
+            Assert.IsFalse(new[] {7, 1}.In(numbers));
         }
 
         [TestCase]
@@ -89,7 +91,7 @@ namespace Tests
         [TestCase]
         public void Generic_ForEach()
         {
-            var numbers = new[] { 1, 3, 5, 7, 9 };
+            var numbers = new[] {1, 3, 5, 7, 9};
             numbers.ForEach(i => Assert.IsTrue(i.Between(1, 10)));
         }
 
@@ -106,7 +108,7 @@ namespace Tests
         [TestCase]
         public void Reflection_Object_SetProperty()
         {
-            var t = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
+            var t = new SampleModel() {Age = 23, Title = "Andreas", Type = ModelType.Example};
 
             t.Set("Age", 3);
             t.Set("Title", "Example");
@@ -124,7 +126,7 @@ namespace Tests
         [TestCase]
         public void Generic_RemoveFromList_Predicate()
         {
-            var numbers = new List<int> { 1, 3, 5, 7, 9 };
+            var numbers = new List<int> {1, 3, 5, 7, 9};
             numbers.Remove(i => i == 7);
 
             Assert.IsFalse(numbers.Contains(7));
@@ -162,7 +164,7 @@ namespace Tests
 
             var x = GetModel().ThrowIfNull("model").And().IfNotNull(model => model.Age = 23);
 
-            var y = GetModelNull().IfNull(model => new SampleModel() { Age = 17 });
+            var y = GetModelNull().IfNull(model => new SampleModel() {Age = 17});
 
             Assert.AreEqual(x.Age, 23);
             Assert.AreEqual(y.Age, 17);
@@ -175,13 +177,13 @@ namespace Tests
             Assert.AreEqual(22, GetModel().IfNotNull(() => Assert.IsTrue(true)).Age);
 
             //reset the age
-            Assert.AreEqual(27, GetModel().IfNotNull(() => new SampleModel() { Age = 27 }).Age);
+            Assert.AreEqual(27, GetModel().IfNotNull(() => new SampleModel() {Age = 27}).Age);
 
             //check for null
             Assert.IsNull(GetModelNull().IfNull(() => Assert.IsTrue(true)));
 
             //create new object when null
-            Assert.AreEqual(27, GetModelNull().IfNull(() => new SampleModel() { Age = 27 }).Age);
+            Assert.AreEqual(27, GetModelNull().IfNull(() => new SampleModel() {Age = 27}).Age);
 
             //create ne wobject and check directly
             GetModelNull().IfNull(() => new SampleModel()).And().IfNotNull(model => Assert.IsNotNull(model));
@@ -199,7 +201,7 @@ namespace Tests
 
         private SampleModel GetModel()
         {
-            return new SampleModel() { Age = 22 };
+            return new SampleModel() {Age = 22};
         }
 
         private SampleModel GetModelNull()
@@ -236,6 +238,35 @@ namespace Tests
         public void Generic_string_Format()
         {
             Assert.AreEqual("Hello World", "Hello {0}".With("World"));
+        }
+
+        [TestCase]
+        public void Test()
+        {
+            var links = Finder.GetLinks(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
+
+            Assert.Greater(links.Count(), 0);
+            Assert.AreEqual(".lnk", Path.GetExtension(links.First().Path));
+            Assert.AreEqual(".exe", Path.GetExtension(links.First().Resolve()));
+
+            //use the extension method to resolve all at once, which is a cheaper call
+            //then resolving every single link seperatly in a foreach
+            var exes = links.ResolveAll();
+
+            Assert.AreEqual(links.Count(), exes.Count());
+
+            Assert.Each(exes, s => Path.GetExtension(s) != ".lnk");
+        }
+    }
+
+    public class Assert : NUnit.Framework.Assert
+    {
+        public static void Each<T>(IEnumerable<T> items, Func<T, bool> predicate)
+        {
+            foreach (var item in items)
+            {
+                IsTrue(predicate(item));
+            }
         }
     }
 }
