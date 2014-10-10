@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using int32.Utils.Aggregator.Contracts;
+using int32.Utils.Core.Aggregator.Contracts;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.Singleton;
 
-namespace int32.Utils.Aggregator
+namespace int32.Utils.Core.Aggregator
 {
     public class Aggregator : Singleton<Aggregator>
     {

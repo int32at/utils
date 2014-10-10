@@ -1,5 +1,5 @@
 ﻿using System;
-using int32.Utils.Aggregator;
+using int32.Utils.Core.Aggregator;
 using int32.Utils.Core.Extensions;
 using NUnit.Framework;
 using Tests.Samples;

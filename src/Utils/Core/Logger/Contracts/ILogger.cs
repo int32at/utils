@@ -1,7 +1,7 @@
 ﻿using System;
-using int32.Utils.Logger.Messages;
+using int32.Utils.Core.Logger.Messages;
 
-namespace int32.Utils.Logger.Contracts
+namespace int32.Utils.Core.Logger.Contracts
 {
     public interface ILogger : IDisposable
     {

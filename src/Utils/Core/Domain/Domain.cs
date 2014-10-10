@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using int32.Utils.Configuration;
+using int32.Utils.Core.Configuration;
 using int32.Utils.Core.Extensions;
-using int32.Utils.Domain.Contracts;
+using int32.Utils.Core.Domain.Contracts;
 
-namespace int32.Utils.Domain
+namespace int32.Utils.Core.Domain
 {
     public static class Domain
     {

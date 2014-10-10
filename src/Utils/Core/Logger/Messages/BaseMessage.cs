@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace int32.Utils.Logger.Messages
+namespace int32.Utils.Core.Logger.Messages
 {
     public abstract class BaseMessage
     {

@@ -1,8 +1,8 @@
 ﻿using System.IO;
-using int32.Utils.Logger.Contracts;
-using int32.Utils.Logger.Messages;
+using int32.Utils.Core.Logger.Contracts;
+using int32.Utils.Core.Logger.Messages;
 
-namespace int32.Utils.Logger.Loggers
+namespace int32.Utils.Core.Logger.Loggers
 {
     public class FileLogger : ILogger
     {

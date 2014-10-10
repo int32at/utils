@@ -1,6 +1,6 @@
-﻿using int32.Utils.Configuration;
+﻿using int32.Utils.Core.Configuration;
 
-namespace int32.Utils.Domain.Contracts
+namespace int32.Utils.Core.Domain.Contracts
 {
     public interface IDomainItem
     {

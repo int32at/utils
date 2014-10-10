@@ -1,4 +1,4 @@
-﻿using int32.Utils.Aggregator.Contracts;
+﻿using int32.Utils.Core.Aggregator.Contracts;
 
 namespace Tests.Samples
 {

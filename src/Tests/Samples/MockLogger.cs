@@ -1,8 +1,7 @@
 ﻿using System;
-using int32.Utils.Logger;
-using int32.Utils.Logger.Contracts;
-using int32.Utils.Logger.Messages;
-using NUnit.Framework;
+using int32.Utils.Core.Logger;
+using int32.Utils.Core.Logger.Contracts;
+using int32.Utils.Core.Logger.Messages;
 
 namespace Tests.Samples
 {

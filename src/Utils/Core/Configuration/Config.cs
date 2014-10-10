@@ -5,7 +5,7 @@ using System.Configuration;
 using System.Linq;
 using int32.Utils.Core.Extensions;
 
-namespace int32.Utils.Configuration
+namespace int32.Utils.Core.Configuration
 {
     public class Config
     {

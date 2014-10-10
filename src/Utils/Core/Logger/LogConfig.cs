@@ -1,4 +1,4 @@
-﻿namespace int32.Utils.Logger
+﻿namespace int32.Utils.Core.Logger
 {
     public class LogConfig
     {

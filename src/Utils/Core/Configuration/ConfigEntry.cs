@@ -1,4 +1,4 @@
-﻿namespace int32.Utils.Configuration
+﻿namespace int32.Utils.Core.Configuration
 {
     public class ConfigEntry
     {

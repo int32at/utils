@@ -1,5 +1,5 @@
-﻿using int32.Utils.Core.Extensions;
-using int32.Utils.Domain;
+﻿using int32.Utils.Core.Domain;
+using int32.Utils.Core.Extensions;
 using NUnit.Framework;
 
 namespace Tests

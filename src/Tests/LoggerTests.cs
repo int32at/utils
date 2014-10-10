@@ -1,8 +1,8 @@
 ﻿using System;
 using System.IO;
-using int32.Utils.Logger;
-using int32.Utils.Logger.Contracts;
-using int32.Utils.Logger.Loggers;
+using int32.Utils.Core.Logger;
+using int32.Utils.Core.Logger.Contracts;
+using int32.Utils.Core.Logger.Loggers;
 using NUnit.Framework;
 using Tests.Samples;
 

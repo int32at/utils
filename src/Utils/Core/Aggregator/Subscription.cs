@@ -1,7 +1,7 @@
 ﻿using System;
-using int32.Utils.Aggregator.Contracts;
+using int32.Utils.Core.Aggregator.Contracts;
 
-namespace int32.Utils.Aggregator
+namespace int32.Utils.Core.Aggregator
 {
     public class Subscription<TEvent> where TEvent : IEvent
     {

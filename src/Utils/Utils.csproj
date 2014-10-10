@@ -51,11 +51,11 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aggregator\Aggregator.cs" />
-    <Compile Include="Aggregator\Contracts\IEvent.cs" />
-    <Compile Include="Aggregator\Subscription.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\ConfigEntry.cs" />
+    <Compile Include="Core\Aggregator\Aggregator.cs" />
+    <Compile Include="Core\Aggregator\Contracts\IEvent.cs" />
+    <Compile Include="Core\Aggregator\Subscription.cs" />
+    <Compile Include="Core\Configuration\Config.cs" />
+    <Compile Include="Core\Configuration\ConfigEntry.cs" />
     <Compile Include="Core\Constants.cs" />
     <Compile Include="Core\Extensions\IOExtensions.cs" />
     <Compile Include="Core\Generic\Base\Require.cs" />
@@ -78,9 +78,9 @@
     <Compile Include="Core\Generic\Workflow\WorkflowResult.cs" />
     <Compile Include="Core\Generic\Workflow\Steps\Step.cs" />
     <Compile Include="Core\Generic\Workflow\Steps\StepResult.cs" />
-    <Compile Include="Domain\Contracts\IDomainItem.cs" />
-    <Compile Include="Domain\Domain.cs" />
-    <Compile Include="Domain\DomainType.cs" />
+    <Compile Include="Core\Domain\Contracts\IDomainItem.cs" />
+    <Compile Include="Core\Domain\Domain.cs" />
+    <Compile Include="Core\Domain\DomainType.cs" />
     <Compile Include="Core\Extensions\DateExtensions.cs" />
     <Compile Include="Core\Extensions\GenericExtensions.cs" />
     <Compile Include="Core\Extensions\ObjectExtensions.cs" />
@@ -100,16 +100,16 @@
     <Compile Include="Core\Generic\ViewModel\Contracts\IViewModel.cs" />
     <Compile Include="Core\Generic\ViewModel\ViewModel.cs" />
     <Compile Include="Core\Generic\ViewModel\ViewModelHandler.cs" />
-    <Compile Include="Logger\Loggers\ConsoleLogger.cs" />
-    <Compile Include="Logger\Loggers\FileLogger.cs" />
-    <Compile Include="Logger\Contracts\ILogger.cs" />
-    <Compile Include="Logger\LogConfig.cs" />
-    <Compile Include="Logger\Logger.cs" />
-    <Compile Include="Logger\LogLevel.cs" />
-    <Compile Include="Logger\Messages\BaseMessage.cs" />
-    <Compile Include="Logger\Messages\ErrorMessage.cs" />
-    <Compile Include="Logger\Messages\WarnMessage.cs" />
-    <Compile Include="Logger\Messages\InfoMessage.cs" />
+    <Compile Include="Core\Logger\Loggers\ConsoleLogger.cs" />
+    <Compile Include="Core\Logger\Loggers\FileLogger.cs" />
+    <Compile Include="Core\Logger\Contracts\ILogger.cs" />
+    <Compile Include="Core\Logger\LogConfig.cs" />
+    <Compile Include="Core\Logger\Logger.cs" />
+    <Compile Include="Core\Logger\LogLevel.cs" />
+    <Compile Include="Core\Logger\Messages\BaseMessage.cs" />
+    <Compile Include="Core\Logger\Messages\ErrorMessage.cs" />
+    <Compile Include="Core\Logger\Messages\WarnMessage.cs" />
+    <Compile Include="Core\Logger\Messages\InfoMessage.cs" />
     <Compile Include="..\build\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>

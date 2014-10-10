@@ -1,4 +1,4 @@
-﻿namespace int32.Utils.Domain
+﻿namespace int32.Utils.Core.Domain
 {
     public enum DomainType
     {

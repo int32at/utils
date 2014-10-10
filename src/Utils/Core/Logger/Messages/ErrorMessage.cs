@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-namespace int32.Utils.Logger.Messages
+namespace int32.Utils.Core.Logger.Messages
 {
     public class ErrorMessage : BaseMessage
     {
