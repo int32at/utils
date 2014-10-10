@@ -46,10 +46,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +233,12 @@
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Core\Extensions\DrawingExtensions.cs" />
+    <Compile Include="Windows\Wpf\Base\BindableBase.cs" />
+    <Compile Include="Windows\Wpf\Commands\RelayCommand.cs" />
+    <Compile Include="Windows\Wpf\Common\KeyboardHook.cs" />
+    <Compile Include="Windows\Wpf\Converters\BaseConverter.cs" />
+    <Compile Include="Windows\Wpf\Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Windows\Wpf\ViewModels\BaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">

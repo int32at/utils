@@ -123,9 +123,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Windows\Wpf\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Core\Generic\Resources\Utils.resx">
       <Generator>ResXFileCodeGenerator</Generator>

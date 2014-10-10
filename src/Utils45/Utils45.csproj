@@ -46,17 +46,36 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
-    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Utils40\Core\Extensions\DrawingExtensions.cs">
       <Link>Core\Extensions\DrawingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\Base\BindableBase.cs">
+      <Link>Windows\Wpf\Base\BindableBase.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\Commands\RelayCommand.cs">
+      <Link>Windows\Wpf\Commands\RelayCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\Common\KeyboardHook.cs">
+      <Link>Windows\Wpf\Common\KeyboardHook.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\Converters\BaseConverter.cs">
+      <Link>Windows\Wpf\Converters\BaseConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\Converters\BooleanToVisibilityConverter.cs">
+      <Link>Windows\Wpf\Converters\BooleanToVisibilityConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Windows\Wpf\ViewModels\BaseViewModel.cs">
+      <Link>Windows\Wpf\ViewModels\BaseViewModel.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Aggregator\Aggregator.cs">
       <Link>Aggregator\Aggregator.cs</Link>
