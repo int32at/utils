@@ -55,19 +55,19 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Utils\Aggregator\Aggregator.cs">
+    <Compile Include="..\Utils\Core\Aggregator\Aggregator.cs">
       <Link>Aggregator\Aggregator.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Aggregator\Contracts\IEvent.cs">
+    <Compile Include="..\Utils\Core\Aggregator\Contracts\IEvent.cs">
       <Link>Aggregator\Contracts\IEvent.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Aggregator\Subscription.cs">
+    <Compile Include="..\Utils\Core\Aggregator\Subscription.cs">
       <Link>Aggregator\Subscription.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Configuration\Config.cs">
+    <Compile Include="..\Utils\Core\Configuration\Config.cs">
       <Link>Configuration\Config.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Configuration\ConfigEntry.cs">
+    <Compile Include="..\Utils\Core\Configuration\ConfigEntry.cs">
       <Link>Configuration\ConfigEntry.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Core\Constants.cs">
@@ -181,43 +181,43 @@
     <Compile Include="..\Utils\Core\Generic\Workflow\WorkflowResult.cs">
       <Link>Core\Generic\Workflow\WorkflowResult.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Domain\Contracts\IDomainItem.cs">
+    <Compile Include="..\Utils\Core\Domain\Contracts\IDomainItem.cs">
       <Link>Domain\Contracts\IDomainItem.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Domain\Domain.cs">
+    <Compile Include="..\Utils\Core\Domain\Domain.cs">
       <Link>Domain\Domain.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Domain\DomainType.cs">
+    <Compile Include="..\Utils\Core\Domain\DomainType.cs">
       <Link>Domain\DomainType.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Contracts\ILogger.cs">
+    <Compile Include="..\Utils\Core\Logger\Contracts\ILogger.cs">
       <Link>Logger\Contracts\ILogger.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\LogConfig.cs">
+    <Compile Include="..\Utils\Core\Logger\LogConfig.cs">
       <Link>Logger\LogConfig.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Logger.cs">
+    <Compile Include="..\Utils\Core\Logger\Logger.cs">
       <Link>Logger\Logger.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Loggers\ConsoleLogger.cs">
+    <Compile Include="..\Utils\Core\Logger\Loggers\ConsoleLogger.cs">
       <Link>Logger\Loggers\ConsoleLogger.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Loggers\FileLogger.cs">
+    <Compile Include="..\Utils\Core\Logger\Loggers\FileLogger.cs">
       <Link>Logger\Loggers\FileLogger.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\LogLevel.cs">
+    <Compile Include="..\Utils\Core\Logger\LogLevel.cs">
       <Link>Logger\LogLevel.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Messages\BaseMessage.cs">
+    <Compile Include="..\Utils\Core\Logger\Messages\BaseMessage.cs">
       <Link>Logger\Messages\BaseMessage.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Messages\ErrorMessage.cs">
+    <Compile Include="..\Utils\Core\Logger\Messages\ErrorMessage.cs">
       <Link>Logger\Messages\ErrorMessage.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Messages\InfoMessage.cs">
+    <Compile Include="..\Utils\Core\Logger\Messages\InfoMessage.cs">
       <Link>Logger\Messages\InfoMessage.cs</Link>
     </Compile>
-    <Compile Include="..\Utils\Logger\Messages\WarnMessage.cs">
+    <Compile Include="..\Utils\Core\Logger\Messages\WarnMessage.cs">
       <Link>Logger\Messages\WarnMessage.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Web\WebService\Contracts\IResponse.cs">
