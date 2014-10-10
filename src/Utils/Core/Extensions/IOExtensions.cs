@@ -42,6 +42,20 @@ namespace int32.Utils.Core.Extensions
             File.WriteAllText(file.ThrowIfNull("file").FullName, contents);
         }
 
+        public static FileInfo Copy(this FileInfo info, string destFileNameWithoutExtension)
+        {
+            return info.Copy(destFileNameWithoutExtension, false);
+        }
+
+        public static FileInfo Copy(this FileInfo info, string destFileNameWithoutExtension, bool overwrite)
+        {
+            var path = info.DirectoryName;
+            return info.CopyTo(Path.Combine(path, destFileNameWithoutExtension) + info.Extension);
+        }
+
+
+        //related to Windows.Files
+
         public static IEnumerable<string> ResolveAll(this IEnumerable<Link> links)
         {
             var resolver = new LinkResolver();

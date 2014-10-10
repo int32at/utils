@@ -241,7 +241,7 @@ namespace Tests
         }
 
         [TestCase]
-        public void Test()
+        public void Generic_Link_Finder_Resolve()
         {
             var links = Finder.GetLinks(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
 
@@ -256,6 +256,19 @@ namespace Tests
             Assert.AreEqual(links.Count(), exes.Count());
 
             Assert.Each(exes, s => Path.GetExtension(s) != ".lnk");
+        }
+
+        [TestCase]
+        public void Generic_File_Extension()
+        {
+            var file = new FileInfo(@"requirement.json");
+
+            //creates file in the same directory called new.json
+            var newCfg = file.Copy("new", true);
+
+            Assert.AreEqual("new.json", newCfg.Name);
+
+            newCfg.Delete();
         }
     }
 
