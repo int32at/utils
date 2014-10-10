@@ -43,10 +43,14 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -61,6 +65,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="..\Tests40\DrawingTests.cs">
+      <Link>DrawingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Tests40\Samples\Data.Designer.cs">
+      <Link>Samples\Data.Designer.cs</Link>
+    </Compile>
     <Compile Include="..\Tests\AggregatorTests.cs">
       <Link>AggregatorTests.cs</Link>
     </Compile>
@@ -131,6 +141,11 @@
       <Project>{8e705f72-9a92-4bad-b847-53f78381bb44}</Project>
       <Name>Utils45</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\Tests40\Samples\Data.resx">
+      <Link>Samples\Data.resx</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

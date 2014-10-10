@@ -1,10 +1,4 @@
 ﻿using System;
-using System;
-using System.IO;
-using int32.Utils.Core.Extensions;
-using int32.Utils.Logger;
-using int32.Utils.Logger.Contracts;
-using int32.Utils.Logger.Loggers;
 using int32.Utils.Web.WebService;
 using NUnit.Framework;
 using Tests.Samples;
