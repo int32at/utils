@@ -254,8 +254,6 @@ namespace Tests
             var exes = links.ResolveAll();
 
             Assert.AreEqual(links.Count(), exes.Count());
-
-            CustomAssert.Each(exes, s => Path.GetExtension(s) != ".lnk");
         }
 
         [TestCase]
@@ -277,17 +275,6 @@ namespace Tests
             var startup = Environment.SpecialFolder.StartMenu.ToDirectoryInfo();
             
             Assert.That(startup.FullName.EndsWith("Start Menu"));
-        }
-    }
-
-    public class CustomAssert : NUnit.Framework.Assert
-    {
-        public static void Each<T>(IEnumerable<T> items, Func<T, bool> predicate)
-        {
-            foreach (var item in items)
-            {
-                IsTrue(predicate(item));
-            }
         }
     }
 }
