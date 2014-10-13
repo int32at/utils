@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using int32.Utils.Windows.Files.Links;
@@ -51,6 +52,11 @@ namespace int32.Utils.Core.Extensions
         {
             var path = info.DirectoryName;
             return info.CopyTo(Path.Combine(path, destFileNameWithoutExtension) + info.Extension);
+        }
+
+        public static DirectoryInfo ToDirectoryInfo(this Environment.SpecialFolder folder)
+        {
+            return new DirectoryInfo(Environment.GetFolderPath(folder));
         }
 
 

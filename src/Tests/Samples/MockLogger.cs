@@ -2,6 +2,7 @@
 using int32.Utils.Core.Logger;
 using int32.Utils.Core.Logger.Contracts;
 using int32.Utils.Core.Logger.Messages;
+using NUnit.Framework;
 
 namespace Tests.Samples
 {
