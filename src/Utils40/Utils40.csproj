@@ -220,6 +220,9 @@
     <Compile Include="..\Utils\Core\Logger\Messages\WarnMessage.cs">
       <Link>Core\Logger\Messages\WarnMessage.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Tests\MakeSure.cs">
+      <Link>Tests\MakeSure.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Web\WebService\Contracts\IResponse.cs">
       <Link>Web\WebService\Contracts\IResponse.cs</Link>
     </Compile>

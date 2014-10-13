@@ -113,6 +113,7 @@
     <Compile Include="..\build\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Tests\MakeSure.cs" />
     <Compile Include="Web\WebService\Contracts\IResponse.cs" />
     <Compile Include="Web\WebService\WebServiceHandler.cs" />
     <Compile Include="Web\WebService\Response.cs" />

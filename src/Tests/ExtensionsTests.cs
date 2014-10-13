@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -273,7 +272,7 @@ namespace Tests
         public void Generic_Environment_SpecialFolders()
         {
             var startup = Environment.SpecialFolder.StartMenu.ToDirectoryInfo();
-            
+
             Assert.That(startup.FullName.EndsWith("Start Menu"));
         }
     }
