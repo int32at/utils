@@ -80,6 +80,9 @@
     <Compile Include="..\Tests\ConfigTests.cs">
       <Link>ConfigTests.cs</Link>
     </Compile>
+    <Compile Include="..\Tests\Core\BaseTest.cs">
+      <Link>Core\BaseTest.cs</Link>
+    </Compile>
     <Compile Include="..\Tests\DomainTests.cs">
       <Link>DomainTests.cs</Link>
     </Compile>

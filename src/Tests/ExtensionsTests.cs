@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
 using int32.Utils.Windows.Files;
 using NUnit.Framework;
+using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class ExtensionsTests
+    public class ExtensionsTests : BaseTest
     {
         [TestCase]
         public void Object_ThrowIfNull()
         {
             object o = null;
-            Assert.Throws<ArgumentNullException>(() => o.ThrowIfNull("o"));
+            MakeSure.That(() => o.ThrowIfNull("o")).Throws<ArgumentNullException>();
         }
 
         [TestCase]
         public void Object_JsonConverters_Simple()
         {
-            Assert.AreEqual("3", 3.ToJSON());
-            Assert.AreEqual(3, "3".FromJSON<int>());
+            MakeSure.That(3.ToJSON()).Is("3");
+            MakeSure.That("3".FromJSON<int>()).Is(3);
         }
 
         [TestCase]
@@ -37,61 +39,63 @@ namespace Tests
             };
 
             const string expected = "{\"Title\":\"Cool Object\",\"Age\":23,\"Type\":\"Sample\"}";
-            Assert.AreEqual(expected, x.ToJSON());
+            MakeSure.That(x.ToJSON()).Is(expected);
 
             var json = expected.FromJSON<SampleModel>();
-            Assert.AreEqual(x.Title, json.Title);
+            MakeSure.That(json.Title).Is(x.Title);
         }
 
         [TestCase]
         public void Object_As_Converter()
         {
-            Assert.AreEqual(3, "3".As<int>());
+            MakeSure.That("3".As<int>()).Is(3);
 
-            var e = new SampleAddEvent() {Data = new SampleAddEvent {Data = 3}};
-            Assert.AreEqual("Tests.Samples.SampleAddEvent", e.As<string>());
-            Assert.AreEqual(3, e.Data.As<SampleAddEvent>().Data.As<int>());
+            var e = new SampleAddEvent() { Data = new SampleAddEvent { Data = 3 } };
+
+            MakeSure.That(e.As<string>()).Is("Tests.Samples.SampleAddEvent");
+            MakeSure.That(e.Data.As<SampleAddEvent>().Data.As<int>()).Is(3);
         }
 
         [TestCase]
         public void Object_Is_Comparisons()
         {
-            Assert.IsTrue(3.Is<int>());
+            MakeSure.That(3.Is<int>()).Is(true);
 
             var e = new SampleAddEvent();
-            Assert.IsTrue(e.Is<SampleAddEvent>());
-            e.Data.IfNull(() => Assert.IsTrue(true));
+            MakeSure.That(e.Is<SampleAddEvent>()).Is(true);
+            e.Data.IfNull(() => MakeSure.That(true).Is(true));
         }
 
         [TestCase]
         public void Date_Yesterday_Tomorrow()
         {
             var today = DateTime.Now.Date;
-            Assert.AreEqual(today.AddDays(-1), today.Yesterday());
-            Assert.AreEqual(today.AddDays(1), today.Tomorrow());
+            MakeSure.That(today.Yesterday()).Is(today.AddDays(-1));
+            MakeSure.That(today.Tomorrow()).Is(today.AddDays(1));
         }
 
         [TestCase]
         public void Generics_In_List()
         {
-            var numbers = new[] {1, 2, 3, 4, 5};
-            Assert.IsTrue(3.In(numbers));
-            Assert.IsTrue(new[] {3, 5}.In(numbers));
-            Assert.IsFalse(new[] {7, 1}.In(numbers));
+            var numbers = new[] { 1, 2, 3, 4, 5 };
+
+            MakeSure.That(3.In(numbers)).Is(true);
+            MakeSure.That(new[] { 3, 5 }.In(numbers)).Is(true);
+            MakeSure.That(new[] { 7, 1 }.In(numbers)).Is(false);
         }
 
         [TestCase]
         public void Generic_Between_List()
         {
-            Assert.IsTrue(3.Between(1, 4));
-            Assert.IsFalse(3.Between(1, 2));
+            MakeSure.That(3.Between(1, 4)).Is(true);
+            MakeSure.That(3.Between(1, 3)).Is(false);
         }
 
         [TestCase]
         public void Generic_ForEach()
         {
-            var numbers = new[] {1, 3, 5, 7, 9};
-            numbers.ForEach(i => Assert.IsTrue(i.Between(1, 10)));
+            var numbers = new[] { 1, 3, 5, 7, 9 };
+            numbers.ForEach(i => MakeSure.That(i.Between(1, 10)).Is(true));
         }
 
         [TestCase]
@@ -99,36 +103,35 @@ namespace Tests
         {
             const string sampleText = "sample 33 xxx 322";
 
-            Assert.IsTrue(sampleText.Matches(@"\d+"));
+            MakeSure.That(sampleText.Matches(@"\d+")).Is(true);
 
-            sampleText.Matches(@"\d+", () => Assert.IsTrue(true));
+            sampleText.Matches(@"\d+", () => MakeSure.That(true).Is(true));
         }
 
         [TestCase]
         public void Reflection_Object_SetProperty()
         {
-            var t = new SampleModel() {Age = 23, Title = "Andreas", Type = ModelType.Example};
+            var model = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
 
-            t.Set("Age", 3);
-            t.Set("Title", "Example");
-            t.Set("Internal", "test");
-            t.Set("_test", "b");
-            t.Set("Type", ModelType.Test);
+            model.Set("Age", 3);
+            model.Set("Title", "Example");
+            model.Set("Internal", "test");
+            model.Set("_test", "b");
+            model.Set("Type", ModelType.Test);
 
-            Assert.AreEqual(3, t.Age);
-            Assert.AreEqual("Example", t.Title);
-            Assert.AreEqual("test", t.Get<string>("Internal"));
-            Assert.AreEqual("b", t.Get<string>("_test"));
-            Assert.AreEqual(t.Type, ModelType.Test);
+            MakeSure.That(model.Age).Is(3);
+            MakeSure.That(model.Title).Is("Example");
+            MakeSure.That(model.Get<string>("Internal")).Is("test");
+            MakeSure.That(model.Get<string>("_test")).Is("b");
+            MakeSure.That(model.Type).Is(ModelType.Test);
         }
 
         [TestCase]
         public void Generic_RemoveFromList_Predicate()
         {
-            var numbers = new List<int> {1, 3, 5, 7, 9};
+            var numbers = new List<int> { 1, 3, 5, 7, 9 };
             numbers.Remove(i => i == 7);
-
-            Assert.IsFalse(numbers.Contains(7));
+            MakeSure.That(numbers.Contains(7)).Is(false);
         }
 
         [TestCase]
@@ -143,9 +146,8 @@ namespace Tests
 
             models.Remove(i => i.Age < 20);
 
-            Assert.IsNull(models.FirstOrDefault(i => i.Age < 20));
+            MakeSure.That(models.FirstOrDefault(i => i.Age < 20)).Is(null);
         }
-
 
         [TestCase]
         public void Generic_UpdateList_Predicate_Class()
@@ -157,55 +159,44 @@ namespace Tests
                 new SampleModel() {Age = 33}
             };
 
-            Assert.Throws<ArgumentNullException>(() => models.FirstOrDefault(i => i.Age == 34).Safe());
+            MakeSure.That(() => models.FirstOrDefault(i => i.Age == 34).Safe()).Throws<ArgumentNullException>();
 
-            models.ForEach(i => Assert.AreEqual(ModelType.Sample, i.Type));
+            models.ForEach(i => MakeSure.That(i.Type).Is(ModelType.Sample));
 
             var x = GetModel().ThrowIfNull("model").And().IfNotNull(model => model.Age = 23);
 
-            var y = GetModelNull().IfNull(model => new SampleModel() {Age = 17});
+            var y = GetModelNull().IfNull(model => new SampleModel() { Age = 17 });
 
-            Assert.AreEqual(x.Age, 23);
-            Assert.AreEqual(y.Age, 17);
+            MakeSure.That(x.Age).Is(23);
+            MakeSure.That(y.Age).Is(17);
         }
 
         [TestCase]
         public void Generic_IfNull_IfNotNull_Chaining()
         {
             //just check if not null
-            Assert.AreEqual(22, GetModel().IfNotNull(() => Assert.IsTrue(true)).Age);
+            MakeSure.That(GetModel().IfNotNull(() => Assert.IsTrue(true)).Age).Is(22);
 
             //reset the age
-            Assert.AreEqual(27, GetModel().IfNotNull(() => new SampleModel() {Age = 27}).Age);
+            MakeSure.That(GetModel().IfNotNull(() => new SampleModel() { Age = 27 }).Age).Is(27);
 
             //check for null
-            Assert.IsNull(GetModelNull().IfNull(() => Assert.IsTrue(true)));
+            MakeSure.That(GetModelNull().IfNull(() => MakeSure.That(true).Is(true))).Is(null);
 
             //create new object when null
-            Assert.AreEqual(27, GetModelNull().IfNull(() => new SampleModel() {Age = 27}).Age);
+            MakeSure.That(GetModelNull().IfNull(() => new SampleModel() { Age = 27 }).Age).Is(27);
 
             //create ne wobject and check directly
-            GetModelNull().IfNull(() => new SampleModel()).And().IfNotNull(model => Assert.IsNotNull(model));
+            GetModelNull().IfNull(() => new SampleModel()).And().IfNotNull(model => MakeSure.That(model).IsNot(null));
 
-            //get valid object, set it to null, check for null, and throw if null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                    GetModel()
-                        .IfNotNull(() => null)
-                        .And()
-                        .IfNull(model => Assert.IsNull(model))
-                        .And()
-                        .ThrowIfNull("model"));
-        }
-
-        private SampleModel GetModel()
-        {
-            return new SampleModel() {Age = 22};
-        }
-
-        private SampleModel GetModelNull()
-        {
-            return null;
+            MakeSure.That(() =>
+                GetModel()
+                    .IfNotNull(() => null)
+                    .And()
+                    .IfNull(model => Assert.IsNull(model))
+                    .And()
+                    .ThrowIfNull("model"))
+                .Throws<ArgumentNullException>();
         }
 
         [TestCase]
@@ -215,28 +206,28 @@ namespace Tests
                 .And(l => l.Add(new SampleModel()))
                 .And(l => l.Add(new SampleModel()));
 
-            Assert.AreEqual(2, models.Count);
+            MakeSure.That(models.Count).Is(2);
         }
 
         [TestCase]
         public void Generic_Object_MemberName()
         {
             var model = new SampleModel();
-            Assert.AreEqual("Age", model.MemberName(i => i.Age));
+            MakeSure.That(model.MemberName(i => i.Age)).Is("Age");
         }
 
         [TestCase]
         public void Generic_String_IsNullOrEmpty()
         {
-            Assert.IsTrue("".IsNullOrEmpty());
-            Assert.IsTrue(string.Empty.IsNullOrEmpty());
-            Assert.IsFalse("test".IsNullOrEmpty());
+            MakeSure.That("".IsNullOrEmpty()).Is(true);
+            MakeSure.That(string.Empty.IsNullOrEmpty()).Is(true);
+            MakeSure.That("test".IsNullOrEmpty()).Is(false);
         }
 
         [TestCase]
         public void Generic_string_Format()
         {
-            Assert.AreEqual("Hello World", "Hello {0}".With("World"));
+            MakeSure.That("Hello {0}".With("World")).Is("Hello World");
         }
 
         [TestCase]
@@ -244,15 +235,15 @@ namespace Tests
         {
             var links = Finder.GetLinks(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
 
-            Assert.Greater(links.Count(), 0);
-            Assert.AreEqual(".lnk", Path.GetExtension(links.First().Path));
-            Assert.AreEqual(".exe", Path.GetExtension(links.First().Resolve()));
+            MakeSure.That(links.Count()).IsGreaterThan(0);
+            MakeSure.That(Path.GetExtension(links.First().Path)).Is(".lnk");
+            MakeSure.That(Path.GetExtension(links.First().Resolve())).Is(".exe");
 
             //use the extension method to resolve all at once, which is a cheaper call
             //then resolving every single link seperatly in a foreach
             var exes = links.ResolveAll();
 
-            Assert.AreEqual(links.Count(), exes.Count());
+            MakeSure.That(exes.Count()).Is(links.Count());
         }
 
         [TestCase]
@@ -264,16 +255,19 @@ namespace Tests
             var newCfg = file.Copy("new", true);
 
             Assert.AreEqual("new.json", newCfg.Name);
+            MakeSure.That(newCfg.Name).Is("new.json");
 
             newCfg.Delete();
         }
 
-        [TestCase]
-        public void Generic_Environment_SpecialFolders()
+        private SampleModel GetModel()
         {
-            var startup = Environment.SpecialFolder.StartMenu.ToDirectoryInfo();
+            return new SampleModel() { Age = 22 };
+        }
 
-            Assert.That(startup.FullName.EndsWith("Start Menu"));
+        private SampleModel GetModelNull()
+        {
+            return null;
         }
     }
 }

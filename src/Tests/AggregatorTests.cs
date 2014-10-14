@@ -1,19 +1,21 @@
 ﻿using System;
 using int32.Utils.Core.Aggregator;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
 using NUnit.Framework;
+using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class AggregatorTests
+    public class AggregatorTests : BaseTest
     {
         [TestCase]
         public void Aggregator_CreateObject()
         {
             var aggregator = new Aggregator();
-            Assert.IsNotNull(aggregator);
+            MakeSure.That(aggregator).IsNot(null);
         }
 
         [TestCase]
@@ -21,14 +23,14 @@ namespace Tests
         {
             var aggregator = new Aggregator();
             aggregator.Subscribe<SampleAddEvent>(@event => { });
-            Assert.IsTrue(aggregator.IsSubscribed<SampleAddEvent>());
+            MakeSure.That(aggregator.IsSubscribed<SampleAddEvent>()).Is(true);
         }
 
         [TestCase]
         public void Aggregator_Add_SubscriptionAndPublish()
         {
             var aggregator = new Aggregator();
-            aggregator.Subscribe<SampleAddEvent>(e => Assert.AreEqual(3, Convert.ToInt32(e.Data)));
+            aggregator.Subscribe<SampleAddEvent>(e => MakeSure.That(Convert.ToInt32(e.Data)).Is(3));
             aggregator.Publish(new SampleAddEvent { Data = 3 });
         }
 
@@ -36,7 +38,7 @@ namespace Tests
         public void Aggregator_NullChecks()
         {
             var aggregator = new Aggregator();
-            Assert.Throws<ArgumentNullException>(() => aggregator.Subscribe<SampleAddEvent>(null));
+            MakeSure.That(() => aggregator.Subscribe<SampleAddEvent>(null)).Throws<ArgumentNullException>();
         }
 
         [TestCase]
@@ -48,7 +50,7 @@ namespace Tests
             Assert.AreEqual(a, b);
 
             //since its the same singleton, this should work
-            a.Subscribe<SampleAddEvent>(x => Assert.AreEqual(3, x.Data.As<int>()));
+            a.Subscribe<SampleAddEvent>(x => MakeSure.That(x.Data.As<int>()).Is(3));
             b.Publish(new SampleAddEvent() { Data = 3 });
         }
     }

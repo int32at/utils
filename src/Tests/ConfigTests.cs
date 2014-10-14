@@ -1,18 +1,20 @@
 ﻿using System;
 using int32.Utils.Core.Configuration;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
 using NUnit.Framework;
+using Tests.Core;
 
 namespace Tests
 {
     [TestFixture]
-    public class ConfigTests
+    public class ConfigTests : BaseTest
     {
         [TestCase]
         public void Config_Create_Object()
         {
             var config = new Config();
-            Assert.IsNotNull(config);
+            MakeSure.That(config).IsNot(null);
         }
 
         [TestCase]
@@ -23,8 +25,8 @@ namespace Tests
             var config = new Config();
             config.Set(new ConfigEntry("MyKey", expected));
 
-            Assert.AreEqual(expected, config.Get<int>("MyKey"));
-            Assert.AreEqual(expected, config["MyKey"].As<int>());
+            MakeSure.That(config.Get<int>("MyKey")).Is(expected);
+            MakeSure.That(config["MyKey"].As<int>()).Is(expected);
         }
 
         [TestCase]
@@ -35,7 +37,7 @@ namespace Tests
             var config = new Config();
             config.Set(new ConfigEntry("MyKey", expected));
 
-            Assert.Throws<ArgumentNullException>(() => config.Get<int>("MyKey1"));
+            MakeSure.That(() => config.Get<int>("MyKey1")).Throws<ArgumentNullException>();
         }
 
         [TestCase]
@@ -45,12 +47,11 @@ namespace Tests
 
             var config = new Config();
             config.Set(new ConfigEntry("MyKey", expected));
-
-            Assert.AreEqual(expected, config.Get<int>("MyKey"));
+            MakeSure.That(config.Get<int>("MyKey")).Is(expected);
 
             config.Remove("MyKey");
 
-            Assert.Throws<ArgumentNullException>(() => config.Get<int>("MyKey"));
+            MakeSure.That(() => config.Get<int>("MyKey")).Throws<ArgumentNullException>();
         }
 
         [TestCase]
@@ -58,7 +59,7 @@ namespace Tests
         {
             //load the app config file
             var cfg = Config.Create();
-            Assert.Greater(cfg.Count, 0);
+            MakeSure.That(cfg.Count).IsGreaterThan(0);
         }
     }
 }

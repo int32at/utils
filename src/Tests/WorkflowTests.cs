@@ -2,6 +2,7 @@
 using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.Workflow;
 using int32.Utils.Core.Generic.Workflow.Steps;
+using int32.Utils.Tests;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -25,13 +26,13 @@ namespace Tests
 
             var result = Engine.Start(workflow);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, counter);
-            Assert.AreEqual(1, result.CompletedSteps.Count);
-            Assert.AreEqual(0, result.FailedSteps.Count);
-            Assert.IsFalse(result.HasErrors);
-            Assert.IsNull(result.Exception);
-            Assert.IsNull(result.Target);
+            MakeSure.That(result).IsNot(null);
+            MakeSure.That(counter).Is(1);
+            MakeSure.That(result.CompletedSteps.Count).Is(1);
+            MakeSure.That(result.FailedSteps.Count).Is(0);
+            MakeSure.That(result.HasErrors).Is(false);
+            MakeSure.That(result.Exception).Is(null);
+            MakeSure.That(result.Target).Is(null);
         }
 
         [TestCase]
@@ -43,20 +44,20 @@ namespace Tests
 
             var result = Engine.Start(workflow);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(1, result.CompletedSteps.Count);
-            Assert.AreEqual(0, result.FailedSteps.Count);
-            Assert.IsFalse(result.HasErrors);
-            Assert.IsNull(result.Exception);
+            MakeSure.That(result).IsNot(null);
+            MakeSure.That(result.CompletedSteps.Count).Is(1);
+            MakeSure.That(result.FailedSteps.Count).Is(0);
+            MakeSure.That(result.HasErrors).Is(false);
+            MakeSure.That(result.Exception).Is(null);
 
             //this time, target is not null, but it represents the target that was given
             //when creating the workflow -> new SampleModel() in this case.
             //this means that we give in an empty object, and use the workflow to fill it;
             //another possibillity would be to create the object before, and just pass in the reference
             //when the workflow is created
-            Assert.IsNotNull(result.Target);
-            Assert.AreEqual(typeof(SampleModel), result.Target.GetType());
-            Assert.AreEqual(17, result.Target.Age);
+            MakeSure.That(result.Target).IsNot(null);
+            MakeSure.That(result.Target.GetType()).Is(typeof(SampleModel));
+            MakeSure.That(result.Target.Age).Is(17);
         }
 
         [TestCase]
@@ -75,16 +76,16 @@ namespace Tests
 
             var result = Engine.Start(workflow);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.CompletedSteps.Count);
-            Assert.AreEqual(1, result.FailedSteps.Count);
-            Assert.True(result.HasErrors);
-            Assert.IsNotNull(result.Exception);
-            Assert.AreEqual("should fail", result.Exception.Message);
+            MakeSure.That(result).IsNot(null);
+            MakeSure.That(result.CompletedSteps.Count).Is(2);
+            MakeSure.That(result.FailedSteps.Count).Is(1);
+            MakeSure.That(result.HasErrors).Is(true);
+            MakeSure.That(result.Exception).IsNot(null);
+            MakeSure.That(result.Exception.Message).Is("should fail");
 
-            Assert.AreEqual(1, counterA);
-            Assert.AreEqual(9, counterB);
-            Assert.AreEqual(0, counterC);
+            MakeSure.That(counterA).Is(1);
+            MakeSure.That(counterB).Is(9);
+            MakeSure.That(counterC).Is(0);
         }
 
         [TestCase]
@@ -99,18 +100,17 @@ namespace Tests
 
             var result = Engine.Start(workflow);
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(2, result.CompletedSteps.Count);
-            Assert.AreEqual(1, result.FailedSteps.Count);
-            Assert.True(result.HasErrors);
-            Assert.IsNotNull(result.Exception);
-            Assert.AreEqual("should fail", result.Exception.Message);
-
-            Assert.AreEqual(17, result.Target.Age);
-            Assert.AreEqual(ModelType.Test, result.Target.Type);
+            MakeSure.That(result).IsNot(null);
+            MakeSure.That(result.CompletedSteps.Count).Is(2);
+            MakeSure.That(result.FailedSteps.Count).Is(1);
+            MakeSure.That(result.HasErrors).Is(true);
+            MakeSure.That(result.Exception).IsNot(null);
+            MakeSure.That(result.Exception.Message).Is("should fail");
 
             //should be empty, because there is an exception before that step..
-            Assert.IsNull(result.Target.Title);
+            MakeSure.That(result.Target.Age).Is(17);
+            MakeSure.That(result.Target.Type).Is(ModelType.Test);
+            MakeSure.That(result.Target.Title).Is(null);
         }
     }
 }

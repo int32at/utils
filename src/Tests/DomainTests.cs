@@ -1,17 +1,19 @@
 ﻿using int32.Utils.Core.Domain;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
 using NUnit.Framework;
+using Tests.Core;
 
 namespace Tests
 {
     [TestFixture]
-    public class EnvironmentTests
+    public class EnvironmentTests : BaseTest
     {
         [TestCase]
         public void Domain_LoadFrom_Config()
         {
             Domain.Current.Config.Load(); //load from app config
-            Assert.AreEqual("http://dev", Domain.Current.Config["Url"]);
+            MakeSure.That(Domain.Current.Config["Url"]).Is("http://dev");
         }
 
         [TestCase]
@@ -23,10 +25,10 @@ namespace Tests
 
             Domain.SetTo<Development>();
 
-            Assert.AreEqual("http://dev", Domain.Current.Config["Url"]);
+            MakeSure.That(Domain.Current.Config["Url"]).Is("http://dev");
 
             Domain.SetTo<Production>();
-            Assert.AreEqual("http://prod", Domain.Current.Config["Url"]);
+            MakeSure.That(Domain.Current.Config["Url"]).Is("http://prod");
         }
     }
 }

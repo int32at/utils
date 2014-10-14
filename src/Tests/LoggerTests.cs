@@ -3,6 +3,7 @@ using System.IO;
 using int32.Utils.Core.Logger;
 using int32.Utils.Core.Logger.Contracts;
 using int32.Utils.Core.Logger.Loggers;
+using int32.Utils.Tests;
 using NUnit.Framework;
 using Tests.Samples;
 
@@ -16,7 +17,7 @@ namespace Tests
         {
             using (var logger = new Logger())
             {
-                Assert.IsNotNull(logger);
+                MakeSure.That(logger).IsNot(null);
             }
         }
 
@@ -38,7 +39,7 @@ namespace Tests
             const string path = @"log.txt";
             TestLogger(new FileLogger(path));
 
-            Assert.IsTrue(File.Exists(path));
+            MakeSure.That(File.Exists(path)).Is(true);
             File.Delete(path);
         }
 
@@ -46,18 +47,18 @@ namespace Tests
         {
             using (var logger = new Logger(log))
             {
-                Assert.IsNotNull(logger);
-                Assert.IsNotNull(logger.Config);
+                MakeSure.That(logger).IsNot(null);
+                MakeSure.That(logger.Config).IsNot(null);
 
                 //found no better way to do this
-                Assert.DoesNotThrow(() =>
+                MakeSure.That(() =>
                 {
                     logger.Warn("WarnMessage");
                     logger.Warn("{0}{1}", "Warn", "Message");
                     logger.Info("InfoMessage");
                     logger.Info("{0}{1}", "Info", "Message");
                     logger.Error(new ArgumentOutOfRangeException());
-                });
+                }).DoesNotThrow();
             }
         }
     }

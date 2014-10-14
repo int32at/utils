@@ -13,7 +13,6 @@ namespace Tests
         {
             var imageSource = Data.Default_App_Icon.ToImageSource();
             Assert.That(imageSource.IsNotNull());
-            Assert.That(imageSource.Height == 48 && imageSource.Width == 48);
         }
     }
 }

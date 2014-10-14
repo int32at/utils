@@ -1,21 +1,23 @@
 ﻿using System;
+using int32.Utils.Tests;
 using int32.Utils.Web.WebService;
 using NUnit.Framework;
+using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class WebServiceTests
+    public class WebServiceTests : BaseTest
     {
         [TestCase]
         public void WebService_Handler_HandleSample()
         {
             var response = WebServiceHandler.Handle(GetData);
 
-            Assert.AreEqual(StatusCode.Ok, response.Status);
-            Assert.IsNull(response.Error);
-            Assert.AreEqual(23, response.Result.Age);
+            MakeSure.That(response.Status).Is(StatusCode.Ok);
+            MakeSure.That(response.Error).Is(null);
+            MakeSure.That(response.Result.Age).Is(23);
         }
 
         [TestCase]
@@ -23,8 +25,8 @@ namespace Tests
         {
             var response = WebServiceHandler.Handle<SampleModel>(GetDataException);
 
-            Assert.AreEqual(StatusCode.Error, response.Status);
-            Assert.AreEqual("Test", response.Error);
+            MakeSure.That(response.Status).Is(StatusCode.Error);
+            MakeSure.That(response.Error).Is("Test");
         }
 
         [TestCase]
@@ -35,6 +37,10 @@ namespace Tests
             Assert.AreEqual(StatusCode.Error, response.Status);
             Assert.AreEqual("TestDirect", response.Error);
             Assert.IsNull(response.Result);
+
+            MakeSure.That(response.Status).Is(StatusCode.Error);
+            MakeSure.That(response.Error).Is("TestDirect");
+            MakeSure.That(response.Result).Is(null);
         }
 
         private SampleModel GetData()
