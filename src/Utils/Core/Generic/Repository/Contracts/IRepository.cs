@@ -5,7 +5,7 @@ namespace int32.Utils.Core.Generic.Repository.Contracts
 {
     public interface IRepository { }
 
-    public interface IRepository<TEntity, in TKey> : IRepository<TEntity> where TEntity : class, IModel
+    public interface IRepository<TEntity, in TKey> : IRepository<TEntity> where TEntity : class
     {
         TEntity Get(TKey id);
     }

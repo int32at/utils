@@ -4,7 +4,7 @@ using int32.Utils.Core.Generic.Repository.Contracts;
 
 namespace int32.Utils.Core.Generic.Repository
 {
-    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IModel
+    public abstract class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
         public abstract int Count { get; }
         public abstract TEntity Add(TEntity item);
@@ -19,7 +19,7 @@ namespace int32.Utils.Core.Generic.Repository
         public abstract void SaveChanges();
     }
 
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class, IModel
+    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
         public abstract int Count { get; }
         public abstract TEntity Add(TEntity item);
