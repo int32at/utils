@@ -2,21 +2,21 @@
 using int32.Utils.Core.Configuration;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class ConfigTests
     {
-        [TestCase]
+        [TestMethod]
         public void Config_Create_Object()
         {
             var config = new Config();
             MakeSure.That(config).IsNot(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Config_GetAndSet_Simple()
         {
             const int expected = 3;
@@ -28,7 +28,7 @@ namespace Tests
             MakeSure.That(config["MyKey"].As<int>()).Is(expected);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Config_GetAndSet_NotFound()
         {
             const int expected = 3;
@@ -39,7 +39,7 @@ namespace Tests
             MakeSure.That(() => config.Get<int>("MyKey1")).Throws<ArgumentNullException>();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Config_GetAndSet_Remove()
         {
             const int expected = 3;
@@ -53,7 +53,7 @@ namespace Tests
             MakeSure.That(() => config.Get<int>("MyKey")).Throws<ArgumentNullException>();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Config_LoadFrom_ConfigManager()
         {
             //load the app config file

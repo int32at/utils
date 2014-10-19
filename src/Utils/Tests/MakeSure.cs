@@ -111,9 +111,9 @@ namespace int32.Utils.Tests
 
     public class AssertFailedException : Exception
     {
-        private object _a;
-        private object _b;
-        private string _operation;
+        private readonly object _a;
+        private readonly object _b;
+        private readonly string _operation;
 
         public AssertFailedException(object a, object b, string operation)
         {

@@ -5,29 +5,29 @@ using System.Linq;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
 using int32.Utils.Windows.Files;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class ExtensionsTests 
     {
-        [TestCase]
+        [TestMethod]
         public void Object_ThrowIfNull()
         {
             object o = null;
             MakeSure.That(() => o.ThrowIfNull("o")).Throws<ArgumentNullException>();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Object_JsonConverters_Simple()
         {
             MakeSure.That(3.ToJSON()).Is("3");
             MakeSure.That("3".FromJSON<int>()).Is(3);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Object_JsonConverters_Class()
         {
             var x = new SampleModel()
@@ -44,7 +44,7 @@ namespace Tests
             MakeSure.That(json.Title).Is(x.Title);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Object_As_Converter()
         {
             MakeSure.That("3".As<int>()).Is(3);
@@ -55,7 +55,7 @@ namespace Tests
             MakeSure.That(e.Data.As<SampleAddEvent>().Data.As<int>()).Is(3);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Object_Is_Comparisons()
         {
             MakeSure.That(3.Is<int>()).Is(true);
@@ -65,7 +65,7 @@ namespace Tests
             e.Data.IfNull(() => MakeSure.That(true).Is(true));
         }
 
-        [TestCase]
+        [TestMethod]
         public void Date_Yesterday_Tomorrow()
         {
             var today = DateTime.Now.Date;
@@ -73,7 +73,7 @@ namespace Tests
             MakeSure.That(today.Tomorrow()).Is(today.AddDays(1));
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generics_In_List()
         {
             var numbers = new[] { 1, 2, 3, 4, 5 };
@@ -83,21 +83,21 @@ namespace Tests
             MakeSure.That(new[] { 7, 1 }.In(numbers)).Is(false);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_Between_List()
         {
             MakeSure.That(3.Between(1, 4)).Is(true);
             MakeSure.That(3.Between(1, 3)).Is(false);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_ForEach()
         {
             var numbers = new[] { 1, 3, 5, 7, 9 };
             numbers.ForEach(i => MakeSure.That(i.Between(1, 10)).Is(true));
         }
 
-        [TestCase]
+        [TestMethod]
         public void String_IsMatch_Regex()
         {
             const string sampleText = "sample 33 xxx 322";
@@ -107,7 +107,7 @@ namespace Tests
             sampleText.Matches(@"\d+", () => MakeSure.That(true).Is(true));
         }
 
-        [TestCase]
+        [TestMethod]
         public void Reflection_Object_SetProperty()
         {
             var model = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
@@ -125,7 +125,7 @@ namespace Tests
             MakeSure.That(model.Type).Is(ModelType.Test);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_RemoveFromList_Predicate()
         {
             var numbers = new List<int> { 1, 3, 5, 7, 9 };
@@ -133,7 +133,7 @@ namespace Tests
             MakeSure.That(numbers.Contains(7)).Is(false);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_RemoveFromList_Predicate_Class()
         {
             var models = new List<SampleModel>
@@ -148,7 +148,7 @@ namespace Tests
             MakeSure.That(models.FirstOrDefault(i => i.Age < 20)).Is(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_UpdateList_Predicate_Class()
         {
             var models = new List<SampleModel>
@@ -170,7 +170,7 @@ namespace Tests
             MakeSure.That(y.Age).Is(17);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_IfNull_IfNotNull_Chaining()
         {
             //just check if not null
@@ -198,7 +198,7 @@ namespace Tests
                 .Throws<ArgumentNullException>();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_And_ListAdd()
         {
             var models = new List<SampleModel>()
@@ -208,14 +208,14 @@ namespace Tests
             MakeSure.That(models.Count).Is(2);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_Object_MemberName()
         {
             var model = new SampleModel();
             MakeSure.That(model.MemberName(i => i.Age)).Is("Age");
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_String_IsNullOrEmpty()
         {
             MakeSure.That("".IsNullOrEmpty()).Is(true);
@@ -223,13 +223,13 @@ namespace Tests
             MakeSure.That("test".IsNullOrEmpty()).Is(false);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_string_Format()
         {
             MakeSure.That("Hello {0}".With("World")).Is("Hello World");
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_Link_Finder_Resolve()
         {
             var links = Finder.GetLinks(Environment.GetFolderPath(Environment.SpecialFolder.StartMenu));
@@ -245,21 +245,20 @@ namespace Tests
             MakeSure.That(exes.Count()).Is(links.Count());
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_File_Extension()
         {
             var file = new FileInfo(@"requirement.json");
 
             //creates file in the same directory called new.json
             var newCfg = file.Copy("new", true);
-
-            Assert.AreEqual("new.json", newCfg.Name);
+            MakeSure.That(newCfg.Name).Is("new.json");
             MakeSure.That(newCfg.Name).Is("new.json");
 
             newCfg.Delete();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Generic_Delegate_Extensions()
         {
             var counter = 0;

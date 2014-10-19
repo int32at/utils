@@ -13,15 +13,15 @@ using int32.Utils.Core.Generic.Singleton;
 using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.ViewModel;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class GenericToolsTest 
     {
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Singleton()
         {
             var a = Singleton<SampleModel>.Instance;
@@ -30,7 +30,7 @@ namespace Tests
             MakeSure.That(a).Is(b);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Singleton_Class()
         {
             var a = SampleModelSingleton.Instance;
@@ -39,28 +39,28 @@ namespace Tests
             MakeSure.That(a).Is(b);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Factory()
         {
             MakeSure.That(SampleModelFactory.Create()).IsNot(null);
             MakeSure.That(SampleModelFactory.Create(model => model.Age = 17).Age).Is(17);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Repository()
         {
             var repo = Factory<SampleModelRepository>.Create();
             MakeSure.That(repo.Get().Age).Is(1);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RepositoryHandler()
         {
             var vm = RepositoryHandler.Add(new SampleModelRepository());
             MakeSure.That(RepositoryHandler.Get<SampleModelRepository>()).Is((SampleModelRepository)vm);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RepositoryHandler_Get()
         {
             //register sample service
@@ -77,7 +77,7 @@ namespace Tests
             MakeSure.That(RepositoryHandler.Get<SampleModelRepository>().Count).Is(3);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RepositoryHandler_GetAll()
         {
             //register sample service
@@ -90,7 +90,7 @@ namespace Tests
             MakeSure.That(count2).Is(2);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RepositoryHandler_AddUpdateDelete()
         {
             //register sample service
@@ -113,7 +113,7 @@ namespace Tests
             MakeSure.That(() => RepositoryHandler.Get<SampleModelRepository>().SaveChanges()).DoesNotThrow();
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RepositoryHandler_RegisterMultiple()
         {
             MakeSure.That(() =>
@@ -131,13 +131,13 @@ namespace Tests
             MakeSure.That(RepositoryHandler.Get<SampleModelRepository>()).IsNot(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Timer_Measure()
         {
             MakeSure.That(Timing.Measure(() => Thread.Sleep(200)).Milliseconds).IsGreaterThan(100);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_ViewModel()
         {
             var vm = Factory<SampleModelViewModel>.Create();
@@ -149,7 +149,7 @@ namespace Tests
             vm.Test = 37;
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_ViewModel_Handler()
         {
             ViewModelHandler.Add(new SampleModelViewModel());
@@ -164,7 +164,7 @@ namespace Tests
             MakeSure.That(vm.IsLoaded).Is(true);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Collections_FluentList()
         {
             var list = new FluentList<SampleModel>()
@@ -177,7 +177,7 @@ namespace Tests
             MakeSure.That(list.First().Type).Is(ModelType.Test);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Collections_FluentDictionary()
         {
             var dict = new FluentDictionary<string, int>()
@@ -197,7 +197,7 @@ namespace Tests
             MakeSure.That(dict.Count).Is(0);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Collection_DataStore()
         {
             var store = new DataStore()
@@ -210,7 +210,7 @@ namespace Tests
             MakeSure.That(store.Get<string>("test3")).Is("bla");
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Collection_EventList()
         {
             var addedCounter = 0;
@@ -232,7 +232,7 @@ namespace Tests
             MakeSure.That(removeCounter).Is(4);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Require_List()
         {
             var sampleModel = new SampleModel() { Age = 23, Type = ModelType.Test };
@@ -243,7 +243,7 @@ namespace Tests
                 )).DoesNotThrow();
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_RequirementBuilder()
         {
             var model = new SampleModel { Age = 14, Type = ModelType.Test };
@@ -260,7 +260,7 @@ namespace Tests
             }
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Require_Throw()
         {
             var sampleModel = new SampleModel() { Age = 17, Type = ModelType.Test };
@@ -278,7 +278,7 @@ namespace Tests
             }
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_MemoryDatabase()
         {
             var db = new MemoryDatabase<SampleModel>();
@@ -292,7 +292,7 @@ namespace Tests
             MakeSure.That(db.GetAll(i => i.Type == ModelType.Sample).Count()).Is(2);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_MemoryDatabase_int()
         {
             var db = new MemoryDatabase<int>();
@@ -305,7 +305,7 @@ namespace Tests
         }
 
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_MemorySession()
         {
             using (var session = new MemorySession())
@@ -318,14 +318,14 @@ namespace Tests
             }
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_Flatdatabase()
         {
             var file = Guid.NewGuid().ToString();
             var db = new FlatDatabase<SampleModel>(file).Load();
 
             //should not have any files in the database
-            Assert.That(db.Count == 0);
+            MakeSure.That(db.Count).Is(0);
 
             //add a new model to the database
             db.Add(new SampleModel { Age = 17 });
@@ -334,15 +334,15 @@ namespace Tests
             db.SaveChanges();
 
             //make sure entry was saved correctly
-            Assert.That(db.Count == 1);
+            MakeSure.That(db.Count).Is(1);
 
             //reload the database from file and check again
-            Assert.That(db.Load().Count == 1);
+            MakeSure.That(db.Load().Count).Is(1);
 
             File.Delete(file);
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_Flatdatabase_Performance()
         {
             var file = Guid.NewGuid().ToString();
@@ -357,11 +357,11 @@ namespace Tests
                 db.SaveChanges();
             });
 
-            Assert.IsTrue(db.Count == times);
+            MakeSure.That(db.Count).Is(times);
             File.Delete(file);
         }
 
-        //[TestCase]
+        //[TestMethod]
         public void GenericTools_Data_FlatSession()
         {
             using (var session = new FlatSession())
@@ -372,13 +372,13 @@ namespace Tests
                 db.SaveChanges();
 
                 var db2 = session.Database<SampleModel>();
-                Assert.That(db2.Count == 1);
+                MakeSure.That(db2.Count).Is(1);
 
                 File.Delete(file);
             }
         }
 
-        [TestCase]
+        [TestMethod]
         public void GenericTools_Data_Mapping()
         {
             //maps the SampleModelDto to a new HomeModel using JSON serialization

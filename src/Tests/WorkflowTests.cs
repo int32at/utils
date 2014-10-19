@@ -1,19 +1,18 @@
 ﻿using System;
-using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.Workflow;
 using int32.Utils.Core.Generic.Workflow.Steps;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class WorkflowTests
     {
         protected Engine Engine = new Engine();
 
-        [TestCase]
+        [TestMethod]
         public void Workflow_Simple_Action()
         {
             var counter = 0;
@@ -35,7 +34,7 @@ namespace Tests
             MakeSure.That(result.Target).Is(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Workflow_Simple_Action_Generic()
         {
             var workflow = new Workflow<SampleModel>(new SampleModel(),
@@ -60,7 +59,7 @@ namespace Tests
             MakeSure.That(result.Target.Age).Is(17);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Workflow_Multiple_Action()
         {
             var counterA = 0;
@@ -88,7 +87,7 @@ namespace Tests
             MakeSure.That(counterC).Is(0);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Workflow_Multiple_Action_Generic()
         {
             var workflow = new Workflow<SampleModel>(new SampleModel(),

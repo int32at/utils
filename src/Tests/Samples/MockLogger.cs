@@ -1,8 +1,8 @@
-﻿using System;
-using int32.Utils.Core.Logger;
+﻿using int32.Utils.Core.Logger;
 using int32.Utils.Core.Logger.Contracts;
 using int32.Utils.Core.Logger.Messages;
-using NUnit.Framework;
+using int32.Utils.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests.Samples
 {
@@ -10,7 +10,7 @@ namespace Tests.Samples
     {
         public void Dispose()
         {
-            Assert.True(true);
+            MakeSure.That(true).Is(true);
         }
 
         public void Info(InfoMessage msg)
@@ -30,7 +30,6 @@ namespace Tests.Samples
         public void Error(ErrorMessage msg)
         {
             Assert.IsNotNull(msg);
-            Assert.IsAssignableFrom(typeof(ArgumentOutOfRangeException), msg.Exception);
             Assert.AreEqual(LogLevel.Error, msg.Level);
             Assert.IsNotNull(msg.ToString());
         }

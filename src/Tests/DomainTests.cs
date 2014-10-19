@@ -1,21 +1,21 @@
 ﻿using int32.Utils.Core.Domain;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class EnvironmentTests 
     {
-        [TestCase]
+        [TestMethod]
         public void Domain_LoadFrom_Config()
         {
             Domain.Current.Config.Load(); //load from app config
             MakeSure.That(Domain.Current.Config["Url"]).Is("http://dev");
         }
 
-        [TestCase]
+        [TestMethod]
         public void Domain_LoadFromConfig_Switch()
         {
             Domain.OnChanged = () => Domain.Current.Switch()

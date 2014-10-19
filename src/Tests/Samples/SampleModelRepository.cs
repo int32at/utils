@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using int32.Utils.Core.Generic.Repository;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Repository;
 
 namespace Tests.Samples
 {

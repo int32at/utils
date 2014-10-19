@@ -1,15 +1,15 @@
 ﻿using System;
 using int32.Utils.Tests;
 using int32.Utils.Web.WebService;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class WebServiceTests
     {
-        [TestCase]
+        [TestMethod]
         public void WebService_Handler_HandleSample()
         {
             var response = WebServiceHandler.Handle(GetData);
@@ -19,7 +19,7 @@ namespace Tests
             MakeSure.That(response.Result.Age).Is(23);
         }
 
-        [TestCase]
+        [TestMethod]
         public void WebService_Handler_HandleNull()
         {
             var response = WebServiceHandler.Handle<SampleModel>(GetDataException);
@@ -28,7 +28,7 @@ namespace Tests
             MakeSure.That(response.Error).Is("Test");
         }
 
-        [TestCase]
+        [TestMethod]
         public void WebService_Handler_HandleException()
         {
             var response = WebServiceHandler.Handle(GetDataExceptionDirect);

@@ -2,22 +2,22 @@
 using int32.Utils.Core.Aggregator;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class AggregatorTests
     {
-        [TestCase]
+        [TestMethod]
         public void Aggregator_CreateObject()
         {
             var aggregator = new Aggregator();
             MakeSure.That(aggregator).IsNot(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Aggregator_Add_Subscription()
         {
             var aggregator = new Aggregator();
@@ -25,7 +25,7 @@ namespace Tests
             MakeSure.That(aggregator.IsSubscribed<SampleAddEvent>()).Is(true);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Aggregator_Add_SubscriptionAndPublish()
         {
             var aggregator = new Aggregator();
@@ -33,14 +33,14 @@ namespace Tests
             aggregator.Publish(new SampleAddEvent { Data = 3 });
         }
 
-        [TestCase]
+        [TestMethod]
         public void Aggregator_NullChecks()
         {
             var aggregator = new Aggregator();
             MakeSure.That(() => aggregator.Subscribe<SampleAddEvent>(null)).Throws<ArgumentNullException>();
         }
 
-        [TestCase]
+        [TestMethod]
         public void Aggregator_Singleton()
         {
             var a = Aggregator.Instance;

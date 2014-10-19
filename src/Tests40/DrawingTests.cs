@@ -1,18 +1,18 @@
-﻿using System.Windows.Media;
-using int32.Utils.Core.Extensions;
-using NUnit.Framework;
+﻿using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class DrawingTests
     {
-        [TestCase]
+        [TestMethod]
         public void Drawing_Change_Icon_to_ImageSource()
         {
             var imageSource = Data.Default_App_Icon.ToImageSource();
-            Assert.That(imageSource.IsNotNull());
+            MakeSure.That(imageSource).IsNot(null);
         }
     }
 }

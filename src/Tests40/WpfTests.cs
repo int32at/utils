@@ -1,40 +1,40 @@
 ﻿using System.Windows;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Tests;
 using int32.Utils.Windows.Wpf.Commands;
 using int32.Utils.Windows.Wpf.Converters;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class WpfTests
     {
-        [TestCase]
+        [TestMethod]
         public void Wpf_Converters_BooleanToVisibility()
         {
             var converter = new BooleanToVisibilityConverter();
-
-            Assert.AreEqual(Visibility.Visible, converter.Convert(true, null));
-            Assert.AreEqual(Visibility.Collapsed, converter.Convert(false, null));
-            Assert.AreEqual(Visibility.Visible, converter.Convert(false, "i"));
-            Assert.AreEqual(Visibility.Collapsed, converter.Convert(true, "i"));
+            MakeSure.That(converter.Convert(true, null)).Is(Visibility.Visible);
+            MakeSure.That(converter.Convert(false, null)).Is(Visibility.Collapsed);
+            MakeSure.That(converter.Convert(false, "i")).Is(Visibility.Visible);
+            MakeSure.That(converter.Convert(true, "i")).Is(Visibility.Collapsed);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Wpf_BindableBase_BaseViewModel()
         {
-            Assert.IsNotNull(new WpfViewModel());
+            MakeSure.That(new WpfViewModel()).IsNot(null);
         }
 
-        [TestCase]
+        [TestMethod]
         public void Wpf_RelayCommands()
         {
             var count = 0;
             var command = new RelayCommand(o => count++, o => o.IsNotNull());
-            Assert.IsTrue(command.CanExecute(count));
+            MakeSure.That(command.CanExecute(count)).Is(true);
             command.Execute(count);
-            Assert.AreEqual(1, count);
+            MakeSure.That(count).Is(1);
         }
     }
 }

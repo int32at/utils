@@ -4,15 +4,15 @@ using int32.Utils.Core.Logger;
 using int32.Utils.Core.Logger.Contracts;
 using int32.Utils.Core.Logger.Loggers;
 using int32.Utils.Tests;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tests.Samples;
 
 namespace Tests
 {
-    [TestFixture]
+    [TestClass]
     public class LoggerTests
     {
-        [TestCase]
+        [TestMethod]
         public void Logger_Create_Object()
         {
             using (var logger = new Logger())
@@ -21,19 +21,19 @@ namespace Tests
             }
         }
 
-        [TestCase]
+        [TestMethod]
         public void Logger_Create_MockLogger()
         {
             TestLogger(new MockLogger());
         }
 
-        [TestCase]
+        [TestMethod]
         public void Logger_Create_ConsoleLogger()
         {
             TestLogger(new ConsoleLogger());
         }
 
-        [TestCase]
+        [TestMethod]
         public void Logger_Create_FileLogger()
         {
             const string path = @"log.txt";
