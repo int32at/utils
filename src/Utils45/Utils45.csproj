@@ -98,6 +98,9 @@
     <Compile Include="..\Utils\Core\Extensions\DateExtensions.cs">
       <Link>Core\Extensions\DateExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Extensions\DelegateExtensions.cs">
+      <Link>Core\Extensions\DelegateExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Extensions\GenericExtensions.cs">
       <Link>Core\Extensions\GenericExtensions.cs</Link>
     </Compile>
