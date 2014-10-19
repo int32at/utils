@@ -3,13 +3,12 @@ using int32.Utils.Core.Aggregator;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
 using NUnit.Framework;
-using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class AggregatorTests : BaseTest
+    public class AggregatorTests
     {
         [TestCase]
         public void Aggregator_CreateObject()

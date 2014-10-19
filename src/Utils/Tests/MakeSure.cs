@@ -1,23 +1,10 @@
 ﻿using System;
+using int32.Utils.Core.Extensions;
 
 namespace int32.Utils.Tests
 {
     public static class MakeSure
     {
-        internal static Action<object, object> Equal { get; set; }
-        internal static Action<object, object> NotEqual { get; set; }
-        internal static Action<object, object> Less { get; set; }
-        internal static Action<object, object> Greater { get; set; }
-
-        public static void Setup(Action<object, object> equal, Action<object, object> notEqual,
-            Action<object, object> less, Action<object, object> greater)
-        {
-            Equal = equal;
-            NotEqual = notEqual;
-            Less = less;
-            Greater = greater;
-        }
-
         public static That<T> That<T>(T item)
         {
             return new That<T>(item);
@@ -26,6 +13,21 @@ namespace int32.Utils.Tests
         public static ThatAction That(Action action)
         {
             return new ThatAction(action);
+        }
+
+        internal static bool Equal(object a, object b)
+        {
+            return Equals(a, b);
+        }
+
+        internal static bool Greater(IComparable a, IComparable b)
+        {
+            return a.CompareTo(b) > 0;
+        }
+
+        internal static bool Less(IComparable a, IComparable b)
+        {
+            return b.CompareTo(a) > 0;
         }
     }
 
@@ -52,7 +54,8 @@ namespace int32.Utils.Tests
                 actual = ex.GetType() == typeof(T);
             }
 
-            MakeSure.Equal(expected, actual);
+            if (!MakeSure.Equal(expected, actual))
+                throw new AssertFailedException(expected, actual, "Throws");
         }
 
         public void DoesNotThrow()
@@ -67,7 +70,8 @@ namespace int32.Utils.Tests
             }
             catch { }
 
-            MakeSure.Equal(expected, actual);
+            if (!MakeSure.Equal(expected, actual))
+                throw new AssertFailedException(expected, actual, "DoesNotThrow");
         }
     }
 
@@ -82,22 +86,55 @@ namespace int32.Utils.Tests
 
         public void Is(T check)
         {
-            MakeSure.Equal(check, Value);
+            if (!MakeSure.Equal(check, Value))
+                throw new AssertFailedException(check, Value, "Is");
         }
 
         public void IsNot(T check)
         {
-            MakeSure.NotEqual(check, Value);
+            if (MakeSure.Equal(check, Value))
+                throw new AssertFailedException(check, Value, "IsNot");
         }
 
         public void IsGreaterThan(T check)
         {
-            MakeSure.Greater(Value, check);
+            if(!MakeSure.Greater((IComparable)Value, (IComparable)check))
+                throw new AssertFailedException(check, Value, "IsGreaterThan");
         }
 
         public void IsLessThan(T check)
         {
-            MakeSure.Less(Value, check);
+            if(!MakeSure.Less((IComparable)Value, (IComparable)check))
+                throw new AssertFailedException(check, Value, "IsLessThan");
+        }
+    }
+
+    public class AssertFailedException : Exception
+    {
+        private object _a;
+        private object _b;
+        private string _operation;
+
+        public AssertFailedException(object a, object b, string operation)
+        {
+            _a = a;
+            _b = b;
+            _operation = operation;
+        }
+
+        private string GetMessage()
+        {
+            return "'{0}' {1} '{2}'".With(GetName(_a), _operation, GetName(_b));
+        }
+
+        private string GetName(object o)
+        {
+            return o.IsNull() ? "null" : _a.ToString();
+        }
+
+        public override string Message
+        {
+            get { return GetMessage(); }
         }
     }
 }

@@ -2,13 +2,12 @@
 using int32.Utils.Tests;
 using int32.Utils.Web.WebService;
 using NUnit.Framework;
-using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class WebServiceTests : BaseTest
+    public class WebServiceTests
     {
         [TestCase]
         public void WebService_Handler_HandleSample()

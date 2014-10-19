@@ -6,13 +6,12 @@ using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
 using int32.Utils.Windows.Files;
 using NUnit.Framework;
-using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class ExtensionsTests : BaseTest
+    public class ExtensionsTests 
     {
         [TestCase]
         public void Object_ThrowIfNull()

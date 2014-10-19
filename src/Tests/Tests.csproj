@@ -58,7 +58,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AggregatorTests.cs" />
-    <Compile Include="Core\BaseTest.cs" />
     <Compile Include="DomainTests.cs" />
     <Compile Include="ExtensionsTests.cs" />
     <Compile Include="GenericToolsTests.cs" />

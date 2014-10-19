@@ -2,12 +2,11 @@
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
 using NUnit.Framework;
-using Tests.Core;
 
 namespace Tests
 {
     [TestFixture]
-    public class EnvironmentTests : BaseTest
+    public class EnvironmentTests 
     {
         [TestCase]
         public void Domain_LoadFrom_Config()

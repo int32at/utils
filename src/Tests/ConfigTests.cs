@@ -3,12 +3,11 @@ using int32.Utils.Core.Configuration;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Tests;
 using NUnit.Framework;
-using Tests.Core;
 
 namespace Tests
 {
     [TestFixture]
-    public class ConfigTests : BaseTest
+    public class ConfigTests
     {
         [TestCase]
         public void Config_Create_Object()

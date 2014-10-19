@@ -14,13 +14,12 @@ using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.ViewModel;
 using int32.Utils.Tests;
 using NUnit.Framework;
-using Tests.Core;
 using Tests.Samples;
 
 namespace Tests
 {
     [TestFixture]
-    public class GenericToolsTest : BaseTest
+    public class GenericToolsTest 
     {
         [TestCase]
         public void GenericTools_Singleton()
