@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using int32.Utils.Core.Extensions;
@@ -317,58 +318,65 @@ namespace Tests
             }
         }
 
+        [TestCase]
+        public void GenericTools_Data_Flatdatabase()
+        {
+            var file = Guid.NewGuid().ToString();
+            var db = new FlatDatabase<SampleModel>(file).Load();
+
+            //should not have any files in the database
+            Assert.That(db.Count == 0);
+
+            //add a new model to the database
+            db.Add(new SampleModel { Age = 17 });
+
+            //save changes (persist to file)
+            db.SaveChanges();
+
+            //make sure entry was saved correctly
+            Assert.That(db.Count == 1);
+
+            //reload the database from file and check again
+            Assert.That(db.Load().Count == 1);
+
+            File.Delete(file);
+        }
+
+        [TestCase]
+        public void GenericTools_Data_Flatdatabase_Performance()
+        {
+            var file = Guid.NewGuid().ToString();
+            var times = 100 * 1000;
+            var db = new FlatDatabase<SampleModel>(file);
+
+            var saving = Timing.Measure(() =>
+            {
+                for (int i = 0; i < times; i++)
+                    db.Add(new SampleModel { Age = 17, Title = "i" + i, Type = ModelType.Example });
+
+                db.SaveChanges();
+            });
+
+            Assert.IsTrue(db.Count == times);
+            File.Delete(file);
+        }
+
         //[TestCase]
-        //public void GenericTools_Data_Flatdatabase()
-        //{
-        //    var db = new FlatDatabase<SampleModel>(Guid.NewGuid().ToString()).Load();
+        public void GenericTools_Data_FlatSession()
+        {
+            using (var session = new FlatSession())
+            {
+                var file = Guid.NewGuid().ToString();
+                var db = session.Database<SampleModel>(file);
+                db.Add(new SampleModel { Age = 23 });
+                db.SaveChanges();
 
-        //    //should not have any files in the database
-        //    Assert.That(db.Count == 0);
+                var db2 = session.Database<SampleModel>();
+                Assert.That(db2.Count == 1);
 
-        //    //add a new model to the database
-        //    db.Add(new SampleModel { Age = 17 });
-
-        //    //save changes (persist to file)
-        //    db.SaveChanges();
-
-        //    //make sure entry was saved correctly
-        //    Assert.That(db.Count == 1);
-
-        //    //reload the database from file and check again
-        //    Assert.That(db.Load().Count == 1);
-        //}
-
-        //[TestCase]
-        //public void GenericTools_Data_Flatdatabase_Performance()
-        //{
-        //    var times = 100 * 1000;
-        //    var db = new FlatDatabase<SampleModel>(Guid.NewGuid().ToString());
-
-        //    var saving = Timing.Measure(() =>
-        //    {
-        //        for (int i = 0; i < times; i++)
-        //            db.Add(new SampleModel { Age = 17, Title = "i" + i, Type = ModelType.Example });
-
-        //        db.SaveChanges();
-        //    });
-
-        //    Assert.IsTrue(db.Count == times);
-
-        //}
-
-        //[TestCase]
-        //public void GenericTools_Data_FlatSession()
-        //{
-        //    using (var session = new FlatSession())
-        //    {
-        //        var db = session.Database<SampleModel>(Guid.NewGuid().ToString());
-        //        db.Add(new SampleModel { Age = 23 });
-        //        db.SaveChanges();
-
-        //        var db2 = session.Database<SampleModel>();
-        //        Assert.That(db2.Count == 1);
-        //    }
-        //}
+                File.Delete(file);
+            }
+        }
 
         //////HELPERS
 

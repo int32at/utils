@@ -18,8 +18,10 @@ namespace int32.Utils.Core.Extensions
 
         public static FileInfo Ensure(this FileInfo info)
         {
+            //creates a new file when it does not exist
+            //using WriteAllText, because it does not lock the file afterwards
             if (!info.Exists)
-                info.Create();
+                File.WriteAllText(info.FullName, string.Empty);
 
             return info;
         }
