@@ -12,7 +12,7 @@ namespace int32.Utils.Web.WebService
 
             try
             {
-                response.Result = action();
+                response.Result = action.Execute<T>();
 
                 if (!response.Error.IsNull())
                     SetFailure(response, response.Error);
@@ -31,7 +31,7 @@ namespace int32.Utils.Web.WebService
 
             try
             {
-                response.Result = action(response);
+                response.Result = action.Execute<T>(response);
 
                 if (!response.Error.IsNull())
                     SetFailure(response, response.Error);

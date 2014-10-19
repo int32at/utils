@@ -260,6 +260,17 @@ namespace Tests
             newCfg.Delete();
         }
 
+        [TestCase]
+        public void Generic_Delegate_Extensions()
+        {
+            var counter = 0;
+
+            //execute it 5 times...
+            new Action(() => counter++).Execute(5).Times();
+
+            MakeSure.That(counter).Is(5);
+        }
+
         private SampleModel GetModel()
         {
             return new SampleModel() { Age = 22 };

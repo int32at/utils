@@ -1,4 +1,5 @@
 ﻿using System;
+using int32.Utils.Core.Extensions;
 
 namespace int32.Utils.Core.Generic.Factory
 {
@@ -12,7 +13,7 @@ namespace int32.Utils.Core.Generic.Factory
         public static T Create(Action<T> constructor)
         {
             var obj = Create();
-            constructor(obj);
+            constructor.Execute(obj);
             return obj;
         }
     }

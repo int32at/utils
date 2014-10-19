@@ -45,7 +45,7 @@ namespace int32.Utils.Core.Domain
                 {
                     _current = i;
                     //execute onChanged when subscribed
-                    OnChanged.IfNotNull(a => a());
+                    OnChanged.Execute();
                 });
         }
     }

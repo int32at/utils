@@ -1,4 +1,5 @@
 ﻿using System;
+using int32.Utils.Core.Extensions;
 
 namespace int32.Utils.Core.Generic.Types
 {
@@ -14,7 +15,7 @@ namespace int32.Utils.Core.Generic.Types
 
         public Switch<T> Case<TTarget>(Action action) where TTarget : T
         {
-            return Case<TTarget>(obj => action());
+            return Case<TTarget>(i => action.Execute());
         }
 
         public Switch<T> Case<TTarget>(Action<T> action) where TTarget : T
@@ -31,13 +32,13 @@ namespace int32.Utils.Core.Generic.Types
 
         public void Default(Action action)
         {
-            Default(obj => action());
+            Default(i=> action.Execute());
         }
 
         public void Default(Action<T> action)
         {
             if (!_handled)
-                action(_value);
+                action.Execute(_value);
         }
     }
 }

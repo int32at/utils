@@ -18,7 +18,7 @@ namespace int32.Utils.Core.Generic.Workflow.Steps
         {
             if (Action != null)
             {
-                var result = Action.DynamicInvoke(parameters);
+                var result = Action.Execute(parameters);
 
                 if (result.IsNotNull())
                     return result.As<T>();

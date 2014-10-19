@@ -39,7 +39,7 @@ namespace int32.Utils.Core.Aggregator
             if (!_subscriptions.ContainsKey(type)) return;
 
             foreach (var subscription in _subscriptions[type].Cast<Subscription<TEvent>>())
-                subscription.Action(message);
+                subscription.Action.Execute(message);
         }
 
         public bool IsSubscribed<TEvent>() where TEvent : IEvent
