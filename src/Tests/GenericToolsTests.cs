@@ -6,6 +6,7 @@ using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.Base;
 using int32.Utils.Core.Generic.Collections;
 using int32.Utils.Core.Generic.Data;
+using int32.Utils.Core.Generic.Data.Mapping;
 using int32.Utils.Core.Generic.Factory;
 using int32.Utils.Core.Generic.Repository;
 using int32.Utils.Core.Generic.Singleton;
@@ -376,6 +377,15 @@ namespace Tests
 
                 File.Delete(file);
             }
+        }
+
+        [TestCase]
+        public void GenericTools_Data_Mapping()
+        {
+            //maps the SampleModelDto to a new HomeModel using JSON serialization
+            var result = Mapper.Map<SampleModelDto, HomeModel>(new SampleModelDto {Title = "test"});
+
+            MakeSure.That(result.Title).Is("test");
         }
 
         //////HELPERS

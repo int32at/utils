@@ -140,6 +140,9 @@
     <Compile Include="..\Utils\Core\Generic\Data\FlatSession.cs">
       <Link>Core\Generic\Data\FlatSession.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Generic\Data\Mapping\Mapper.cs">
+      <Link>Core\Generic\Data\Mapping\Mapper.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Generic\Data\MemoryDatabase.cs">
       <Link>Core\Generic\Data\MemoryDatabase.cs</Link>
     </Compile>

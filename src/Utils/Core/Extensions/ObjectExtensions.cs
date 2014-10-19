@@ -8,13 +8,23 @@ namespace int32.Utils.Core.Extensions
     {
         public static string ToJSON(this object o)
         {
+            return o.ToJSON(Constants.JsonSerializerDefaultSettings);
+        }
+
+        public static string ToJSON(this object o, JsonSerializerSettings settings)
+        {
             o.ThrowIfNull("o");
-            return JsonConvert.SerializeObject(o, Constants.JsonSerializerDefaultSettings);
+            return JsonConvert.SerializeObject(o, settings);
         }
 
         public static string ToJSON(this IEnumerable<object> objects)
         {
-            return JsonConvert.SerializeObject(objects, Constants.JsonSerializerDefaultSettings);
+            return objects.ToJSON(Constants.JsonSerializerDefaultSettings);
+        }
+
+        public static string ToJSON(this IEnumerable<object> objects, JsonSerializerSettings settings)
+        {
+            return JsonConvert.SerializeObject(objects, settings);
         }
 
         public static T As<T>(this object o)

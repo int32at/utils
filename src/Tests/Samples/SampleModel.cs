@@ -25,6 +25,12 @@ namespace Tests.Samples
         }
     }
 
+    public class SampleModelDto 
+    {
+        public string Title { get; set; }
+        public int Age { get; set; }
+    }
+
     public class SampleModelSingleton : Singleton<SampleModel> { }
 
     public enum ModelType

@@ -8,7 +8,11 @@ namespace int32.Utils.Core.Extensions
     {
         public static T FromJSON<T>(this string s)
         {
-            return JsonConvert.DeserializeObject<T>(s);
+            return s.FromJSON<T>(Constants.JsonSerializerDefaultSettings);
+        }
+        public static T FromJSON<T>(this string s, JsonSerializerSettings settings)
+        {
+            return JsonConvert.DeserializeObject<T>(s, settings);
         }
 
         public static bool Matches(this string s, string regex)
