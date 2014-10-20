@@ -52,7 +52,7 @@ namespace int32.Utils.Core.Extensions
 
         public static FileInfo Copy(this FileInfo info, string destFileNameWithoutExtension, bool overwrite)
         {
-            var path = info.DirectoryName;
+            var path = info.ThrowIfNull("info").DirectoryName;
             return info.CopyTo(Path.Combine(path, destFileNameWithoutExtension) + info.Extension);
         }
 

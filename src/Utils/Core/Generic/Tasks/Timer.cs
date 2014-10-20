@@ -16,7 +16,11 @@ namespace int32.Utils.Core.Generic.Tasks
             }
             finally
             {
-                watch.IfNotNull(() => watch.Stop());
+                watch.IfNotNull(() =>
+                {
+                    if (watch != null)
+                        watch.Stop();
+                });
             }
 
             return watch.Elapsed;

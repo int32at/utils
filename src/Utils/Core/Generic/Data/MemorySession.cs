@@ -21,11 +21,10 @@ namespace int32.Utils.Core.Generic.Data
 
             var db = _databases.FirstOrDefault(i => i.GetType() == type);
 
-            if (db.IsNull())
-            {
-                db = new MemoryDatabase<T>();
-                _databases.Add(db);
-            }
+            if (!db.IsNull()) return db.As<MemoryDatabase<T>>();
+
+            db = new MemoryDatabase<T>();
+            _databases.Add(db);
 
             return db.As<MemoryDatabase<T>>();
         }

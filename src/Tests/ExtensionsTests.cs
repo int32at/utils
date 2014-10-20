@@ -112,16 +112,16 @@ namespace Tests
         {
             var model = new SampleModel() { Age = 23, Title = "Andreas", Type = ModelType.Example };
 
-            model.Set("Age", 3);
-            model.Set("Title", "Example");
-            model.Set("Internal", "test");
-            model.Set("_test", "b");
-            model.Set("Type", ModelType.Test);
+            model.SetProperty("Age", 3);
+            model.SetProperty("Title", "Example");
+            model.SetProperty("Internal", "test");
+            model.SetProperty("_test", "b");
+            model.SetProperty("Type", ModelType.Test);
 
             MakeSure.That(model.Age).Is(3);
             MakeSure.That(model.Title).Is("Example");
-            MakeSure.That(model.Get<string>("Internal")).Is("test");
-            MakeSure.That(model.Get<string>("_test")).Is("b");
+            MakeSure.That(model.GetProperty<string>("Internal")).Is("test");
+            MakeSure.That(model.GetProperty<string>("_test")).Is("b");
             MakeSure.That(model.Type).Is(ModelType.Test);
         }
 

@@ -45,11 +45,9 @@ namespace int32.Utils.Core.Generic.Base
             var left = Expression.MakeMemberAccess(parameter, property);
             var right = Expression.Constant(constant);
 
-            BinaryExpression expression = null;
-
             var condition = requirement.Check.ParseEnum<ExpressionType>();
 
-            expression = Expression.MakeBinary(condition, left, right);
+            var expression = Expression.MakeBinary(condition, left, right);
 
             return Expression.Lambda<Func<T, bool>>(expression, parameter);
         }

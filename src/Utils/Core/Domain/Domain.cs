@@ -11,7 +11,7 @@ namespace int32.Utils.Core.Domain
     {
         private static IDomainItem _current;
 
-        private static readonly List<IDomainItem> Domains = new List<IDomainItem>()
+        private static readonly List<IDomainItem> Domains = new List<IDomainItem>
         {
             new Development(),
             new Integration(),

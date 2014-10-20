@@ -5,7 +5,7 @@ namespace int32.Utils.Core.Extensions
 {
     public static class ReflectionExtensions
     {
-        public static void Set<T>(this object o, string name, T value)
+        public static void SetProperty<T>(this object o, string name, T value)
         {
             o.ThrowIfNull("o");
             value.ThrowIfNull("value");
@@ -17,7 +17,7 @@ namespace int32.Utils.Core.Extensions
                 .IfNotNull(prop => prop.SetValue(o, value, null));
         }
 
-        public static T Get<T>(this object o, string name)
+        public static T GetProperty<T>(this object o, string name)
         {
             o.ThrowIfNull("o");
 

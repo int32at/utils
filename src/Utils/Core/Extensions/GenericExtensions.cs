@@ -116,10 +116,11 @@ namespace int32.Utils.Core.Extensions
 
         public static void ForEach<T>(this IEnumerable<T> list, Action<T> action)
         {
-            list.ThrowIfNull("list");
+            var enumerable = list as IList<T> ?? list.ToList();
+            enumerable.ThrowIfNull("list");
             action.ThrowIfNull("action");
 
-            foreach (var item in list) action(item);
+            foreach (var item in enumerable) action(item);
         }
 
         public static void Remove<T>(this ICollection<T> list, Func<T, bool> where)
