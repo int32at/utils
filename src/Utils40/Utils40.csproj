@@ -41,6 +41,7 @@
     <AssemblyOriginatorKeyFile>..\build\key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
@@ -132,9 +133,6 @@
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Factory\Factory.cs">
       <Link>Core\Generic\Factory\Factory.cs</Link>
-    </Compile>
-    <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IModel.cs">
-      <Link>Core\Generic\Repository\Contracts\IModel.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IRepository.cs">
       <Link>Core\Generic\Repository\Contracts\IRepository.cs</Link>
@@ -251,6 +249,9 @@
       <Link>Windows\Files\Links\LinkResolver.cs</Link>
     </Compile>
     <Compile Include="Core\Extensions\DrawingExtensions.cs" />
+    <Compile Include="Core\Extensions\ViewEngineExtensions.cs" />
+    <Compile Include="Core\Generic\ViewEngine\Contracts\IRenderable.cs" />
+    <Compile Include="Core\Generic\ViewEngine\ViewEngine.cs" />
     <Compile Include="Windows\Wpf\Base\BindableBase.cs" />
     <Compile Include="Windows\Wpf\Commands\RelayCommand.cs" />
     <Compile Include="Windows\Wpf\Common\KeyboardHook.cs" />

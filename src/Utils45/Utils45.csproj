@@ -41,6 +41,7 @@
     <AssemblyOriginatorKeyFile>..\build\key.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -58,6 +59,15 @@
   <ItemGroup>
     <Compile Include="..\Utils40\Core\Extensions\DrawingExtensions.cs">
       <Link>Core\Extensions\DrawingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Core\Extensions\ViewEngineExtensions.cs">
+      <Link>Core\Extensions\ViewEngineExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Core\Generic\ViewEngine\Contracts\IRenderable.cs">
+      <Link>Core\Generic\ViewEngine\Contracts\IRenderable.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Core\Generic\ViewEngine\ViewEngine.cs">
+      <Link>Core\Generic\ViewEngine\ViewEngine.cs</Link>
     </Compile>
     <Compile Include="..\Utils40\Windows\Wpf\Base\BindableBase.cs">
       <Link>Windows\Wpf\Base\BindableBase.cs</Link>
@@ -154,9 +164,6 @@
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Factory\Factory.cs">
       <Link>Core\Generic\Factory\Factory.cs</Link>
-    </Compile>
-    <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IModel.cs">
-      <Link>Core\Generic\Repository\Contracts\IModel.cs</Link>
     </Compile>
     <Compile Include="..\Utils\Core\Generic\Repository\Contracts\IRepository.cs">
       <Link>Core\Generic\Repository\Contracts\IRepository.cs</Link>

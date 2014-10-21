@@ -4,7 +4,7 @@ using int32.Utils.Core.Generic.Singleton;
 
 namespace Tests.Samples
 {
-    public class SampleModel : IModel
+    public class SampleModel 
     {
         // ReSharper disable once InconsistentNaming
         private string _test = "a";

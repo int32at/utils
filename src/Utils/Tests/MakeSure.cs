@@ -124,12 +124,12 @@ namespace int32.Utils.Tests
 
         private string GetMessage()
         {
-            return "'{0}' {1} '{2}'".With(GetName(_a), _operation, GetName(_b));
+            return "'{0}' {1} '{2}'".With(GetName(_b), _operation, GetName(_a));
         }
 
         private string GetName(object o)
         {
-            return o.IsNull() ? "null" : _a.ToString();
+            return o.IsNull() ? "null" : o.ToString();
         }
 
         public override string Message
