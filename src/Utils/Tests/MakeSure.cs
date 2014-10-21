@@ -140,7 +140,9 @@ namespace int32.Utils.Tests
 
         private string GetMessage()
         {
-            return "'{0}' {1} '{2}'".With(GetName(_b), _operation, GetName(_a));
+            return _expression.IsNullOrEmpty()
+                ? "'{0}' {1} '{2}'".With(GetName(_a), _operation, GetName(_b))
+                : _expression;
         }
 
         private string GetName(object o)
