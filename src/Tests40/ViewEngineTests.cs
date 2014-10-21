@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using int32.Utils.Core.Extensions;
-using int32.Utils.Core.Generic.Tasks;
 using int32.Utils.Core.Generic.ViewEngine;
 using int32.Utils.Core.Generic.ViewEngine.Contracts;
 using int32.Utils.Tests;
@@ -40,11 +39,7 @@ namespace Tests
             //extensions
             var renderable = new RenderableModel {Title = "Cool"};
             MakeSure.That(renderable.Render("Hello @Model.Title")).Is("Hello Cool");
-
             MakeSure.That("Hello @Model.Title".RenderWith(renderable)).Is("Hello Cool");
-
-            var x = Timing.Measure(() => "Hello @Model.Title".RenderWith(renderable));
-            var y = Timing.Measure(() => "Hello {0}".With(renderable.Title));
         }
 
         [TestMethod]
