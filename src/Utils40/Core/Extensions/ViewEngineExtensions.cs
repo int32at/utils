@@ -17,5 +17,10 @@ namespace int32.Utils.Core.Extensions
             renderables.ThrowIfNull("Renderables");
             return ViewEngine.Instance.Render(template, renderables);
         }
+
+        public static string RenderWith(this string template, IRenderable renderable)
+        {
+            return renderable.Render(template);
+        }
     }
 }
