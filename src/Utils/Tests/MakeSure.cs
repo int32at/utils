@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using int32.Utils.Core.Extensions;
 
 namespace int32.Utils.Tests
@@ -8,6 +9,15 @@ namespace int32.Utils.Tests
         public static That<T> That<T>(T item)
         {
             return new That<T>(item);
+        }
+
+        public static void That<T>(T item, params Expression<Func<T, bool>>[] requirements)
+        {
+            foreach (var require in requirements)
+            {
+                if (!require.Compile()(item))
+                    throw new AssertFailedException(require.ToString());
+            }
         }
 
         public static ThatAction That(Action action)
@@ -98,13 +108,13 @@ namespace int32.Utils.Tests
 
         public void IsGreaterThan(T check)
         {
-            if(!MakeSure.Greater((IComparable)Value, (IComparable)check))
+            if (!MakeSure.Greater((IComparable)Value, (IComparable)check))
                 throw new AssertFailedException(check, Value, "IsGreaterThan");
         }
 
         public void IsLessThan(T check)
         {
-            if(!MakeSure.Less((IComparable)Value, (IComparable)check))
+            if (!MakeSure.Less((IComparable)Value, (IComparable)check))
                 throw new AssertFailedException(check, Value, "IsLessThan");
         }
     }
@@ -114,12 +124,18 @@ namespace int32.Utils.Tests
         private readonly object _a;
         private readonly object _b;
         private readonly string _operation;
+        private readonly string _expression;
 
         public AssertFailedException(object a, object b, string operation)
         {
             _a = a;
             _b = b;
             _operation = operation;
+        }
+
+        public AssertFailedException(string expression)
+        {
+            _expression = expression;
         }
 
         private string GetMessage()

@@ -32,13 +32,10 @@ namespace int32.Utils.Core
         {
             get
             {
-                if (_jsonSerializerAllSettings == null)
+                return _jsonSerializerAllSettings ?? (_jsonSerializerAllSettings = new JsonSerializerSettings
                 {
-                    _jsonSerializerAllSettings = new JsonSerializerSettings();
-                    _jsonSerializerAllSettings.ContractResolver = new AllPropertiesResolver();
-                }
-
-                return _jsonSerializerAllSettings;
+                    ContractResolver = new AllPropertiesResolver()
+                });
             }
         }
     }

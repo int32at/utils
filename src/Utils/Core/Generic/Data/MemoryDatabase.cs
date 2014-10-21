@@ -8,7 +8,7 @@ namespace int32.Utils.Core.Generic.Data
 {
     public class MemoryDatabase<T> : IRepository<T>
     {
-        private List<T> _data;
+        private readonly List<T> _data;
 
         public MemoryDatabase()
         {

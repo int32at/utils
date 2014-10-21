@@ -14,7 +14,7 @@ namespace int32.Utils.Core.Extensions
             return del.Execute<T>(null);
         }
 
-        public static object  Execute(this Delegate del, params object[] parameters)
+        public static object Execute(this Delegate del, params object[] parameters)
         {
             return del.Execute<object>(parameters);
         }
@@ -23,9 +23,7 @@ namespace int32.Utils.Core.Extensions
         {
             try
             {
-                if (del.IsNotNull())
-                    return del.DynamicInvoke(parameters).As<T>();
-                return ObjectExtensions.As<T>(null);
+                return del.IsNotNull() ? del.DynamicInvoke(parameters).As<T>() : ObjectExtensions.As<T>(null);
             }
             catch (Exception ex)
             {
