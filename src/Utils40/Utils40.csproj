@@ -252,6 +252,8 @@
     <Compile Include="Core\Extensions\ViewEngineExtensions.cs" />
     <Compile Include="Core\Generic\ViewEngine\Contracts\IRenderable.cs" />
     <Compile Include="Core\Generic\ViewEngine\ViewEngine.cs" />
+    <Compile Include="Web\WebServer\WebController.cs" />
+    <Compile Include="Web\WebServer\WebServer.cs" />
     <Compile Include="Windows\Wpf\Base\BindableBase.cs" />
     <Compile Include="Windows\Wpf\Commands\RelayCommand.cs" />
     <Compile Include="Windows\Wpf\Common\KeyboardHook.cs" />

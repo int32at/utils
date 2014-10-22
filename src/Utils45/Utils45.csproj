@@ -69,6 +69,12 @@
     <Compile Include="..\Utils40\Core\Generic\ViewEngine\ViewEngine.cs">
       <Link>Core\Generic\ViewEngine\ViewEngine.cs</Link>
     </Compile>
+    <Compile Include="..\Utils40\Web\WebServer\WebController.cs">
+      <Link>Web\WebServer\WebController.cs</Link>
+    </Compile>
+    <Compile Include="..\Utils40\Web\WebServer\WebServer.cs">
+      <Link>Web\WebServer\WebServer.cs</Link>
+    </Compile>
     <Compile Include="..\Utils40\Windows\Wpf\Base\BindableBase.cs">
       <Link>Windows\Wpf\Base\BindableBase.cs</Link>
     </Compile>
