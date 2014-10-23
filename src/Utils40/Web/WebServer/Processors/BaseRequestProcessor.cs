@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using int32.Utils.Web.WebServer.Controller.Contracts;
@@ -8,9 +9,12 @@ namespace int32.Utils.Web.WebServer.Processors
 {
     public abstract class BaseRequestProcessor : IRequestProcessor
     {
-        protected BaseRequestProcessor()
+        public string Root { get; set; }
+
+        protected BaseRequestProcessor(string dir)
         {
             Cache = new List<IController>();
+            Root = dir;
         }
 
         protected T GetController<T>(string url) where T : IController

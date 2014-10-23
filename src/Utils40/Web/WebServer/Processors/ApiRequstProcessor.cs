@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebServer.Controller;
@@ -8,6 +9,8 @@ namespace int32.Utils.Web.WebServer.Processors
 {
     public class ApiRequstProcessor : BaseRequestProcessor
     {
+        public ApiRequstProcessor(string dir) : base(dir) { }
+
         public override bool Process(HttpListenerContext context)
         {
             try

@@ -1,37 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading;
+using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebServer.Processors;
 using int32.Utils.Web.WebServer.Processors.Contracts;
 
 namespace int32.Utils.Web.WebServer
 {
-    public class WebServer : IDisposable
+    public class WebServer 
     {
         private readonly HttpListener _listener;
 
         private static readonly AutoResetEvent ListenForNextRequest
             = new AutoResetEvent(false);
 
+        public string Root { get; set; }
+
         private List<IRequestProcessor> Processors { get; set; }
 
-        public WebServer(string url)
+        public WebServer(string url) : this(url, Environment.CurrentDirectory) { }
+
+        public WebServer(string url, string root)
         {
             _listener = new HttpListener();
             _listener.Prefixes.Add(url + "/");
 
-            Processors = new List<IRequestProcessor>()
-            {
-                new ApiRequstProcessor(),
-                new WebRequestProcessor()
-            };
-
-            Start();
+            Root = root;
         }
 
-        private void Start()
+        public void Start()
         {
+            Processors = new List<IRequestProcessor>()
+            {
+                new ApiRequstProcessor(Root),
+                new WebRequestProcessor(Root)
+            };
+
             _listener.Start();
 
             ThreadPool.QueueUserWorkItem(state =>
@@ -84,7 +90,7 @@ namespace int32.Utils.Web.WebServer
             }
         }
 
-        public void Dispose()
+        public void Stop()
         {
             _listener.Stop();
         }

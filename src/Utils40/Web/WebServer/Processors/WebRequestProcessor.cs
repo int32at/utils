@@ -10,6 +10,8 @@ namespace int32.Utils.Web.WebServer.Processors
 {
     public class WebRequestProcessor : BaseRequestProcessor
     {
+        public WebRequestProcessor(string dir) : base(dir) { }
+
         public override bool Process(HttpListenerContext context)
         {
             try
@@ -22,9 +24,9 @@ namespace int32.Utils.Web.WebServer.Processors
                 if (!Path.HasExtension(file))
                     return false;
 
-                string result = string.Empty;
+                string result;
 
-                var data = File.ReadAllText(file);
+                var data = File.ReadAllText(Path.Combine(Root, file));
 
                 var controller = GetController<WebController>(file);
 
