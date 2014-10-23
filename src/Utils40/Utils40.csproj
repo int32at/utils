@@ -250,10 +250,18 @@
     </Compile>
     <Compile Include="Core\Extensions\DrawingExtensions.cs" />
     <Compile Include="Core\Extensions\ViewEngineExtensions.cs" />
+    <Compile Include="Core\Extensions\WebExtensions.cs" />
     <Compile Include="Core\Generic\ViewEngine\Contracts\IRenderable.cs" />
     <Compile Include="Core\Generic\ViewEngine\ViewEngine.cs" />
-    <Compile Include="Web\WebServer\WebController.cs" />
+    <Compile Include="Web\WebServer\Controller\ApiController.cs" />
+    <Compile Include="Web\WebServer\Controller\BaseController.cs" />
+    <Compile Include="Web\WebServer\Controller\Contracts\IController.cs" />
+    <Compile Include="Web\WebServer\Controller\WebController.cs" />
+    <Compile Include="Web\WebServer\Processors\ApiRequstProcessor.cs" />
+    <Compile Include="Web\WebServer\Processors\Contracts\IRequestProcessor.cs" />
+    <Compile Include="Web\WebServer\Processors\WebRequestProcessor.cs" />
     <Compile Include="Web\WebServer\WebServer.cs" />
+    <Compile Include="Web\WebServer\WebServerHelper.cs" />
     <Compile Include="Windows\Wpf\Base\BindableBase.cs" />
     <Compile Include="Windows\Wpf\Commands\RelayCommand.cs" />
     <Compile Include="Windows\Wpf\Common\KeyboardHook.cs" />
