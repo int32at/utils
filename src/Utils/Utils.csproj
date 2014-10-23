@@ -73,6 +73,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Utils.resx</DependentUpon>
     </Compile>
+    <Compile Include="Core\Generic\Types\TypeScanner.cs" />
     <Compile Include="Core\Generic\Workflow\Engine.cs" />
     <Compile Include="Core\Generic\Workflow\Steps\IfSteps.cs" />
     <Compile Include="Core\Generic\Workflow\Steps\StepEngine.cs" />

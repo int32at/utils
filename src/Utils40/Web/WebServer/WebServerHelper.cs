@@ -3,32 +3,36 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Dynamic;
-using System.Linq;
 using System.Net;
-using System.Reflection;
 using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Types;
 using int32.Utils.Web.WebServer.Controller.Contracts;
 
 namespace int32.Utils.Web.WebServer
 {
     internal static class WebServerHelper
     {
+        internal static TypeScanner Scanner = new TypeScanner();
+
         internal static T FindController<T>(string fileName) where T : IController
         {
-            var assembly = Assembly.GetEntryAssembly();
-
-            var controllers = assembly.GetTypes().Where(i => i.BaseType == typeof(T)).ToList();
-
-            foreach (var controller in controllers)
+            try
             {
-                var ctrl = (T)Activator.CreateInstance(controller);
+                var controllers = new List<Type>();
+                controllers.AddRange(Scanner.Scan<T>());
 
-                if (fileName.EndsWith("/"))
-                    fileName = ctrl.Path.TrimEnd('/');
+                foreach (var controller in controllers)
+                {
+                    var ctrl = (T)Activator.CreateInstance(controller);
 
-                if (ctrl != null && ctrl.Path.Equals(fileName))
-                    return ctrl;
+                    if (fileName.EndsWith("/"))
+                        fileName = ctrl.Path.TrimEnd('/');
+
+                    if (ctrl != null && ctrl.Path.Equals(fileName))
+                        return ctrl;
+                }
             }
+            catch { }
 
             return ObjectExtensions.As<T>(null);
         }

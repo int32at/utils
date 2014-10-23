@@ -2,20 +2,19 @@
 using System.Net;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebServer.Controller;
-using int32.Utils.Web.WebServer.Processors.Contracts;
 using Newtonsoft.Json;
 
 namespace int32.Utils.Web.WebServer.Processors
 {
-    public class ApiRequstProcessor : IRequestProcessor
+    public class ApiRequstProcessor : BaseRequestProcessor
     {
-        public bool Process(HttpListenerContext context)
+        public override bool Process(HttpListenerContext context)
         {
             try
             {
                 var url = context.GetUrl();
 
-                var controller = WebServerHelper.FindController<ApiController>(url);
+                var controller = GetController<ApiController>(url);
 
                 if (controller.IsNotNull() && !ReferenceEquals(null, controller.Get))
                 {

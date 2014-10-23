@@ -152,6 +152,9 @@
     <Compile Include="..\Utils\Core\Generic\Tasks\Timer.cs">
       <Link>Core\Generic\Tasks\Timer.cs</Link>
     </Compile>
+    <Compile Include="..\Utils\Core\Generic\Types\TypeScanner.cs">
+      <Link>Core\Generic\Types\TypeScanner.cs</Link>
+    </Compile>
     <Compile Include="..\Utils\Core\Generic\Types\TypeSwitch.cs">
       <Link>Core\Generic\Types\TypeSwitch.cs</Link>
     </Compile>
@@ -258,6 +261,7 @@
     <Compile Include="Web\WebServer\Controller\Contracts\IController.cs" />
     <Compile Include="Web\WebServer\Controller\WebController.cs" />
     <Compile Include="Web\WebServer\Processors\ApiRequstProcessor.cs" />
+    <Compile Include="Web\WebServer\Processors\BaseRequestProcessor.cs" />
     <Compile Include="Web\WebServer\Processors\Contracts\IRequestProcessor.cs" />
     <Compile Include="Web\WebServer\Processors\WebRequestProcessor.cs" />
     <Compile Include="Web\WebServer\WebServer.cs" />
