@@ -31,7 +31,13 @@ namespace int32.Utils.Web.WebServer.Controller
         public ApiResponse(Exception ex)
         {
             Data = new object[] {};
-            Error = new ApiResponseError(ex);
+            Error = new ApiResponseError(ex, 500);
+        }
+
+        public ApiResponse(Exception ex, int code)
+        {
+            Data = new object[] { };
+            Error = new ApiResponseError(ex, code);
         }
     }
 
@@ -40,9 +46,9 @@ namespace int32.Utils.Web.WebServer.Controller
         public int Code { get; set; }
         public string Message { get; set; }
 
-        public ApiResponseError(Exception ex)
+        public ApiResponseError(Exception ex, int code)
         {
-            Code = 500;
+            Code = code;
             Message = ex.Message;
         }
     }

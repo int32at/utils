@@ -52,6 +52,7 @@
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -260,7 +261,7 @@
     <Compile Include="Web\WebServer\Controller\BaseController.cs" />
     <Compile Include="Web\WebServer\Controller\Contracts\IController.cs" />
     <Compile Include="Web\WebServer\Controller\WebController.cs" />
-    <Compile Include="Web\WebServer\Processors\ApiRequstProcessor.cs" />
+    <Compile Include="Web\WebServer\Processors\ApiRequestProcessor.cs" />
     <Compile Include="Web\WebServer\Processors\BaseRequestProcessor.cs" />
     <Compile Include="Web\WebServer\Processors\Contracts\IRequestProcessor.cs" />
     <Compile Include="Web\WebServer\Processors\WebRequestProcessor.cs" />

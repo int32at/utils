@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Threading;
-using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebServer.Processors;
 using int32.Utils.Web.WebServer.Processors.Contracts;
 
@@ -18,6 +16,8 @@ namespace int32.Utils.Web.WebServer
 
         public string Root { get; set; }
 
+        public AuthenticationSchemes Authentication { get; set; }
+
         private List<IRequestProcessor> Processors { get; set; }
 
         public WebServer(string url) : this(url, Environment.CurrentDirectory) { }
@@ -28,16 +28,19 @@ namespace int32.Utils.Web.WebServer
             _listener.Prefixes.Add(url + "/");
 
             Root = root;
+
+            Authentication = AuthenticationSchemes.Anonymous;
         }
 
-        public void Start()
+        public WebServer Start()
         {
             Processors = new List<IRequestProcessor>()
             {
-                new ApiRequstProcessor(Root),
+                new ApiRequestProcessor(Root),
                 new WebRequestProcessor(Root)
             };
 
+            _listener.AuthenticationSchemes = Authentication;
             _listener.Start();
 
             ThreadPool.QueueUserWorkItem(state =>
@@ -69,6 +72,8 @@ namespace int32.Utils.Web.WebServer
                     ListenForNextRequest.WaitOne();
                 }
             });
+
+            return this;
         }
 
         private void ProcessRequest(HttpListenerContext context)

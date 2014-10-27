@@ -43,5 +43,11 @@ namespace int32.Utils.Core.Extensions
         {
             return (T)Enum.Parse(typeof(T), s, true);
         }
+
+        public static bool IsJson(this string s)
+        {
+            s = s.Trim();
+            return s.StartsWith("{") && s.EndsWith("}") || s.StartsWith("[") && s.EndsWith("]");
+        }
     }
 }

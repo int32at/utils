@@ -26,9 +26,11 @@ namespace int32.Utils.Web.WebServer.Processors
 
                 string result;
 
-                var data = File.ReadAllText(Path.Combine(Root, file));
-
                 var controller = GetController<WebController>(file);
+
+                controller.CheckAuth(context);
+
+                var data = File.ReadAllText(Path.Combine(Root, file));
 
                 //when a controller and model is found, use the view engine to render the html
                 if (controller != null && !ReferenceEquals(null, controller.Get))

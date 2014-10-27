@@ -21,7 +21,7 @@ namespace int32.Utils.Core.Extensions
 
         public static bool IsNull<T>(this T o)
         {
-            return o == null;
+            return ReferenceEquals(null, o);
         }
 
         public static bool IsNotNull<T>(this T o)
