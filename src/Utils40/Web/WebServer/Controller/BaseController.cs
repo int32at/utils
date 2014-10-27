@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Authentication;
 using System.Security.Principal;
@@ -8,10 +9,22 @@ namespace int32.Utils.Web.WebServer.Controller
 {
     public abstract class BaseController : IController
     {
-        public Func<dynamic, dynamic> Get { get; set; }
-        public Func<dynamic, dynamic> Post { get; set; }
-        public Func<IPrincipal, bool> Auth { get; set; } 
+        public Dictionary<string, Func<dynamic, dynamic>> Get { get; set; }
+
+        public Dictionary<string, Func<dynamic, dynamic>> Post { get; set; }
+
+        public Func<IPrincipal, bool> Auth { get; set; }
+
         public string Path { get; set; }
+
+        protected BaseController(string rootPath)
+        {
+            Path = rootPath;
+            Get = new Dictionary<string, Func<dynamic, dynamic>>();
+            Post = new Dictionary<string, Func<dynamic, dynamic>>();
+        }
+
+        protected BaseController() : this("") { }
 
         public void CheckAuth(HttpListenerContext context)
         {

@@ -2,12 +2,9 @@
 
 namespace int32.Utils.Web.WebServer.Controller
 {
-    public abstract class WebController : BaseController
+    public class WebController : BaseController
     {
-        protected WebController(string viewFile)
-        {
-            Path = viewFile;
-        }
+        protected WebController(string path) : base(path) { }
     }
 
     public class WebResponse

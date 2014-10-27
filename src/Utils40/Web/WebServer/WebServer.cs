@@ -7,7 +7,7 @@ using int32.Utils.Web.WebServer.Processors.Contracts;
 
 namespace int32.Utils.Web.WebServer
 {
-    public class WebServer 
+    public class WebServer
     {
         private readonly HttpListener _listener;
 
@@ -36,8 +36,8 @@ namespace int32.Utils.Web.WebServer
         {
             Processors = new List<IRequestProcessor>()
             {
-                new ApiRequestProcessor(Root),
-                new WebRequestProcessor(Root)
+                new ApiRequestProcessor(),
+                new WebRequestProcessor()
             };
 
             _listener.AuthenticationSchemes = Authentication;

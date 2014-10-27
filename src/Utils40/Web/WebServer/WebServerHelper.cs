@@ -14,7 +14,7 @@ namespace int32.Utils.Web.WebServer
     {
         internal static TypeScanner Scanner = new TypeScanner();
 
-        internal static T FindController<T>(string fileName) where T : IController
+        internal static T FindController<T>(string root) where T : IController
         {
             try
             {
@@ -23,26 +23,25 @@ namespace int32.Utils.Web.WebServer
 
                 foreach (var controller in controllers)
                 {
-                    var ctrl = (T)Activator.CreateInstance(controller);
+                    var ctrl = (T) Activator.CreateInstance(controller);
 
-                    if (fileName.EndsWith("/"))
-                        fileName = ctrl.Path.TrimEnd('/');
-
-                    if (ctrl != null && ctrl.Path.Equals(fileName))
+                    if (ctrl != null && ctrl.Path.Equals(root))
                         return ctrl;
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return ObjectExtensions.As<T>(null);
         }
 
         internal static dynamic GetQueryString(HttpListenerContext context)
         {
-            return BuildQueryStringObject(context.Request.QueryString);
+            return BuildDynamicKeyValueObject(context.Request.QueryString);
         }
 
-        private static dynamic BuildQueryStringObject(NameValueCollection query)
+        internal static dynamic BuildDynamicKeyValueObject(NameValueCollection query)
         {
             var dict = new Collection<KeyValuePair<string, object>>();
 
@@ -50,7 +49,7 @@ namespace int32.Utils.Web.WebServer
                 dict.Add(new KeyValuePair<string, object>(k, query[k]));
 
             var dyn = new ExpandoObject();
-            var coll = (ICollection<KeyValuePair<string, object>>)dyn;
+            var coll = (ICollection<KeyValuePair<string, object>>) dyn;
 
             foreach (var kvp in dict)
             {
@@ -58,6 +57,18 @@ namespace int32.Utils.Web.WebServer
             }
 
             return dyn;
+        }
+
+        internal static dynamic Merge(dynamic query, Dictionary<string, object> param)
+        {
+            var coll = (ICollection<KeyValuePair<string, object>>)query;
+
+            foreach (var key in param)
+            {
+                coll.Add(new KeyValuePair<string, object>(key.Key, key.Value));
+            }
+
+            return query;
         }
     }
 }

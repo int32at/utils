@@ -4,19 +4,19 @@ using System.Net;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.ViewEngine;
 using int32.Utils.Web.WebServer.Controller;
-using WebResponse = int32.Utils.Web.WebServer.Controller.WebResponse;
 
 namespace int32.Utils.Web.WebServer.Processors
 {
     public class WebRequestProcessor : BaseRequestProcessor
     {
-        public WebRequestProcessor(string dir) : base(dir) { }
-
         public override bool Process(HttpListenerContext context)
         {
             try
             {
-                var file = context.GetUrl();
+                //get the file name instead of the url
+
+
+                var file = context.GetUrl().AbsolutePath.Substring(1);
 
                 if (file.IsNullOrEmpty())
                     file = "index.html";
@@ -24,32 +24,37 @@ namespace int32.Utils.Web.WebServer.Processors
                 if (!Path.HasExtension(file))
                     return false;
 
-                string result;
+                string result = "";
 
                 var controller = GetController<WebController>(file);
 
-                if(controller != null)
+                if (controller != null)
                     controller.CheckAuth(context);
 
-                var data = File.ReadAllText(Path.Combine(Root, file));
+                var data = File.ReadAllText(file);
 
                 //when a controller and model is found, use the view engine to render the html
-                if (controller != null && !ReferenceEquals(null, controller.Get))
+                if (controller != null && controller.Get.Count > 0)
                 {
-                    var parameters = WebServerHelper.GetQueryString(context);
-                    result = ViewEngine.Instance.Render(data, controller.Get(parameters));
+                    foreach (var get in controller.Get)
+                    {
+                        var parameters = WebServerHelper.GetQueryString(context);
+                        result = ViewEngine.Instance.Render(data, get.Value(parameters));
+                        break;
+                    }
+                 
                 }
-                    //otherwise just return the data that was found
+                //otherwise just return the data that was found
                 else result = data;
 
-                context.SetResponse(new WebResponse(result).ToString());
+                context.SetResponse(new Controller.WebResponse(result).ToString());
 
                 return true;
             }
             catch (Exception ex)
             {
                 context.Response.StatusCode = 500;
-                context.SetResponse(new WebResponse(ex).ToString());
+                context.SetResponse(new Controller.WebResponse(ex).ToString());
             }
 
             return false;

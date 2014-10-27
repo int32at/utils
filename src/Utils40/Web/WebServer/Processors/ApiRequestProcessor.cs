@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Authentication;
+using System.Text.RegularExpressions;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Web.WebServer.Controller;
 using Newtonsoft.Json;
@@ -9,22 +11,25 @@ namespace int32.Utils.Web.WebServer.Processors
 {
     public class ApiRequestProcessor : BaseRequestProcessor
     {
-        public ApiRequestProcessor(string dir) : base(dir) { }
-
         public override bool Process(HttpListenerContext context)
         {
             try
             {
-                var url = context.GetUrl();
+                var rootUrl = GetRootUrl(context);
 
-                var controller = GetController<ApiController>(url);
+                //search all api controller that are registered to the ROOT url
+                //since sub urls can be made using the Get[] object within the constructor of the controller
+                var ctrl = GetController<ApiController>(rootUrl);
 
-                switch (context.Request.HttpMethod)
+                if (ctrl != null)
                 {
-                    case "GET":
-                        return ProcessGet(context, controller);
-                    case "POST":
-                        return ProcessPost(context, controller);
+                    ctrl.CheckAuth(context);
+
+                    switch (context.Request.HttpMethod)
+                    {
+                        case "GET": return ProcessGet(context, rootUrl, ctrl);
+                        case "POST": return ProcessPost(context, rootUrl, ctrl);
+                    }
                 }
             }
             catch (AuthenticationException aex)
@@ -41,44 +46,118 @@ namespace int32.Utils.Web.WebServer.Processors
             return false;
         }
 
-        private bool ProcessGet(HttpListenerContext context, BaseController controller)
+        private bool ProcessGet(HttpListenerContext context, string root, BaseController controller)
         {
-            return ProccessRequest(context, controller, i => i.Get, i =>
+            //pass in the query string data
+            var get = WebServerHelper.GetQueryString(context);
+
+            return ProcessRequest(context, root, controller.Get, get);
+        }
+
+        private bool ProcessPost(HttpListenerContext context, string root, BaseController controller)
+        {
+            //pass in the POST data from the request
+            var post = context.GetPostData();
+
+            return ProcessRequest(context, root, controller.Post, post);
+        }
+
+        private bool ProcessRequest(HttpListenerContext context, string root,
+            Dictionary<string, Func<dynamic, dynamic>> method, dynamic param)
+        {
+            var full = GetFullUrl(context);
+
+            foreach (var m in method)
             {
-                var get = WebServerHelper.GetQueryString(context);
-                return i.Get(get);
-            });
+                //get the complete service url
+                var service = RemoveEndingSlash(root + m.Key);
+
+                //parameters from the query string, will be loaded from the matches method
+                Dictionary<string, object> paramList;
+
+                //check if the service url matches the full url of the request
+                if (!Matches(service, full, out paramList)) continue;
+
+                //merge the post or get objects with the parameter list
+                var data = WebServerHelper.Merge(param, paramList);
+
+                //execute the specific method
+                var result = m.Value(data);
+
+                //convert the result to json and set the response
+                var json = JsonConvert.SerializeObject(new ApiResponse(result));
+                context.SetResponse(json);
+                context.Response.ContentType = "application/json";
+                return true;
+            }
+
+            return false;
         }
 
-        private bool ProcessPost(HttpListenerContext context, BaseController controller)
+        private bool Matches(string service, string full, out Dictionary<string, object> param)
         {
-            return ProccessRequest(context, controller, i => i.Post, i =>
+            //split the urls into pieces to make it easier to check
+            var serviceSplit = service.Split(new[] {'/'}, StringSplitOptions.RemoveEmptyEntries);
+            var fullSplit = full.Split(new[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+
+            var successCount = 0;
+
+            param = new Dictionary<string, object>();
+
+            //only if the length of the pieces matches, we need to check
+            if (serviceSplit.Length == fullSplit.Length)
             {
-                var post = context.GetPostData();
-                return i.Post(post);
-            });
+                for (var i = 0; i < serviceSplit.Length; i++)
+                {
+                    if (serviceSplit[i] != fullSplit[i])
+                    {
+                        //when splits are not the same, check for the placeholder i.e {id}
+                        if (serviceSplit[i].Matches(@"\{.*?\}"))
+                        {
+                            //if it does match, add the matches with regex
+                            var matches = Regex.Matches(serviceSplit[i], @"\{.*?\}");
+
+                            foreach (Match match in matches)
+                            {
+                                //remove the brackets from {id} so only id is left
+                                var val = match.Value;
+                                val = val.Remove(0, 1);
+                                val = val.Remove(val.Length - 1, 1);
+
+                                //convert the placeholder to integer, since in this release only int is supported
+                                param.Add(val, Convert.ToInt32(fullSplit[i]));
+                            }
+
+                            successCount++;
+                        }
+                    }
+                    else
+                        successCount++;
+                }
+            }
+
+            return successCount == fullSplit.Length;
         }
 
-        private static bool ProccessRequest(HttpListenerContext context, BaseController controller, Func<BaseController, dynamic> check, Func<BaseController, dynamic> action)
+        private string GetRootUrl(HttpListenerContext context)
         {
-            if (!IsValid(controller, check)) return false;
+            var url = context.GetUrl();
+            var root =  url.Segments.Length > 1 ? "/" + url.Segments[1] : url.Segments[0];
 
-            controller.CheckAuth(context);
-
-            var result = action(controller);
-            var json = JsonConvert.SerializeObject(new ApiResponse(result));
-
-            context.SetResponse(json);
-            context.Response.ContentType = "application/json";
-            return true;
+            return RemoveEndingSlash(root);
         }
 
-        private static bool IsValid(BaseController controller, Func<BaseController, dynamic> action)
+        private string GetFullUrl(HttpListenerContext context)
         {
-            if (controller.IsNull()) return false;
-
-            var method = action(controller);
-            return !ReferenceEquals(null, method);
+            return context.GetUrl().AbsolutePath;
         }
-    }
+
+        private string RemoveEndingSlash(string path)
+        {
+            if (path.Length > 1 && path.EndsWith("/"))
+               path = path.Remove(path.Length - 1, 1);
+
+            return path;
+        }
+    } 
 }

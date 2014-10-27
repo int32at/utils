@@ -3,17 +3,9 @@ using Newtonsoft.Json;
 
 namespace int32.Utils.Web.WebServer.Controller
 {
-    public abstract class ApiController : BaseController
+    public class ApiController : BaseController
     {
-        protected ApiController(string path) : this()
-        {
-            Path = Path + path;
-        }
-
-        private ApiController()
-        {
-            Path = "api";
-        }
+        protected ApiController(string path) : base(path) { }
     }
 
     public class ApiResponse
@@ -30,7 +22,7 @@ namespace int32.Utils.Web.WebServer.Controller
 
         public ApiResponse(Exception ex)
         {
-            Data = new object[] {};
+            Data = new object[] { };
             Error = new ApiResponseError(ex, 500);
         }
 

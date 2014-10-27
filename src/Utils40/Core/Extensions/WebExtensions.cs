@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Net;
@@ -9,9 +10,9 @@ namespace int32.Utils.Core.Extensions
 {
     public static class WebExtensions
     {
-        public static string GetUrl(this HttpListenerContext context)
+        public static Uri GetUrl(this HttpListenerContext context)
         {
-            return context.Request.Url.AbsolutePath.Substring(1);
+            return context.Request.Url;
         }
 
         public static void SetResponse(this HttpListenerContext context, string data)
@@ -50,6 +51,8 @@ namespace int32.Utils.Core.Extensions
                         var value = HttpUtility.UrlDecode(kvPair[1]);
                         expandoObject.Add(key, value);
                     }
+
+                    postParams = expandoObject;
                 }
             }
             catch { }

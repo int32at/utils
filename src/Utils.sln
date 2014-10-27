@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		build\key.snk = build\key.snk
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Host", "Host\Host.csproj", "{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,12 @@ Global
 		{351B205A-D727-477D-B19C-8F4BA6970E90}.Debug40|Any CPU.Build.0 = Debug|Any CPU
 		{351B205A-D727-477D-B19C-8F4BA6970E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{351B205A-D727-477D-B19C-8F4BA6970E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Debug40|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Debug40|Any CPU.Build.0 = Debug|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C5C7C95-5B26-43D6-9F5D-CDF613F53E70}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
