@@ -28,7 +28,8 @@ namespace int32.Utils.Web.WebServer.Processors
 
                 var controller = GetController<WebController>(file);
 
-                controller.CheckAuth(context);
+                if(controller != null)
+                    controller.CheckAuth(context);
 
                 var data = File.ReadAllText(Path.Combine(Root, file));
 

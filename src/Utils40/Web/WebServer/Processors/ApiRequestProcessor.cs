@@ -75,8 +75,10 @@ namespace int32.Utils.Web.WebServer.Processors
 
         private static bool IsValid(BaseController controller, Func<BaseController, dynamic> action)
         {
+            if (controller.IsNull()) return false;
+
             var method = action(controller);
-            return controller.IsNotNull() && !ReferenceEquals(null, method);
+            return !ReferenceEquals(null, method);
         }
     }
 }
