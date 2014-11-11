@@ -1,46 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Threading;
+using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Generic.Factory;
 using int32.Utils.Web.WebServer.Processors;
 using int32.Utils.Web.WebServer.Processors.Contracts;
 
 namespace int32.Utils.Web.WebServer
 {
-    public class WebServer
+    public static class WebServer 
     {
-        private readonly HttpListener _listener;
+        private static HttpListener _listener;
+        private static List<IRequestProcessor> _processors;
+        private static readonly AutoResetEvent ListenForNextRequest = new AutoResetEvent(false);
 
-        private static readonly AutoResetEvent ListenForNextRequest
-            = new AutoResetEvent(false);
+        public static Bootstrapper Config { get; internal set; }
 
-        public string Root { get; set; }
+        #region events 
 
-        public AuthenticationSchemes Authentication { get; set; }
+        public static Action OnStarted { get; set; }
+        public static Action OnStopped { get; set; }
+        public static Action<IRequestProcessor, HttpListenerContext> OnRequestProcessed { get; set; }
+        public static Action<HttpListenerContext> OnRequestReceived { get; set; } 
 
-        private List<IRequestProcessor> Processors { get; set; }
+        #endregion
 
-        public WebServer(string url) : this(url, Environment.CurrentDirectory) { }
-
-        public WebServer(string url, string root)
+        public static void Start<T>() where T : Bootstrapper
         {
-            _listener = new HttpListener();
-            _listener.Prefixes.Add(url + "/");
-
-            Root = root;
-
-            Authentication = AuthenticationSchemes.Anonymous;
+            Config = Factory<T>.Create().ThrowIfNull("bootstrapper");
+            Setup();
         }
 
-        public WebServer Start()
+        public static void Stop()
         {
-            Processors = new List<IRequestProcessor>()
+            _listener.Stop();
+            OnStopped.Execute();
+        }
+
+        private static void Setup()
+        {
+            _listener = new HttpListener();
+            _listener.Prefixes.Add(Config.Url + "/");
+            _listener.AuthenticationSchemes = Config.Authentication;
+
+            //set the default processors
+            _processors = new List<IRequestProcessor>()
             {
                 new ApiRequestProcessor(),
                 new WebRequestProcessor()
             };
 
-            _listener.AuthenticationSchemes = Authentication;
+            //add additional ones from the config
+            _processors.AddRange(Config.Processors);
+
+            RunServer();
+        }
+
+        private static void RunServer()
+        {
             _listener.Start();
 
             ThreadPool.QueueUserWorkItem(state =>
@@ -73,19 +92,29 @@ namespace int32.Utils.Web.WebServer
                 }
             });
 
-            return this;
+            OnStarted.Execute();
         }
 
-        private void ProcessRequest(HttpListenerContext context)
+        private static void ProcessRequest(HttpListenerContext context)
         {
             try
             {
-                foreach (var processor in Processors)
+                OnRequestReceived.Execute(context);
+
+                foreach (var processor in _processors)
                 {
                     //when the first processor managed the request
                     //do not proceed with other processors
-                    if (processor.Process(context))
+                    if (processor.IsNotNull() && processor.Process(context))
+                    {
+                        using (var memory = new MemoryStream())
+                        {
+                            context.Response.OutputStream.CopyTo(memory);
+                        }
+                       
+                        OnRequestProcessed.Execute(processor, context);
                         break;
+                    }
                 }
             }
             finally
@@ -93,11 +122,6 @@ namespace int32.Utils.Web.WebServer
                 //close the response
                 context.Response.OutputStream.Close();
             }
-        }
-
-        public void Stop()
-        {
-            _listener.Stop();
         }
     }
 }

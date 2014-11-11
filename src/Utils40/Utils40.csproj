@@ -257,6 +257,7 @@
     <Compile Include="Core\Extensions\WebExtensions.cs" />
     <Compile Include="Core\Generic\ViewEngine\Contracts\IRenderable.cs" />
     <Compile Include="Core\Generic\ViewEngine\ViewEngine.cs" />
+    <Compile Include="Web\WebServer\Bootstrapper.cs" />
     <Compile Include="Web\WebServer\Controller\ApiController.cs" />
     <Compile Include="Web\WebServer\Controller\BaseController.cs" />
     <Compile Include="Web\WebServer\Controller\Contracts\IController.cs" />

@@ -18,7 +18,7 @@ namespace int32.Utils.Core.Extensions
         public static void SetResponse(this HttpListenerContext context, string data)
         {
             var buf = Encoding.UTF8.GetBytes(data);
-            context.Response.ContentLength64 = buf.Length;
+            //context.Response.ContentLength64 = buf.Length;
             context.Response.OutputStream.Write(buf, 0, buf.Length);
         }
 

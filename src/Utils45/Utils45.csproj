@@ -73,6 +73,9 @@
     <Compile Include="..\Utils40\Core\Generic\ViewEngine\ViewEngine.cs">
       <Link>Core\Generic\ViewEngine\ViewEngine.cs</Link>
     </Compile>
+    <Compile Include="..\Utils40\Web\WebServer\Bootstrapper.cs">
+      <Link>Web\WebServer\Bootstrapper.cs</Link>
+    </Compile>
     <Compile Include="..\Utils40\Web\WebServer\Controller\ApiController.cs">
       <Link>Web\WebServer\Controller\ApiController.cs</Link>
     </Compile>

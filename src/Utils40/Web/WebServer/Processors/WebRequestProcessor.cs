@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Windows.Forms;
 using int32.Utils.Core.Extensions;
 using int32.Utils.Core.Generic.ViewEngine;
 using int32.Utils.Web.WebServer.Controller;
@@ -42,14 +43,12 @@ namespace int32.Utils.Web.WebServer.Processors
                         result = ViewEngine.Instance.Render(data, get.Value(parameters));
                         break;
                     }
-                 
+
                 }
-                //otherwise just return the data that was found
+                    //otherwise just return the data that was found
                 else result = data;
 
                 context.SetResponse(new Controller.WebResponse(result).ToString());
-
-                return true;
             }
             catch (Exception ex)
             {
@@ -57,7 +56,7 @@ namespace int32.Utils.Web.WebServer.Processors
                 context.SetResponse(new Controller.WebResponse(ex).ToString());
             }
 
-            return false;
+            return true;
         }
     }
 }
