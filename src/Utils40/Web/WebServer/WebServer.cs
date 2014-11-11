@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Threading;
 using int32.Utils.Core.Extensions;
@@ -10,36 +9,37 @@ using int32.Utils.Web.WebServer.Processors.Contracts;
 
 namespace int32.Utils.Web.WebServer
 {
-    public static class WebServer 
+    public class WebServer 
     {
-        private static HttpListener _listener;
-        private static List<IRequestProcessor> _processors;
-        private static readonly AutoResetEvent ListenForNextRequest = new AutoResetEvent(false);
+        private HttpListener _listener;
+        private List<IRequestProcessor> _processors;
+        private readonly AutoResetEvent _listenForNextRequest = new AutoResetEvent(false);
 
-        public static Bootstrapper Config { get; internal set; }
+        public Bootstrapper Config { get; internal set; }
 
         #region events 
 
-        public static Action OnStarted { get; set; }
-        public static Action OnStopped { get; set; }
-        public static Action<IRequestProcessor, HttpListenerContext> OnRequestProcessed { get; set; }
-        public static Action<HttpListenerContext> OnRequestReceived { get; set; } 
+        public Action OnStarted { get; set; }
+        public Action OnStopped { get; set; }
+        public Action<IRequestProcessor, HttpListenerContext> OnRequestProcessed { get; set; }
+        public Action<HttpListenerContext> OnRequestReceived { get; set; } 
 
         #endregion
 
-        public static void Start<T>() where T : Bootstrapper
+        public WebServer Start<T>() where T : Bootstrapper
         {
             Config = Factory<T>.Create().ThrowIfNull("bootstrapper");
             Setup();
+            return this;
         }
 
-        public static void Stop()
+        public void Stop()
         {
             _listener.Stop();
             OnStopped.Execute();
         }
 
-        private static void Setup()
+        private void Setup()
         {
             _listener = new HttpListener();
             _listener.Prefixes.Add(Config.Url + "/");
@@ -58,7 +58,7 @@ namespace int32.Utils.Web.WebServer
             RunServer();
         }
 
-        private static void RunServer()
+        private void RunServer()
         {
             _listener.Start();
 
@@ -84,18 +84,18 @@ namespace int32.Utils.Web.WebServer
                         }
                         finally
                         {
-                            ListenForNextRequest.Set();
+                            _listenForNextRequest.Set();
                         }
                     }, _listener);
 
-                    ListenForNextRequest.WaitOne();
+                    _listenForNextRequest.WaitOne();
                 }
             });
 
             OnStarted.Execute();
         }
 
-        private static void ProcessRequest(HttpListenerContext context)
+        private void ProcessRequest(HttpListenerContext context)
         {
             try
             {

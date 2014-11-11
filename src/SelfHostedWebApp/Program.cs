@@ -15,7 +15,7 @@ namespace int32.Utils.SelfHostedWebApp
                 //WebServer.OnRequestReceived = context => Console.WriteLine("request to {0} {1} {2}", context.Request.HttpMethod, context.Request.ProtocolVersion, context.Request.Url);
                 //WebServer.OnRequestProcessed = (processor, context) => Console.WriteLine("request processed by {0}.", processor.GetType().Name);
 
-                WebServer.Start<Boot>();
+                new WebServer().Start<Boot>();
             }
             catch (Exception ex)
             {
