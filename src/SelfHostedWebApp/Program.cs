@@ -1,5 +1,5 @@
 ﻿using System;
-using int32.Utils.Core.Extensions;
+using int32.Utils.Core.Domain;
 using int32.Utils.Web.WebServer;
 
 namespace int32.Utils.SelfHostedWebApp
@@ -10,10 +10,10 @@ namespace int32.Utils.SelfHostedWebApp
         {
             try
             {
-                WebServer.OnStarted = () => Console.WriteLine("server started at {0}.", WebServer.Config.Url);
-                WebServer.OnStopped = () => Console.WriteLine("server stopped.");
-                WebServer.OnRequestReceived = context => Console.WriteLine("request to {0} {1} {2}", context.Request.HttpMethod, context.Request.ProtocolVersion, context.Request.Url);
-                WebServer.OnRequestProcessed = (processor, context) => Console.WriteLine("request processed by {0}.", processor.GetType().Name);
+                //WebServer.OnStarted = () => Console.WriteLine("server started at {0}.", WebServer.Config.Url);
+                //WebServer.OnStopped = () => Console.WriteLine("server stopped.");
+                //WebServer.OnRequestReceived = context => Console.WriteLine("request to {0} {1} {2}", context.Request.HttpMethod, context.Request.ProtocolVersion, context.Request.Url);
+                //WebServer.OnRequestProcessed = (processor, context) => Console.WriteLine("request processed by {0}.", processor.GetType().Name);
 
                 WebServer.Start<Boot>();
             }
@@ -30,8 +30,7 @@ namespace int32.Utils.SelfHostedWebApp
     {
         public Boot()
         {
-            Url = "http://localhost:1337";
-            Root = "";
+            Url = Domain.Current.Config["Url"].ToString();
         }
     }
 }

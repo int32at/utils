@@ -107,11 +107,6 @@ namespace int32.Utils.Web.WebServer
                     //do not proceed with other processors
                     if (processor.IsNotNull() && processor.Process(context))
                     {
-                        using (var memory = new MemoryStream())
-                        {
-                            context.Response.OutputStream.CopyTo(memory);
-                        }
-                       
                         OnRequestProcessed.Execute(processor, context);
                         break;
                     }
